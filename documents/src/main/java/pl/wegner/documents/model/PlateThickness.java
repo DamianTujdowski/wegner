@@ -1,5 +1,5 @@
 package pl.wegner.documents.model;
 
-public enum Matrix {
+public enum PlateThickness {
     THIN, MEDIUM, THICK
 }
