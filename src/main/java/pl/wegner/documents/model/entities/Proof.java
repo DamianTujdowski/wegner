@@ -1,9 +1,22 @@
 package pl.wegner.documents.model.entities;
 
-import pl.wegner.documents.model.SendMode;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import pl.wegner.documents.model.SendMethod;
 
+import javax.persistence.*;
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+@Entity
 public class Proof {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
     private String name;
@@ -14,7 +27,8 @@ public class Proof {
 
     private String dimension;
 
-    private SendMode mode;
+    @Enumerated(EnumType.ORDINAL)
+    private SendMethod method;
 
     private String payer;
 }

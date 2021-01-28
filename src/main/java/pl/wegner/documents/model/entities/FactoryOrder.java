@@ -4,10 +4,9 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
+import pl.wegner.documents.model.LinesPerInch;
 import pl.wegner.documents.model.PlateThickness;
 import pl.wegner.documents.model.PrintSide;
-import pl.wegner.documents.model.Stage;
 
 import javax.persistence.*;
 import java.util.List;
@@ -17,23 +16,24 @@ import java.util.List;
 @AllArgsConstructor
 @Builder
 @Entity
-public class Project {
+public class FactoryOrder {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    private String name;
-
-    private int number;
-
-    private String client;
-
-    private String printHouse;
-
-    private int rollerSize;
+    private String fileName;
 
     private String dimensions;
+
+    private int platesNumber;
+
+    @Enumerated(EnumType.ORDINAL)
+    private LinesPerInch lpi;
+
+    @OneToMany(orphanRemoval = true)
+    @JoinColumn(name = "factory_order_id")
+    private List<Ink> inks;
 
     @Enumerated(EnumType.ORDINAL)
     private PlateThickness plateThickness;
@@ -42,18 +42,6 @@ public class Project {
     private PrintSide side;
 
     @OneToMany(orphanRemoval = true)
-    @JoinColumn(name = "project_id")
-    private List<Ink> inks;
-
-    @OneToMany(orphanRemoval = true)
-    @JoinColumn(name = "project_id")
-    private List<Note> notes;
-
-    @Enumerated(EnumType.ORDINAL)
-    private Stage stage;
-
-    @OneToMany(orphanRemoval = true)
-    @JoinColumn(name = "project_id")
-    private List<Change> changes;
-
+    @JoinColumn(name = "factory_order_id")
+    private List<OrderNote> notes;
 }
