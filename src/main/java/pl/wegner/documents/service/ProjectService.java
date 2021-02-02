@@ -48,7 +48,7 @@ public class ProjectService {
         edited.setInks(project.getInks());
         edited.setNotes(project.getNotes());
         edited.setStage(project.getStage());
-        edited.setChanges(project.getChanges());
+        edited.setAlterations(project.getAlterations());
         return edited;
     }
 

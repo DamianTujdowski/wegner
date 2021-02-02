@@ -54,6 +54,6 @@ public class Project {
 
     @OneToMany(orphanRemoval = true)
     @JoinColumn(name = "project_id")
-    private List<Change> changes;
+    private List<Alteration> alterations;
 
 }

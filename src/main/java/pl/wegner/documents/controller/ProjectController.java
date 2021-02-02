@@ -16,8 +16,8 @@ public class ProjectController {
         this.service = service;
     }
 
-    @GetMapping("/projects/")
-    public Project findProject(@RequestParam long id) {
+    @GetMapping("/projects/{id}")
+    public Project findProject(@PathVariable long id) {
         return service.find(id);
     }
 

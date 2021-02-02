@@ -17,7 +17,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @Builder
 @Entity
-public class Change {
+public class Alteration {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
