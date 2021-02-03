@@ -4,9 +4,9 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import pl.wegner.documents.model.LinesPerInch;
-import pl.wegner.documents.model.PlateThickness;
-import pl.wegner.documents.model.PrintSide;
+import pl.wegner.documents.model.enums.LinesPerInch;
+import pl.wegner.documents.model.enums.PlateThickness;
+import pl.wegner.documents.model.enums.PrintSide;
 
 import javax.persistence.*;
 import java.util.List;
@@ -16,7 +16,7 @@ import java.util.List;
 @AllArgsConstructor
 @Builder
 @Entity
-public class FactoryOrder {
+public class ProductionOrder {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -32,7 +32,7 @@ public class FactoryOrder {
     private LinesPerInch lpi;
 
     @OneToMany(orphanRemoval = true)
-    @JoinColumn(name = "factory_order_id")
+    @JoinColumn(name = "production_order_id")
     private List<Ink> inks;
 
     @Enumerated(EnumType.ORDINAL)
@@ -42,6 +42,6 @@ public class FactoryOrder {
     private PrintSide side;
 
     @OneToMany(orphanRemoval = true)
-    @JoinColumn(name = "factory_order_id")
+    @JoinColumn(name = "production_order_id")
     private List<OrderNote> notes;
 }

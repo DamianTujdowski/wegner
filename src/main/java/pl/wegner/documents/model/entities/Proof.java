@@ -4,7 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import pl.wegner.documents.model.SendMethod;
+import pl.wegner.documents.model.enums.SendMethod;
 
 import javax.persistence.*;
 

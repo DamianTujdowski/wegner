@@ -5,8 +5,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import pl.wegner.documents.model.Angle;
-import pl.wegner.documents.model.LinesPerInch;
+import pl.wegner.documents.model.enums.Angle;
+import pl.wegner.documents.model.enums.LinesPerInch;
 
 import javax.persistence.*;
 

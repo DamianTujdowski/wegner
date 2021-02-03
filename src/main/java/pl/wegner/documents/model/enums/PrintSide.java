@@ -1,4 +1,4 @@
-package pl.wegner.documents.model;
+package pl.wegner.documents.model.enums;
 
 public enum PrintSide {
     INNER, OUTER

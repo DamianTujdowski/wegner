@@ -4,12 +4,12 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
+import pl.wegner.documents.model.enums.LinesPerInch;
 import pl.wegner.documents.model.enums.PlateThickness;
 import pl.wegner.documents.model.enums.PrintSide;
-import pl.wegner.documents.model.enums.Stage;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Data
@@ -17,43 +17,41 @@ import java.util.List;
 @AllArgsConstructor
 @Builder
 @Entity
-public class Project {
+public class OrderDetailedData {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    private String name;
+    private LocalDateTime date;
 
-    private int number;
+    private String fileName;
 
-    private String client;
-
-    private String printHouse;
-
-    private int rollerSize;
+    private String productionFileName;
 
     private String dimensions;
 
-    @Enumerated(EnumType.ORDINAL)
-    private PlateThickness plateThickness;
+    private int platesNumber;
 
     @Enumerated(EnumType.ORDINAL)
+    private LinesPerInch lpi;
+
     private PrintSide side;
 
     @OneToMany(orphanRemoval = true)
-    @JoinColumn(name = "project_id")
+    @JoinColumn(name = "production_order_id")
     private List<Ink> inks;
 
     @OneToMany(orphanRemoval = true)
-    @JoinColumn(name = "project_id")
+    @JoinColumn(name = "production_order_id")
     private List<ProjectNote> notes;
 
+    private String payer;
+
+    private String printHouse;
+
+    private String platesFactory;
+
     @Enumerated(EnumType.ORDINAL)
-    private Stage stage;
-
-    @OneToMany(orphanRemoval = true)
-    @JoinColumn(name = "project_id")
-    private List<Alteration> alterations;
-
+    private PlateThickness plateThickness;
 }
