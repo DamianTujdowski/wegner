@@ -4,11 +4,9 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import pl.wegner.documents.model.enums.LinesPerInch;
-import pl.wegner.documents.model.enums.PlateThickness;
-import pl.wegner.documents.model.enums.PrintSide;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.List;
 
 @Data
@@ -22,26 +20,12 @@ public class ProductionOrder {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    private String fileName;
+    private String name;
 
-    private String dimensions;
-
-    private int platesNumber;
-
-    @Enumerated(EnumType.ORDINAL)
-    private LinesPerInch lpi;
+    private LocalDate date;
 
     @OneToMany(orphanRemoval = true)
     @JoinColumn(name = "production_order_id")
-    private List<Ink> inks;
+    private List<OrderData> orderData;
 
-    @Enumerated(EnumType.ORDINAL)
-    private PlateThickness plateThickness;
-
-    @Enumerated(EnumType.ORDINAL)
-    private PrintSide side;
-
-    @OneToMany(orphanRemoval = true)
-    @JoinColumn(name = "production_order_id")
-    private List<OrderNote> notes;
 }

@@ -5,6 +5,8 @@ import pl.wegner.documents.model.entities.OrderDetailedData;
 import pl.wegner.documents.model.entities.Project;
 import pl.wegner.documents.service.OrderDetailedDataService;
 
+import java.util.List;
+
 @RestController
 public class OrderDetailedDataController {
 
@@ -20,8 +22,8 @@ public class OrderDetailedDataController {
     }
 
     @GetMapping("/orders/")
-    public OrderDetailedData findDetailedOrder(@RequestParam int page,
-                                               @RequestParam(defaultValue = "20") int size) {
+    public List<OrderDetailedData> findDetailedOrder(@RequestParam int page,
+                                                    @RequestParam(defaultValue = "20") int size) {
         return orderService.findAll(page, size);
     }
 

@@ -6,6 +6,7 @@ import pl.wegner.documents.model.entities.OrderDetailedData;
 import pl.wegner.documents.repository.OrderDetailedDataRepository;
 
 import javax.persistence.EntityNotFoundException;
+import java.util.List;
 
 @Service
 public class OrderDetailedDataService {
@@ -21,7 +22,7 @@ public class OrderDetailedDataService {
                 String.format("Project with id %d does not exist", id)));
     }
 
-    public OrderDetailedData findAll(int page, int size) {
+    public List<OrderDetailedData> findAll(int page, int size) {
         return orderRepository.findAllBy(PageRequest.of(page, size));
     }
 
