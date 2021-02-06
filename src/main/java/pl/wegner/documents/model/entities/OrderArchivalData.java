@@ -17,7 +17,7 @@ import java.util.List;
 @AllArgsConstructor
 @Builder
 @Entity
-public class OrderDetailedData {
+public class OrderArchivalData {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -39,11 +39,11 @@ public class OrderDetailedData {
     private PrintSide side;
 
     @OneToMany(orphanRemoval = true)
-    @JoinColumn(name = "order_detailed_data_id")
+    @JoinColumn(name = "order_archival_data_id")
     private List<Ink> inks;
 
     @OneToMany(orphanRemoval = true)
-    @JoinColumn(name = "order_detailed_data_id")
+    @JoinColumn(name = "order_archival_data_id")
     private List<ProjectNote> notes;
 
     private String payer;
