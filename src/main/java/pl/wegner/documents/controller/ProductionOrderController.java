@@ -1,13 +1,12 @@
 package pl.wegner.documents.controller;
 
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import pl.wegner.documents.model.entities.ProductionOrder;
 import pl.wegner.documents.service.ProductionOrderService;
 
 import java.util.List;
 
-@Controller
+@RestController
 public class ProductionOrderController {
 
     private ProductionOrderService orderService;
@@ -17,13 +16,13 @@ public class ProductionOrderController {
     }
 
     @GetMapping("/orders/{id}")
-    public ProductionOrder findProductionOrder(long id){
+    public ProductionOrder findById(long id) {
         return orderService.findById(id);
     }
 
     @GetMapping("/orders/")
-    public List<ProductionOrder> findProductionOrder(@RequestParam int page,
-                                                     @RequestParam(defaultValue = "20") int size){
+    public List<ProductionOrder> findAll(@RequestParam int page,
+                                         @RequestParam(defaultValue = "20") int size) {
         return orderService.findAll(page, size);
     }
 
@@ -41,6 +40,5 @@ public class ProductionOrderController {
     public void delete(long id) {
         orderService.delete(id);
     }
-
 
 }

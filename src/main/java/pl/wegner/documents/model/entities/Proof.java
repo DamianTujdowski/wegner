@@ -21,14 +21,14 @@ public class Proof {
 
     private String name;
 
-    private int number;
+    private int quantity;
 
     private String principal;
 
     private String dimension;
 
     @Enumerated(EnumType.ORDINAL)
-    private SendMethod method;
+    private SendMethod sendMethod;
 
     private String payer;
 }
