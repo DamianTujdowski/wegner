@@ -42,9 +42,7 @@ public class OrderArchivalData {
     @JoinColumn(name = "order_archival_data_id")
     private List<Ink> inks;
 
-    @OneToMany(orphanRemoval = true)
-    @JoinColumn(name = "order_archival_data_id")
-    private List<ProjectNote> notes;
+    private String notes;
 
     private String payer;
 

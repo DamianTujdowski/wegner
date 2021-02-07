@@ -41,7 +41,5 @@ public class OrderData {
     @Enumerated(EnumType.ORDINAL)
     private PrintSide side;
 
-    @OneToMany(orphanRemoval = true)
-    @JoinColumn(name = "order_data_id")
-    private List<OrderNote> notes;
+    private String notes;
 }

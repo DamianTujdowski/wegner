@@ -45,9 +45,7 @@ public class Project {
     @JoinColumn(name = "project_id")
     private List<Ink> inks;
 
-    @OneToMany(orphanRemoval = true)
-    @JoinColumn(name = "project_id")
-    private List<ProjectNote> notes;
+    private String notes;
 
     @Enumerated(EnumType.ORDINAL)
     private Stage stage;
