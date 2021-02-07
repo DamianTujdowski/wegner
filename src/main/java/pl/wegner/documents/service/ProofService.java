@@ -19,7 +19,9 @@ public class ProofService {
 
     public Proof findById(long id) {
         return repository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException(String.format("Proof with id %d does not exist", id)));
+                .orElseThrow(() -> new EntityNotFoundException(
+                        String.format("Proof with id %d does not exist", id)
+                ));
     }
 
     public List<Proof> findAll(int page, int size) {
@@ -32,7 +34,9 @@ public class ProofService {
 
     public Proof edit(Proof proof) {
         Proof edited = repository.findById(proof.getId())
-                .orElseThrow(() -> new EntityNotFoundException(String.format("Proof with id %d does not exist", proof.getId())));
+                .orElseThrow(() -> new EntityNotFoundException(
+                        String.format("Proof with id %d does not exist", proof.getId())
+                ));
         edited.setName(proof.getName());
         edited.setQuantity(proof.getQuantity());
         edited.setPrincipal(proof.getPrincipal());

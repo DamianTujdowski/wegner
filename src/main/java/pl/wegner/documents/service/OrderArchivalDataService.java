@@ -19,7 +19,8 @@ public class OrderArchivalDataService {
 
     public OrderArchivalData findOrder(long id) {
         return orderRepository.findById(id).orElseThrow(() -> new EntityNotFoundException(
-                String.format("Project with id %d does not exist", id)));
+                String.format("Project with id %d does not exist", id)
+        ));
     }
 
     public List<OrderArchivalData> findAll(int page, int size) {

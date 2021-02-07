@@ -19,7 +19,9 @@ public class ProductionOrderService {
 
     public ProductionOrder findById(long id) {
         return orderRepository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException(String.format("Production order with id %d does not exist", id)));
+                .orElseThrow(() -> new EntityNotFoundException(
+                        String.format("Production order with id %d does not exist", id)
+                ));
     }
 
     public List<ProductionOrder> findAll(int page, int size) {
@@ -32,7 +34,9 @@ public class ProductionOrderService {
 
     public ProductionOrder edit(ProductionOrder order) {
         ProductionOrder edited = orderRepository.findById(order.getId())
-                .orElseThrow(() -> new EntityNotFoundException(String.format("Production order with id %d does not exist", order.getId())));
+                .orElseThrow(() -> new EntityNotFoundException(
+                        String.format("Production order with id %d does not exist", order.getId())
+                ));
         edited.setName(order.getName());
         edited.setDate(order.getDate());
         edited.setOrderData(order.getOrderData());
