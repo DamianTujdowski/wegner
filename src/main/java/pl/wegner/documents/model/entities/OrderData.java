@@ -42,4 +42,6 @@ public class OrderData {
     private PrintSide side;
 
     private String notes;
+
+    private long productionOrderId;
 }

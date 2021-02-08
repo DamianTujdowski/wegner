@@ -28,4 +28,7 @@ public class Alteration {
     private String description;
 
     private int duration;
+
+    private long projectId;
+
 }

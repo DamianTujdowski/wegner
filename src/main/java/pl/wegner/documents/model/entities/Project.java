@@ -25,7 +25,7 @@ public class Project {
 
     private String name;
 
-    private int number;
+    private int index;
 
     private String client;
 

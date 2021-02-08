@@ -38,7 +38,7 @@ public class ProjectService {
                         String.format("Project with id %d does not exist", project.getId())
                 ));
         edited.setName(project.getName());
-        edited.setNumber(project.getNumber());
+        edited.setIndex(project.getIndex());
         edited.setClient(project.getClient());
         edited.setPrintHouse(project.getPrintHouse());
         edited.setRollerSize(project.getRollerSize());

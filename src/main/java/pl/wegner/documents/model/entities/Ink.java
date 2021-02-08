@@ -28,4 +28,11 @@ public class Ink {
 
     @Enumerated(EnumType.ORDINAL)
     private LinesPerInch lpi;
+
+    private long projectId;
+
+    private long orderDataId;
+
+    private long orderArchivalDataId;
+
 }
