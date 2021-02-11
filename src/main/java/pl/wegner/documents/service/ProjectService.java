@@ -37,8 +37,8 @@ public class ProjectService {
                 .orElseThrow(() -> new EntityNotFoundException(
                         String.format("Project with id %d does not exist", project.getId())
                 ));
-        edited.setName(project.getName());
-        edited.setIndex(project.getIndex());
+        edited.setDesignation(project.getDesignation());
+        edited.setSymbol(project.getSymbol());
         edited.setClient(project.getClient());
         edited.setPrintHouse(project.getPrintHouse());
         edited.setRollerSize(project.getRollerSize());

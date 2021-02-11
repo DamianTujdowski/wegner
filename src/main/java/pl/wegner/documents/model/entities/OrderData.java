@@ -24,9 +24,9 @@ public class OrderData {
 
     private String fileName;
 
-    private String dimensions;
+    private String platesDimensions;
 
-    private int platesNumber;
+    private int platesQuantity;
 
     @Enumerated(EnumType.ORDINAL)
     private LinesPerInch lpi;

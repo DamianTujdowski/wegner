@@ -37,8 +37,8 @@ public class ProductionOrderService {
                 .orElseThrow(() -> new EntityNotFoundException(
                         String.format("Production order with id %d does not exist", order.getId())
                 ));
-        edited.setName(order.getName());
-        edited.setDate(order.getDate());
+        edited.setDesignation(order.getDesignation());
+        edited.setOccurrence(order.getOccurrence());
         edited.setOrderData(order.getOrderData());
         return edited;
     }

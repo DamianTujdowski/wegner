@@ -37,7 +37,7 @@ public class ProofService {
                 .orElseThrow(() -> new EntityNotFoundException(
                         String.format("Proof with id %d does not exist", proof.getId())
                 ));
-        edited.setName(proof.getName());
+        edited.setDesignation(proof.getDesignation());
         edited.setQuantity(proof.getQuantity());
         edited.setPrincipal(proof.getPrincipal());
         edited.setDimension(proof.getDimension());

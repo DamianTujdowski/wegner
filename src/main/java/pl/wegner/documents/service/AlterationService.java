@@ -2,7 +2,6 @@ package pl.wegner.documents.service;
 
 import org.springframework.stereotype.Service;
 import pl.wegner.documents.model.entities.Alteration;
-import pl.wegner.documents.model.entities.Ink;
 import pl.wegner.documents.repository.AlterationRepository;
 
 import javax.persistence.EntityNotFoundException;
@@ -26,7 +25,7 @@ public class AlterationService {
                 .orElseThrow(() -> new EntityNotFoundException(
                         String.format("Alteration with id %d does not exist", alteration.getId())
                 ));
-        edited.setDate(alteration.getDate());
+        edited.setOccurrence(alteration.getOccurrence());
         edited.setDescription(alteration.getDescription());
         edited.setDuration(alteration.getDuration());
         edited.setProjectId(alteration.getProjectId());

@@ -21,7 +21,7 @@ public class Ink {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    private String name;
+    private String symbol;
 
     @Enumerated(EnumType.ORDINAL)
     private Angle angle;

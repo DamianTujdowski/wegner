@@ -24,7 +24,7 @@ public class InkService {
                 .orElseThrow(() -> new EntityNotFoundException(
                         String.format("Ink with id %d does not exist", ink.getId())
                 ));
-        edited.setName(ink.getName());
+        edited.setSymbol(ink.getSymbol());
         edited.setAngle(ink.getAngle());
         edited.setLpi(ink.getLpi());
         edited.setProjectId(ink.getProjectId());

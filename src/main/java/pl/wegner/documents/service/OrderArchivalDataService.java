@@ -36,11 +36,11 @@ public class OrderArchivalDataService {
                 .orElseThrow(() -> new EntityNotFoundException(
                         String.format("Project with id %d does not exist", order.getId())
                 ));
-        editedOrder.setDate(order.getDate());
+        editedOrder.setOccurrence(order.getOccurrence());
         editedOrder.setFileName(order.getFileName());
         editedOrder.setProductionFileName(order.getProductionFileName());
         editedOrder.setDimensions(order.getDimensions());
-        editedOrder.setPlatesNumber(order.getPlatesNumber());
+        editedOrder.setPlatesQuantity(order.getPlatesQuantity());
         editedOrder.setLpi(order.getLpi());
         editedOrder.setSide(order.getSide());
         editedOrder.setInks(order.getInks());

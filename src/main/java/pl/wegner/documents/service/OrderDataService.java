@@ -26,8 +26,8 @@ public class OrderDataService {
                         String.format("Order data with id %d does not exist", data.getId())
                 ));
         edited.setFileName(data.getFileName());
-        edited.setDimensions(data.getDimensions());
-        edited.setPlatesNumber(data.getPlatesNumber());
+        edited.setPlatesDimensions(data.getPlatesDimensions());
+        edited.setPlatesQuantity(data.getPlatesQuantity());
         edited.setLpi(data.getLpi());
         edited.setInks(data.getInks());
         edited.setPlateThickness(data.getPlateThickness());

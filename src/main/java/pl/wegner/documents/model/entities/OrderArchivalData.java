@@ -23,7 +23,7 @@ public class OrderArchivalData {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    private LocalDateTime date;
+    private LocalDateTime occurrence;
 
     private String fileName;
 
@@ -31,7 +31,7 @@ public class OrderArchivalData {
 
     private String dimensions;
 
-    private int platesNumber;
+    private int platesQuantity;
 
     @Enumerated(EnumType.ORDINAL)
     private LinesPerInch lpi;

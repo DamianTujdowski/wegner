@@ -20,9 +20,9 @@ public class ProductionOrder {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    private String name;
+    private String designation;
 
-    private LocalDate date;
+    private LocalDate occurrence;
 
     @OneToMany(orphanRemoval = true)
     @JoinColumn(name = "production_order_id")
