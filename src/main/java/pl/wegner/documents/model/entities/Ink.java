@@ -29,10 +29,13 @@ public class Ink {
     @Enumerated(EnumType.ORDINAL)
     private LinesPerInch lpi;
 
+    @Column(name = "project_id")
     private long projectId;
 
+    @Column(name = "order_data_id")
     private long orderDataId;
 
+    @Column(name = "order_archival_data_id")
     private long orderArchivalDataId;
 
 }

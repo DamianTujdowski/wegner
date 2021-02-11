@@ -15,28 +15,28 @@ public class OrderArchivalDataController {
         this.orderService = orderService;
     }
 
-    @GetMapping("//{id}")
+    @GetMapping("/archives/{id}")
     public OrderArchivalData findDetailedOrder(@PathVariable int id) {
         return orderService.findOrder(id);
     }
 
-    @GetMapping("/orders/")
+    @GetMapping("/archives/")
     public List<OrderArchivalData> findDetailedOrder(@RequestParam int page,
                                                      @RequestParam(defaultValue = "20") int size) {
         return orderService.findAll(page, size);
     }
 
-    @PostMapping("/orders/")
+    @PostMapping("/archives/")
     public OrderArchivalData save(@RequestBody OrderArchivalData order) {
         return orderService.save(order);
     }
 
-    @PutMapping("/orders/")
+    @PutMapping("/archives/")
     public OrderArchivalData edit(@RequestBody OrderArchivalData order) {
         return orderService.edit(order);
     }
 
-    @DeleteMapping("/orders/")
+    @DeleteMapping("/archives/")
     public void delete(long id) {
         orderService.delete(id);
     }

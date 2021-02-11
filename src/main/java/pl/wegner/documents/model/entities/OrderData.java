@@ -43,5 +43,6 @@ public class OrderData {
 
     private String notes;
 
+    @Column(name = "production_order_id")
     private long productionOrderId;
 }
