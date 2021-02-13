@@ -28,4 +28,13 @@ public class ProductionOrder {
     @JoinColumn(name = "production_order_id")
     private List<OrderData> orderData;
 
+    public void setOrderData(List<OrderData> orderData) {
+        if (this.orderData == null) {
+            this.orderData = orderData;
+        } else {
+            this.orderData.retainAll(orderData);
+            orderData.removeAll(this.orderData);
+            this.orderData.addAll(orderData);
+        }
+    }
 }

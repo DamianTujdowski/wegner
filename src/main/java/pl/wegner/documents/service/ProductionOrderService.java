@@ -6,6 +6,7 @@ import pl.wegner.documents.model.entities.ProductionOrder;
 import pl.wegner.documents.repository.ProductionOrderRepository;
 
 import javax.persistence.EntityNotFoundException;
+import javax.transaction.Transactional;
 import java.util.List;
 
 @Service
@@ -32,6 +33,7 @@ public class ProductionOrderService {
         return orderRepository.save(order);
     }
 
+    @Transactional
     public ProductionOrder edit(ProductionOrder order) {
         ProductionOrder edited = orderRepository.findById(order.getId())
                 .orElseThrow(() -> new EntityNotFoundException(

@@ -16,7 +16,7 @@ public class ProductionOrderController {
     }
 
     @GetMapping("/orders/{id}")
-    public ProductionOrder findById(long id) {
+    public ProductionOrder findById(@PathVariable long id) {
         return orderService.findById(id);
     }
 
