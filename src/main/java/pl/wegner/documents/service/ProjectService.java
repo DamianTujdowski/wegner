@@ -6,6 +6,7 @@ import pl.wegner.documents.model.entities.Project;
 import pl.wegner.documents.repository.ProjectRepository;
 
 import javax.persistence.EntityNotFoundException;
+import javax.transaction.Transactional;
 import java.util.List;
 
 @Service
@@ -32,6 +33,7 @@ public class ProjectService {
         return repository.save(project);
     }
 
+    @Transactional
     public Project edit(Project project) {
         Project edited = repository.findById(project.getId())
                 .orElseThrow(() -> new EntityNotFoundException(

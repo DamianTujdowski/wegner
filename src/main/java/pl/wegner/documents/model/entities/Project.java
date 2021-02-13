@@ -54,4 +54,23 @@ public class Project {
     @JoinColumn(name = "project_id")
     private List<Alteration> alterations;
 
+    public void setInks(List<Ink> inks) {
+        if (this.inks == null) {
+            this.inks = inks;
+        } else {
+            this.inks.retainAll(inks);
+            inks.removeAll(this.inks);
+            this.inks.addAll(inks);
+        }
+    }
+
+    public void setAlterations(List<Alteration> alterations) {
+        if (this.alterations == null) {
+            this.alterations = alterations;
+        } else {
+            this.alterations.retainAll(alterations);
+            alterations.removeAll(this.alterations);
+            this.alterations.addAll(alterations);
+        }
+    }
 }
