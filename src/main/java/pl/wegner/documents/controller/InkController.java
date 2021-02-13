@@ -24,8 +24,8 @@ public class InkController {
         return service.edit(ink);
     }
 
-    @DeleteMapping("/inks/")
-    public void delete(long id) {
+    @DeleteMapping("/inks/{id}")
+    public void delete(@PathVariable long id) {
         service.delete(id);
     }
 }

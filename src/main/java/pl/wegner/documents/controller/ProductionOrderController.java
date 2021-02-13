@@ -36,8 +36,8 @@ public class ProductionOrderController {
         return orderService.edit(order);
     }
 
-    @DeleteMapping("/orders/")
-    public void delete(long id) {
+    @DeleteMapping("/orders/{id}")
+    public void delete(@PathVariable long id) {
         orderService.delete(id);
     }
 

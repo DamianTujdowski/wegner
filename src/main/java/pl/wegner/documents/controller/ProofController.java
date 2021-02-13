@@ -36,8 +36,8 @@ public class ProofController {
         return proofService.edit(proof);
     }
 
-    @DeleteMapping("/proofs/")
-    public void delete(long id) {
+    @DeleteMapping("/proofs/{id}")
+    public void delete(@PathVariable long id) {
         proofService.delete(id);
     }
 

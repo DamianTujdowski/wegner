@@ -37,8 +37,8 @@ public class ProjectController {
         return service.edit(project);
     }
 
-    @DeleteMapping("/projects/")
-    public void delete(long id) {
+    @DeleteMapping("/projects/{id}")
+    public void delete(@PathVariable long id) {
         service.delete(id);
     }
 

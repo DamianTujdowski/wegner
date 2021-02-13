@@ -36,8 +36,8 @@ public class OrderArchivalDataController {
         return orderService.edit(order);
     }
 
-    @DeleteMapping("/archives/")
-    public void delete(long id) {
+    @DeleteMapping("/archives/{id}")
+    public void delete(@PathVariable long id) {
         orderService.delete(id);
     }
 

@@ -23,8 +23,8 @@ public class AlterationController {
         return service.edit(alteration);
     }
 
-    @DeleteMapping("/alterations/")
-    public void delete(long id) {
+    @DeleteMapping("/alterations/{id}")
+    public void delete(@PathVariable long id) {
         service.delete(id);
     }
 }

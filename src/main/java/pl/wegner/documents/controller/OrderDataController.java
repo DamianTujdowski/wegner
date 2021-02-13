@@ -23,8 +23,8 @@ public class OrderDataController {
         return service.edit(data);
     }
 
-    @DeleteMapping("/data/")
-    public void delete(long id) {
+    @DeleteMapping("/data/{id}")
+    public void delete(@PathVariable long id) {
         service.delete(id);
     }
 
