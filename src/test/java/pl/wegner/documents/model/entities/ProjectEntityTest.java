@@ -3,6 +3,7 @@ package pl.wegner.documents.model.entities;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -13,9 +14,11 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class ProjectEntityTest {
 
-    private Project projectWithNoInks, projectWithYelloMagentaInks;
+    private Project projectWithNoInksAndAlterations, projectWithYellowMagentaInks, projectWithTextAndColorAlterations;
 
-    private Ink yellow, magenta, yellowModified, magentaModified;
+    private Ink yellow, magenta, magentaModified;
+
+    private Alteration colorAlter, textAlter, colorAlterModified;
 
     @BeforeEach
     public void init() {
@@ -31,11 +34,7 @@ class ProjectEntityTest {
                 .projectId(1)
                 .build();
 
-        yellowModified = Ink.builder()
-                .id(1)
-                .symbol("Modified yellow")
-                .projectId(1)
-                .build();
+        List<Ink> inks = Stream.of(yellow, magenta).collect(Collectors.toList());
 
         magentaModified = Ink.builder()
                 .id(2)
@@ -43,20 +42,49 @@ class ProjectEntityTest {
                 .projectId(1)
                 .build();
 
-        List<Ink> inks = Stream.of(yellow, magenta).collect(Collectors.toList());
+        colorAlter = Alteration.builder()
+                .occurrence(LocalDateTime.of(2020, 1, 12, 10, 40))
+                .description("Red changed to blue")
+                .duration(50)
+                .projectId(1)
+                .build();
 
-        projectWithNoInks = Project.builder()
+        textAlter = Alteration.builder()
+                .occurrence(LocalDateTime.of(2020, 1, 16, 13, 10))
+                .description("Text changed to capitals")
+                .duration(110)
+                .projectId(1)
+                .build();
+
+        List<Alteration> alterations = Stream.of(colorAlter, textAlter).collect(Collectors.toList());
+
+        colorAlterModified = Alteration.builder()
+                .occurrence(LocalDateTime.of(2020, 1, 12, 10, 40))
+                .description("Red changed to magenta")
+                .duration(50)
+                .projectId(1)
+                .build();
+
+        projectWithNoInksAndAlterations = Project.builder()
                 .id(1)
                 .designation("Alicja")
                 .client("Komsomolec")
                 .inks(new ArrayList<>())
+                .alterations(new ArrayList<>())
                 .build();
 
-        projectWithYelloMagentaInks = Project.builder()
+        projectWithYellowMagentaInks = Project.builder()
                 .id(1)
                 .designation("Alicja")
                 .client("Komsomolec")
                 .inks(inks)
+                .build();
+
+        projectWithTextAndColorAlterations = Project.builder()
+                .id(1)
+                .designation("Alicja")
+                .client("Komsomolec")
+                .alterations(alterations)
                 .build();
     }
 
@@ -66,21 +94,21 @@ class ProjectEntityTest {
         List<Ink> inks = Stream.of(yellow, magenta).collect(Collectors.toList());
 
         //when
-        projectWithNoInks.setInks(inks);
+        projectWithNoInksAndAlterations.setInks(inks);
         //then
-        assertEquals(2, projectWithNoInks.getInks().size());
+        assertEquals(2, projectWithNoInksAndAlterations.getInks().size());
     }
 
     @Test
-    public void whenProjectInksListIsSetWithIdenticalInksListTheSame_shouldNotMakeAnyChangesToEntityInksList() {
+    public void whenProjectInksListIsSetWithIdenticalInksList_shouldNotMakeAnyChangesToEntityInksList() {
         //given
         List<Ink> inks = Stream.of(yellow, magenta).collect(Collectors.toList());
 
         //when
-        projectWithYelloMagentaInks.setInks(inks);
+        projectWithYellowMagentaInks.setInks(inks);
         //then
-        assertEquals(2, projectWithYelloMagentaInks.getInks().size());
-        assertEquals("Yellow", projectWithYelloMagentaInks.getInks().get(0).getSymbol());
+        assertEquals(2, projectWithYellowMagentaInks.getInks().size());
+        assertEquals("Yellow", projectWithYellowMagentaInks.getInks().get(0).getSymbol());
     }
 
     @Test
@@ -89,10 +117,10 @@ class ProjectEntityTest {
         List<Ink> inks = Stream.of(yellow, magentaModified).collect(Collectors.toList());
 
         //when
-        projectWithYelloMagentaInks.setInks(inks);
+        projectWithYellowMagentaInks.setInks(inks);
         //then
-        assertEquals(2, projectWithYelloMagentaInks.getInks().size());
-        assertEquals("Modified magenta", projectWithYelloMagentaInks.getInks().get(1).getSymbol());
+        assertEquals(2, projectWithYellowMagentaInks.getInks().size());
+        assertEquals("Modified magenta", projectWithYellowMagentaInks.getInks().get(1).getSymbol());
     }
 
     @Test
@@ -101,9 +129,9 @@ class ProjectEntityTest {
         List<Ink> inks = Stream.of(yellow).collect(Collectors.toList());
 
         //when
-        projectWithYelloMagentaInks.setInks(inks);
+        projectWithYellowMagentaInks.setInks(inks);
         //then
-        assertEquals(1, projectWithYelloMagentaInks.getInks().size());
+        assertEquals(1, projectWithYellowMagentaInks.getInks().size());
     }
 
     @Test
@@ -112,9 +140,61 @@ class ProjectEntityTest {
         List<Ink> inks = new ArrayList<>();
 
         //when
-        projectWithYelloMagentaInks.setInks(inks);
+        projectWithYellowMagentaInks.setInks(inks);
         //then
-        assertEquals(0, projectWithYelloMagentaInks.getInks().size());
+        assertEquals(0, projectWithYellowMagentaInks.getInks().size());
+    }
+
+    @Test
+    public void whenProjectHasNoAlterations_shouldAddAllAlterations() {
+        //given
+        List<Alteration> alterations = Stream.of(colorAlter, textAlter).collect(Collectors.toList());
+        //when
+        projectWithNoInksAndAlterations.setAlterations(alterations);
+        //then
+        assertEquals(2, projectWithNoInksAndAlterations.getAlterations().size());
+    }
+
+    @Test
+    public void whenProjectAlterationsListIsSetWithIdenticalAlterationsList_shouldNotMakeAnyChangesToEntityAlterationsList() {
+        //given
+        List<Alteration> alterations = Stream.of(colorAlter, textAlter).collect(Collectors.toList());
+        //when
+        projectWithTextAndColorAlterations.setAlterations(alterations);
+        //then
+        assertEquals(2, projectWithTextAndColorAlterations.getAlterations().size());
+        assertEquals("Red changed to blue", projectWithTextAndColorAlterations.getAlterations().get(0).getDescription());
+    }
+
+    @Test
+    public void whenProjectAlterationsListIsSetWithAlterationsListWithChangedElements_shouldMakeChangesToEntityAlterationsList() {
+        //given
+        List<Alteration> alterations = Stream.of(colorAlterModified, textAlter).collect(Collectors.toList());
+        //when
+        projectWithTextAndColorAlterations.setAlterations(alterations);
+        //then
+        assertEquals(2, projectWithTextAndColorAlterations.getAlterations().size());
+        assertEquals("Red changed to magenta", projectWithTextAndColorAlterations.getAlterations().get(1).getDescription());
+    }
+
+    @Test
+    public void whenProjectAlterationsListIsSetWithAlterationsListWithRemovedElements_shouldRemoveMissingElementFromEntityAlterationsList() {
+        //given
+        List<Alteration> alterations = Stream.of(textAlter).collect(Collectors.toList());
+        //when
+        projectWithTextAndColorAlterations.setAlterations(alterations);
+        //then
+        assertEquals(1, projectWithTextAndColorAlterations.getAlterations().size());
+    }
+
+    @Test
+    public void whenProjectAlterationsListIsSetWithEmptyAlterationsList_shouldRemoveAllElementFromEntityAlterationsList() {
+        //given
+        List<Alteration> alterations = new ArrayList<>();
+        //when
+        projectWithTextAndColorAlterations.setAlterations(alterations);
+        //then
+        assertEquals(0, projectWithTextAndColorAlterations.getAlterations().size());
     }
 
 }
