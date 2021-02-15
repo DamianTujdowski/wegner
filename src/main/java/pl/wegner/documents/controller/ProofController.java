@@ -16,7 +16,7 @@ public class ProofController {
     }
 
     @GetMapping("/proofs/{id}")
-    public Proof findById(long id) {
+    public Proof findById(@PathVariable long id) {
         return proofService.findById(id);
     }
 

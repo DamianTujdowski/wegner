@@ -6,6 +6,7 @@ import pl.wegner.documents.model.entities.Proof;
 import pl.wegner.documents.repository.ProofRepository;
 
 import javax.persistence.EntityNotFoundException;
+import javax.transaction.Transactional;
 import java.util.List;
 
 @Service
@@ -32,6 +33,7 @@ public class ProofService {
         return repository.save(proof);
     }
 
+    @Transactional
     public Proof edit(Proof proof) {
         Proof edited = repository.findById(proof.getId())
                 .orElseThrow(() -> new EntityNotFoundException(

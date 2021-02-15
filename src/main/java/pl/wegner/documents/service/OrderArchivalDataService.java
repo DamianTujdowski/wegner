@@ -6,6 +6,7 @@ import pl.wegner.documents.model.entities.OrderArchivalData;
 import pl.wegner.documents.repository.OrderArchivalDataRepository;
 
 import javax.persistence.EntityNotFoundException;
+import javax.transaction.Transactional;
 import java.util.List;
 
 @Service
@@ -31,6 +32,7 @@ public class OrderArchivalDataService {
         return orderRepository.save(order);
     }
 
+    @Transactional
     public OrderArchivalData edit(OrderArchivalData order) {
         OrderArchivalData editedOrder = orderRepository.findById(order.getId())
                 .orElseThrow(() -> new EntityNotFoundException(

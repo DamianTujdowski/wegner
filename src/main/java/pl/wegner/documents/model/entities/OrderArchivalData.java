@@ -9,6 +9,7 @@ import pl.wegner.documents.model.enums.PlateThickness;
 import pl.wegner.documents.model.enums.PrintSide;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -23,7 +24,7 @@ public class OrderArchivalData {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    private LocalDateTime occurrence;
+    private LocalDate occurrence;
 
     private String fileName;
 
@@ -52,4 +53,15 @@ public class OrderArchivalData {
 
     @Enumerated(EnumType.ORDINAL)
     private PlateThickness plateThickness;
+
+    public void setInks(List<Ink> inks) {
+        if (this.inks == null) {
+            this.inks = inks;
+        } else {
+            this.inks.retainAll(inks);
+            inks.removeAll(this.inks);
+            this.inks.addAll(inks);
+        }
+    }
+
 }
