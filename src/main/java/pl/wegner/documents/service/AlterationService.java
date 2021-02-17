@@ -5,6 +5,7 @@ import pl.wegner.documents.model.entities.Alteration;
 import pl.wegner.documents.repository.AlterationRepository;
 
 import javax.persistence.EntityNotFoundException;
+import javax.transaction.Transactional;
 
 @Service
 public class AlterationService {
@@ -20,6 +21,7 @@ public class AlterationService {
         return repository.save(alteration);
     }
 
+    @Transactional
     public Alteration edit(Alteration alteration) {
         Alteration edited = repository.findById(alteration.getId())
                 .orElseThrow(() -> new EntityNotFoundException(

@@ -5,6 +5,7 @@ import pl.wegner.documents.model.entities.OrderData;
 import pl.wegner.documents.repository.OrderDataRepository;
 
 import javax.persistence.EntityNotFoundException;
+import javax.transaction.Transactional;
 
 @Service
 public class OrderDataService {
@@ -20,6 +21,7 @@ public class OrderDataService {
         return repository.save(data);
     }
 
+    @Transactional
     public OrderData edit(OrderData data) {
         OrderData edited = repository.findById(data.getId())
                 .orElseThrow(() -> new EntityNotFoundException(

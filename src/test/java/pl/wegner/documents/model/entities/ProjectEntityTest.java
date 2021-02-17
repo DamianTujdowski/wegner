@@ -3,6 +3,7 @@ package pl.wegner.documents.model.entities;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -43,14 +44,14 @@ class ProjectEntityTest {
                 .build();
 
         colorAlter = Alteration.builder()
-                .occurrence(LocalDateTime.of(2020, 1, 12, 10, 40))
+                .occurrence(LocalDate.of(2020, 1, 12))
                 .description("Red changed to blue")
                 .duration(50)
                 .projectId(1)
                 .build();
 
         textAlter = Alteration.builder()
-                .occurrence(LocalDateTime.of(2020, 1, 16, 13, 10))
+                .occurrence(LocalDate.of(2020, 1, 16))
                 .description("Text changed to capitals")
                 .duration(110)
                 .projectId(1)
@@ -59,7 +60,7 @@ class ProjectEntityTest {
         List<Alteration> alterations = Stream.of(colorAlter, textAlter).collect(Collectors.toList());
 
         colorAlterModified = Alteration.builder()
-                .occurrence(LocalDateTime.of(2020, 1, 12, 10, 40))
+                .occurrence(LocalDate.of(2020, 1, 12))
                 .description("Red changed to magenta")
                 .duration(50)
                 .projectId(1)

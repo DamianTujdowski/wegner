@@ -5,6 +5,7 @@ import pl.wegner.documents.model.entities.Ink;
 import pl.wegner.documents.repository.InkRepository;
 
 import javax.persistence.EntityNotFoundException;
+import javax.transaction.Transactional;
 
 @Service
 public class InkService {
@@ -19,6 +20,7 @@ public class InkService {
         return repository.save(ink);
     }
 
+    @Transactional
     public Ink edit(Ink ink) {
         Ink edited = repository.findById(ink.getId())
                 .orElseThrow(() -> new EntityNotFoundException(
