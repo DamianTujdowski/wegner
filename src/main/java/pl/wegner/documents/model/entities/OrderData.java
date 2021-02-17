@@ -45,4 +45,15 @@ public class OrderData {
 
     @Column(name = "production_order_id")
     private long productionOrderId;
+
+    public void setInks(List<Ink> inks) {
+        if (this.inks == null) {
+            this.inks = inks;
+        } else {
+            this.inks.retainAll(inks);
+            inks.removeAll(this.inks);
+            this.inks.addAll(inks);
+        }
+    }
+
 }

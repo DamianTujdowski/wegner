@@ -40,13 +40,13 @@ class OrderArchivalDataEntityTest {
 
         dataWithNoInks = OrderArchivalData.builder()
                 .fileName("Palstmoroz many plates")
-                .dimensions("200x500")
+                .platesDimensions("200x500")
                 .inks(new ArrayList<>())
                 .build();
 
         dataWithYellowMagentaInks = OrderArchivalData.builder()
                 .fileName("Palstmoroz many plates")
-                .dimensions("200x500")
+                .platesDimensions("200x500")
                 .inks(inks)
                 .build();
     }

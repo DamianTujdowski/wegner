@@ -30,7 +30,7 @@ public class OrderArchivalData {
 
     private String productionFileName;
 
-    private String dimensions;
+    private String platesDimensions;
 
     private int platesQuantity;
 

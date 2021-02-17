@@ -41,7 +41,7 @@ public class OrderArchivalDataService {
         editedOrder.setOccurrence(order.getOccurrence());
         editedOrder.setFileName(order.getFileName());
         editedOrder.setProductionFileName(order.getProductionFileName());
-        editedOrder.setDimensions(order.getDimensions());
+        editedOrder.setPlatesDimensions(order.getPlatesDimensions());
         editedOrder.setPlatesQuantity(order.getPlatesQuantity());
         editedOrder.setLpi(order.getLpi());
         editedOrder.setSide(order.getSide());
