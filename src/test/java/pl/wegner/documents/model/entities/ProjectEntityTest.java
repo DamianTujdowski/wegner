@@ -17,7 +17,7 @@ class ProjectEntityTest {
 
     private Project projectWithNoInksAndAlterations, projectWithYellowMagentaInks, projectWithTextAndColorAlterations;
 
-    private Ink yellow, magenta, magentaModified;
+    private Ink yellow, magenta, cyan, magentaModified;
 
     private Alteration colorAlter, textAlter, colorAlterModified;
 
@@ -32,6 +32,12 @@ class ProjectEntityTest {
         magenta = Ink.builder()
                 .id(2)
                 .symbol("Magenta")
+                .projectId(1)
+                .build();
+
+        cyan = Ink.builder()
+                .id(3)
+                .symbol("Cyan")
                 .projectId(1)
                 .build();
 
@@ -101,6 +107,17 @@ class ProjectEntityTest {
     }
 
     @Test
+    public void whenProjectInksListIsSetWithInksListWithNoCommonElements_shouldReplaceEntityInksListWithNewInks() {
+        //given
+        List<Ink> inks = Stream.of(cyan).collect(Collectors.toList());
+
+        //when
+        projectWithYellowMagentaInks.setInks(inks);
+        //then
+        assertEquals(1, projectWithYellowMagentaInks.getInks().size());
+    }
+
+    @Test
     public void whenProjectInksListIsSetWithIdenticalInksList_shouldNotMakeAnyChangesToEntityInksList() {
         //given
         List<Ink> inks = Stream.of(yellow, magenta).collect(Collectors.toList());
@@ -139,7 +156,6 @@ class ProjectEntityTest {
     public void whenProjectInksListIsSetWithEmptyInksList_shouldRemoveAllElementFromEntityInksList() {
         //given
         List<Ink> inks = new ArrayList<>();
-
         //when
         projectWithYellowMagentaInks.setInks(inks);
         //then

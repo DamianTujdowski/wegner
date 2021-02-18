@@ -54,6 +54,8 @@ public class Project {
     @JoinColumn(name = "project_id")
     private List<Alteration> alterations;
 
+    private int overallPreparationTime;
+
     public void setInks(List<Ink> inks) {
         if (this.inks == null) {
             this.inks = inks;

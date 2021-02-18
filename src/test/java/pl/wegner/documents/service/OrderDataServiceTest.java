@@ -3,11 +3,9 @@ package pl.wegner.documents.service;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.TestConfiguration;
-import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.context.annotation.Bean;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
 import pl.wegner.documents.model.entities.Ink;
 import pl.wegner.documents.model.entities.OrderArchivalData;
 import pl.wegner.documents.model.entities.OrderData;
@@ -22,23 +20,14 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-@ExtendWith(SpringExtension.class)
+@ExtendWith(MockitoExtension.class)
 class OrderDataServiceTest {
 
-    @TestConfiguration
-    static class OrderDataServiceContextConfiguration{
-
-        OrderDataRepository repository;
-
-        @Bean
-        public OrderDataService dataService() {
-            return new OrderDataService(repository);
-        }
-
-    }
-
-    @Autowired
+    @InjectMocks
     private OrderDataService service;
+
+    @Mock
+    private OrderDataRepository repository;
 
     private OrderArchivalData archivalData;
 

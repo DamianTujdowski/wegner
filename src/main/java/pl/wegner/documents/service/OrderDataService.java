@@ -25,10 +25,10 @@ public class OrderDataService {
     }
 
     public OrderData generateData(OrderArchivalData archivalData) {
-        return mapArchivalToOrderData(archivalData);
+        return mapToOrderData(archivalData);
     }
 
-    private OrderData mapArchivalToOrderData(OrderArchivalData archivalData) {
+    private OrderData mapToOrderData(OrderArchivalData archivalData) {
         return OrderData.builder()
                 .fileName(archivalData.getFileName())
                 .platesDimensions(archivalData.getPlatesDimensions())

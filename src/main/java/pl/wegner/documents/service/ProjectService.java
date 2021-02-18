@@ -2,6 +2,7 @@ package pl.wegner.documents.service;
 
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
+import pl.wegner.documents.model.entities.Alteration;
 import pl.wegner.documents.model.entities.Project;
 import pl.wegner.documents.repository.ProjectRepository;
 
@@ -33,6 +34,8 @@ public class ProjectService {
         return repository.save(project);
     }
 
+
+    //TODO fix actualizing overalPreparationTime
     @Transactional
     public Project edit(Project project) {
         Project edited = repository.findById(project.getId())
@@ -51,9 +54,16 @@ public class ProjectService {
         edited.setNotes(project.getNotes());
         edited.setStage(project.getStage());
         edited.setAlterations(project.getAlterations());
+        edited.setOverallPreparationTime(countOverallPreparationTime(project.getAlterations()));
         return edited;
     }
 
+    private int countOverallPreparationTime(List<Alteration> alterations) {
+        return alterations
+                .stream()
+                .mapToInt(Alteration::getDuration)
+                .sum();
+    }
 
     public void delete(long id) {
         repository.deleteById(id);
