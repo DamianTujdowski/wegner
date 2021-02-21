@@ -85,9 +85,10 @@ class ProductionOrderEntityTest {
         List<OrderData> data = Stream.of(modifiedGermanProjectOrder, polishProjectOrder).collect(Collectors.toList());
         //when
         orderWithTwoElements.setOrderData(data);
+        int index = orderWithTwoElements.getOrderData().indexOf(modifiedGermanProjectOrder);
         //then
         assertEquals(2, orderWithTwoElements.getOrderData().size());
-        assertEquals("Pfeffer hunde stinkishe lungen", orderWithTwoElements.getOrderData().get(1).getFileName());
+        assertEquals("Pfeffer hunde stinkishe lungen", orderWithTwoElements.getOrderData().get(index).getFileName());
     }
 
     @Test

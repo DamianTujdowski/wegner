@@ -34,10 +34,9 @@ public class ProjectService {
         return repository.save(project);
     }
 
-
-    //TODO fix actualizing overalPreparationTime
     @Transactional
     public Project edit(Project project) {
+        int duration = countOverallPreparationDuration(project.getAlterations());
         Project edited = repository.findById(project.getId())
                 .orElseThrow(() -> new EntityNotFoundException(
                         String.format("Project with id %d does not exist", project.getId())
@@ -54,11 +53,11 @@ public class ProjectService {
         edited.setNotes(project.getNotes());
         edited.setStage(project.getStage());
         edited.setAlterations(project.getAlterations());
-        edited.setOverallPreparationTime(countOverallPreparationTime(project.getAlterations()));
+        edited.setOverallPreparationDuration(duration);
         return edited;
     }
 
-    private int countOverallPreparationTime(List<Alteration> alterations) {
+    private int countOverallPreparationDuration(List<Alteration> alterations) {
         return alterations
                 .stream()
                 .mapToInt(Alteration::getDuration)

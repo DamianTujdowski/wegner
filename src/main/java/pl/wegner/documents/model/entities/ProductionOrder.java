@@ -32,8 +32,7 @@ public class ProductionOrder {
         if (this.orderData == null) {
             this.orderData = orderData;
         } else {
-            this.orderData.retainAll(orderData);
-            orderData.removeAll(this.orderData);
+            this.orderData.clear();
             this.orderData.addAll(orderData);
         }
     }

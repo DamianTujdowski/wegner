@@ -12,7 +12,6 @@ import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-
 class ProjectEntityTest {
 
     private Project projectWithNoInksAndAlterations, projectWithYellowMagentaInks, projectWithTextAndColorAlterations;
@@ -99,7 +98,6 @@ class ProjectEntityTest {
     public void whenProjectHasNoInks_shouldAddAllInks() {
         //given
         List<Ink> inks = Stream.of(yellow, magenta).collect(Collectors.toList());
-
         //when
         projectWithNoInksAndAlterations.setInks(inks);
         //then
@@ -110,7 +108,6 @@ class ProjectEntityTest {
     public void whenProjectInksListIsSetWithInksListWithNoCommonElements_shouldReplaceEntityInksListWithNewInks() {
         //given
         List<Ink> inks = Stream.of(cyan).collect(Collectors.toList());
-
         //when
         projectWithYellowMagentaInks.setInks(inks);
         //then
@@ -133,7 +130,6 @@ class ProjectEntityTest {
     public void whenProjectInksListIsSetWithInksListWithChangedElements_shouldMakeChangesToEntityInksList() {
         //given
         List<Ink> inks = Stream.of(yellow, magentaModified).collect(Collectors.toList());
-
         //when
         projectWithYellowMagentaInks.setInks(inks);
         //then
@@ -145,11 +141,21 @@ class ProjectEntityTest {
     public void whenProjectInksListIsSetWithInksListWithRemovedElements_shouldRemoveMissingElementFromEntityInksList() {
         //given
         List<Ink> inks = Stream.of(yellow).collect(Collectors.toList());
-
         //when
         projectWithYellowMagentaInks.setInks(inks);
         //then
         assertEquals(1, projectWithYellowMagentaInks.getInks().size());
+        assertEquals("Yellow", projectWithYellowMagentaInks.getInks().get(0).getSymbol());
+    }
+
+    @Test
+    public void whenProjectInksListIsSetWithInksListWithNewElements_shouldAddAllNewElements() {
+        //given
+        List<Ink> inks = Stream.of(cyan, yellow, magenta).collect(Collectors.toList());
+        //when
+        projectWithYellowMagentaInks.setInks(inks);
+        //then
+        assertEquals(3, projectWithYellowMagentaInks.getInks().size());
     }
 
     @Test
@@ -191,7 +197,7 @@ class ProjectEntityTest {
         projectWithTextAndColorAlterations.setAlterations(alterations);
         //then
         assertEquals(2, projectWithTextAndColorAlterations.getAlterations().size());
-        assertEquals("Red changed to magenta", projectWithTextAndColorAlterations.getAlterations().get(1).getDescription());
+        assertEquals("Red changed to magenta", projectWithTextAndColorAlterations.getAlterations().get(0).getDescription());
     }
 
     @Test

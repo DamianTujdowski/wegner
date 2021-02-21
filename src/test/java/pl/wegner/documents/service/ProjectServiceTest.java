@@ -31,7 +31,8 @@ class ProjectServiceTest {
     @Mock
     private ProjectRepository repository;
 
-    private Project projectWithNotInitializedAlterationsList, projectWithEmptyAlterationsList, projectWithThreeAlteration, projectWithTwoAlterations;
+    private Project projectWithNotInitializedAlterationsList, projectWithEmptyAlterationsList,projectWithOneAlteration,
+            projectWithTwoAlterations, projectWithThreeAlterations;
 
     @BeforeEach
     public void setUp() {
@@ -53,6 +54,7 @@ class ProjectServiceTest {
                 .duration(10)
                 .build();
 
+        List<Alteration> oneAlter = Stream.of(sizeAlt).collect(Collectors.toList());
         List<Alteration> twoAlters = Stream.of(textAlt, colorAlt).collect(Collectors.toList());
         List<Alteration> threeAlter = Stream.of(textAlt, colorAlt, sizeAlt).collect(Collectors.toList());
 
@@ -69,6 +71,13 @@ class ProjectServiceTest {
                 .alterations(new ArrayList<>())
                 .build();
 
+        projectWithOneAlteration = Project.builder()
+                .id(1)
+                .designation("Alicja")
+                .client("Komsomolec")
+                .alterations(oneAlter)
+                .build();
+
         projectWithTwoAlterations = Project.builder()
                 .id(1)
                 .designation("Alicja")
@@ -76,23 +85,12 @@ class ProjectServiceTest {
                 .alterations(twoAlters)
                 .build();
 
-        projectWithThreeAlteration = Project.builder()
+        projectWithThreeAlterations = Project.builder()
                 .id(1)
                 .designation("Alicja")
                 .client("Komsomolec")
                 .alterations(threeAlter)
                 .build();
-    }
-
-    @Test
-    public void shouldCountOverallPreparationTimeEqualTo110_whenEditedProjectHasEmptyAlterationsList() {
-        //given
-        Project edited;
-        //when
-        when(repository.findById(1L)).thenReturn(Optional.of(projectWithEmptyAlterationsList));
-        edited = service.edit(projectWithTwoAlterations);
-        //then
-        assertEquals(110, edited.getOverallPreparationTime());
     }
 
     @Test
@@ -103,18 +101,40 @@ class ProjectServiceTest {
         when(repository.findById(1L)).thenReturn(Optional.of(projectWithNotInitializedAlterationsList));
         edited = service.edit(projectWithTwoAlterations);
         //then
-        assertEquals(110, edited.getOverallPreparationTime());
+        assertEquals(110, edited.getOverallPreparationDuration());
     }
 
     @Test
-    public void shouldCountOverallPreparationTimeEqualTo200_whenEditedProjectHasCommonAlterations() {
+    public void shouldCountOverallPreparationTimeEqualTo110_whenEditedProjectHasEmptyAlterationsList() {
+        //given
+        Project edited;
+        //when
+        when(repository.findById(1L)).thenReturn(Optional.of(projectWithEmptyAlterationsList));
+        edited = service.edit(projectWithTwoAlterations);
+        //then
+        assertEquals(110, edited.getOverallPreparationDuration());
+    }
+
+    @Test
+    public void shouldCountOverallPreparationTimeEqualTo110_whenEditedProjectHasNoCommonAlterations() {
+        //given
+        Project edited;
+        //when
+        when(repository.findById(1L)).thenReturn(Optional.of(projectWithOneAlteration));
+        edited = service.edit(projectWithTwoAlterations);
+        //then
+        assertEquals(110, edited.getOverallPreparationDuration());
+    }
+
+    @Test
+    public void shouldCountOverallPreparationTimeEqualTo120_whenEditedProjectHasCommonAlterations() {
         //given
         Project edited;
         //when
         when(repository.findById(1L)).thenReturn(Optional.of(projectWithTwoAlterations));
-        edited = service.edit(projectWithThreeAlteration);
+        edited = service.edit(projectWithThreeAlterations);
         //then
-        assertEquals(120, edited.getOverallPreparationTime());
+        assertEquals(120, edited.getOverallPreparationDuration());
     }
 
 }

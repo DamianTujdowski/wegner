@@ -58,8 +58,7 @@ public class OrderArchivalData {
         if (this.inks == null) {
             this.inks = inks;
         } else {
-            this.inks.retainAll(inks);
-            inks.removeAll(this.inks);
+            this.inks.clear();
             this.inks.addAll(inks);
         }
     }
