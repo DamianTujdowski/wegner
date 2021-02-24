@@ -1,6 +1,7 @@
 package pl.wegner.documents.service;
 
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import pl.wegner.documents.model.entities.Proof;
 import pl.wegner.documents.repository.ProofRepository;
@@ -25,8 +26,8 @@ public class ProofService {
                 ));
     }
 
-    public List<Proof> findAll(int page, int size) {
-        return repository.findAllBy(PageRequest.of(page, size));
+    public List<Proof> findAll(int page, int size, Sort.Direction direction) {
+        return repository.findAllBy(PageRequest.of(page, size, Sort.by(direction, "printDate")));
     }
 
     public Proof save(Proof proof) {

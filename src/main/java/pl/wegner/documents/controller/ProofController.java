@@ -1,5 +1,6 @@
 package pl.wegner.documents.controller;
 
+import org.springframework.data.domain.Sort;
 import org.springframework.web.bind.annotation.*;
 import pl.wegner.documents.model.entities.Proof;
 import pl.wegner.documents.service.ProofService;
@@ -22,8 +23,9 @@ public class ProofController {
 
     @GetMapping("/proofs/")
     public List<Proof> findAll(@RequestParam int page,
-                               @RequestParam(defaultValue = "20") int size) {
-        return proofService.findAll(page, size);
+                               @RequestParam(defaultValue = "20") int size,
+                               @RequestParam(defaultValue = "ASC") Sort.Direction direction) {
+        return proofService.findAll(page, size, direction);
     }
 
     @PostMapping("/proofs/")

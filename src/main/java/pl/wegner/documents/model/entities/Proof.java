@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import pl.wegner.documents.model.enums.SendMethod;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 
 @Data
 @NoArgsConstructor
@@ -18,6 +19,8 @@ public class Proof {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+
+    private LocalDate printDate;
 
     private String designation;
 
