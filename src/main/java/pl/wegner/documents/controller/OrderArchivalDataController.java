@@ -1,5 +1,6 @@
 package pl.wegner.documents.controller;
 
+import org.springframework.data.domain.Sort;
 import org.springframework.web.bind.annotation.*;
 import pl.wegner.documents.model.entities.OrderArchivalData;
 import pl.wegner.documents.service.OrderArchivalDataService;
@@ -22,8 +23,9 @@ public class OrderArchivalDataController {
 
     @GetMapping("/archives/")
     public List<OrderArchivalData> findDetailedOrder(@RequestParam int page,
-                                                     @RequestParam(defaultValue = "20") int size) {
-        return orderService.findAll(page, size);
+                                                     @RequestParam(defaultValue = "20") int size,
+                                                     @RequestParam(defaultValue = "ASC") Sort.Direction direction) {
+        return orderService.findAll(page, size, direction);
     }
 
     @PostMapping("/archives/")

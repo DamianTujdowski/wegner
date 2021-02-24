@@ -1,6 +1,7 @@
 package pl.wegner.documents.service;
 
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import pl.wegner.documents.model.entities.OrderArchivalData;
 import pl.wegner.documents.repository.OrderArchivalDataRepository;
@@ -24,8 +25,8 @@ public class OrderArchivalDataService {
         ));
     }
 
-    public List<OrderArchivalData> findAll(int page, int size) {
-        return orderRepository.findAllBy(PageRequest.of(page, size));
+    public List<OrderArchivalData> findAll(int page, int size, Sort.Direction direction) {
+        return orderRepository.findAllBy(PageRequest.of(page, size, Sort.by(direction, "occurrence")));
     }
 
     public OrderArchivalData save(OrderArchivalData order) {

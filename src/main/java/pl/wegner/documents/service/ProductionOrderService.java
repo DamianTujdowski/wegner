@@ -1,6 +1,7 @@
 package pl.wegner.documents.service;
 
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import pl.wegner.documents.model.entities.ProductionOrder;
 import pl.wegner.documents.repository.ProductionOrderRepository;
@@ -25,8 +26,8 @@ public class ProductionOrderService {
                 ));
     }
 
-    public List<ProductionOrder> findAll(int page, int size) {
-        return orderRepository.findAllBy(PageRequest.of(page, size));
+    public List<ProductionOrder> findAll(int page, int size, Sort.Direction direction) {
+        return orderRepository.findAllBy(PageRequest.of(page, size, Sort.by(direction, "occurrence")));
     }
 
     public ProductionOrder save(ProductionOrder order) {
