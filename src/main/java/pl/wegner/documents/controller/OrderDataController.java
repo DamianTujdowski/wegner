@@ -19,7 +19,7 @@ public class OrderDataController {
         return service.findById(id);
     }
 
-    //TODO only generates orderData does not save it to DB
+    // only generates orderData does not save it to DB
     @PostMapping("/data/gen")
     public OrderData generateOrderData(@RequestBody OrderArchivalData archivalData) {
         return service.generateData(archivalData);

@@ -42,7 +42,7 @@ public class Project {
     private PrintSide side;
 
     @OneToMany(orphanRemoval = true)
-    @JoinColumn(name = "project_id")
+    @JoinColumn(name = "projectId")
     private List<Ink> inks;
 
     private String notes;
@@ -51,7 +51,7 @@ public class Project {
     private Stage stage;
 
     @OneToMany(orphanRemoval = true)
-    @JoinColumn(name = "project_id")
+    @JoinColumn(name = "projectId")
     private List<Alteration> alterations;
 
     private int overallPreparationDuration;

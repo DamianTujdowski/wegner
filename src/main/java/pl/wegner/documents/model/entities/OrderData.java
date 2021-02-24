@@ -32,7 +32,7 @@ public class OrderData {
     private LinesPerInch lpi;
 
     @OneToMany(orphanRemoval = true)
-    @JoinColumn(name = "order_data_id")
+    @JoinColumn(name = "orderDataId")
     private List<Ink> inks;
 
     @Enumerated(EnumType.ORDINAL)
@@ -43,15 +43,13 @@ public class OrderData {
 
     private String notes;
 
-    @Column(name = "production_order_id")
     private long productionOrderId;
 
     public void setInks(List<Ink> inks) {
         if (this.inks == null) {
             this.inks = inks;
         } else {
-            this.inks.retainAll(inks);
-            inks.removeAll(this.inks);
+            this.inks.clear();
             this.inks.addAll(inks);
         }
     }

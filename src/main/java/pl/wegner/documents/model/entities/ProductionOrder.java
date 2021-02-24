@@ -25,7 +25,7 @@ public class ProductionOrder {
     private LocalDate occurrence;
 
     @OneToMany(orphanRemoval = true)
-    @JoinColumn(name = "production_order_id")
+    @JoinColumn(name = "productionOrderId")
     private List<OrderData> orderData;
 
     public void setOrderData(List<OrderData> orderData) {

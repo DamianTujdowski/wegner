@@ -25,7 +25,6 @@ public class Alteration {
 
     private int duration;
 
-    @Column(name = "project_id")
     private long projectId;
 
 }

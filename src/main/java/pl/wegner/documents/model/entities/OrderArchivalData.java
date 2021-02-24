@@ -40,7 +40,7 @@ public class OrderArchivalData {
     private PrintSide side;
 
     @OneToMany(orphanRemoval = true)
-    @JoinColumn(name = "order_archival_data_id")
+    @JoinColumn(name = "orderArchivalDataId")
     private List<Ink> inks;
 
     private String notes;
