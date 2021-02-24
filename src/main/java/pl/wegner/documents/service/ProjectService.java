@@ -1,6 +1,7 @@
 package pl.wegner.documents.service;
 
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import pl.wegner.documents.model.entities.Alteration;
 import pl.wegner.documents.model.entities.Project;
@@ -26,8 +27,8 @@ public class ProjectService {
                 ));
     }
 
-    public List<Project> findAll(int page, int size) {
-        return repository.findAllBy(PageRequest.of(page, size));
+    public List<Project> findAll(int page, int size, Sort.Direction direction) {
+        return repository.findAllBy(PageRequest.of(page, size, Sort.by(direction, "symbol")));
     }
 
     public Project save(Project project) {

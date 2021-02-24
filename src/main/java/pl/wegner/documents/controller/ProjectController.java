@@ -1,5 +1,6 @@
 package pl.wegner.documents.controller;
 
+import org.springframework.data.domain.Sort;
 import org.springframework.web.bind.annotation.*;
 
 import pl.wegner.documents.model.entities.Project;
@@ -23,8 +24,9 @@ public class ProjectController {
 
     @GetMapping("/projects/")
     public List<Project> findAllProject(@RequestParam int page,
-                                        @RequestParam(defaultValue = "20") int size) {
-        return service.findAll(page, size);
+                                        @RequestParam(defaultValue = "20") int size,
+                                        @RequestParam(defaultValue = "ASC") Sort.Direction direction) {
+        return service.findAll(page, size, direction);
     }
 
     @PostMapping("/projects/")
