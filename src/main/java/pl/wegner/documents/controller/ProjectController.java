@@ -1,9 +1,11 @@
 package pl.wegner.documents.controller;
 
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Sort;
 import org.springframework.web.bind.annotation.*;
 
 import pl.wegner.documents.model.entities.Project;
+import pl.wegner.documents.model.enums.Stage;
 import pl.wegner.documents.service.ProjectService;
 
 import java.util.List;
@@ -23,10 +25,12 @@ public class ProjectController {
     }
 
     @GetMapping("/projects/")
-    public List<Project> findAllProject(@RequestParam int page,
+    public Page<Project> findAllProject(@RequestParam int page,
                                         @RequestParam(defaultValue = "20") int size,
-                                        @RequestParam(defaultValue = "ASC") Sort.Direction direction) {
-        return service.findAll(page, size, direction);
+                                        @RequestParam(defaultValue = "ASC") Sort.Direction direction,
+                                        @RequestParam(required = false) Stage stage,
+                                        @RequestParam(required = false) String printHouse) {
+        return service.findAll(page, size, direction, stage, printHouse);
     }
 
     @PostMapping("/projects/")

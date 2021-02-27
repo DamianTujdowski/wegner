@@ -1,11 +1,16 @@
 package pl.wegner.documents.service;
 
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import pl.wegner.documents.model.entities.Alteration;
 import pl.wegner.documents.model.entities.Project;
+import pl.wegner.documents.model.enums.Stage;
 import pl.wegner.documents.repository.ProjectRepository;
+import pl.wegner.documents.repository.specification.ProjectWithPrintHouse;
+import pl.wegner.documents.repository.specification.ProjectWithStage;
 
 import javax.persistence.EntityNotFoundException;
 import javax.transaction.Transactional;
@@ -27,8 +32,13 @@ public class ProjectService {
                 ));
     }
 
-    public List<Project> findAll(int page, int size, Sort.Direction direction) {
-        return repository.findAllBy(PageRequest.of(page, size, Sort.by(direction, "symbol")));
+    public Page<Project> findAll(int page, int size, Sort.Direction direction, Stage stage, String printHouse) {
+        Specification<Project> spec = buildSpecification(stage, printHouse);
+        return repository.findAll(spec, PageRequest.of(page, size, Sort.by(direction, "symbol")));
+    }
+
+    private Specification<Project> buildSpecification(Stage stage, String printHouse) {
+        return Specification.where(new ProjectWithStage(stage)).or(new ProjectWithPrintHouse(printHouse));
     }
 
     public Project save(Project project) {
