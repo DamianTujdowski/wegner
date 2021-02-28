@@ -14,6 +14,7 @@ import pl.wegner.documents.repository.specification.ProjectWithStage;
 
 import javax.persistence.EntityNotFoundException;
 import javax.transaction.Transactional;
+import java.time.LocalDate;
 import java.util.List;
 
 @Service
@@ -42,7 +43,25 @@ public class ProjectService {
     }
 
     public Project save(Project project) {
+        project.setStartDate(mapSymbolToDate(project.getSymbol()));
         return repository.save(project);
+    }
+
+    private LocalDate mapSymbolToDate(String symbol) {
+        validateSymbol(symbol);
+        int year = mapToPartialDate(symbol, 0, 2);
+        int month = mapToPartialDate(symbol, 2, 4);
+        int day = mapToPartialDate(symbol, 4, 6);
+        return LocalDate.of(year, month, day);
+    }
+
+    private Integer mapToPartialDate(String symbol, int beginIndex, int endIndex) {
+        return Integer.valueOf(symbol.substring(beginIndex, endIndex));
+    }
+
+    //TODO implement symbol validation
+    private void validateSymbol(String symbol) {
+//        LocalDate.now();
     }
 
     @Transactional

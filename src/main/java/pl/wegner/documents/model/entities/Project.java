@@ -10,6 +10,7 @@ import pl.wegner.documents.model.enums.PrintSide;
 import pl.wegner.documents.model.enums.Stage;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.List;
 
 @Data
@@ -25,7 +26,7 @@ public class Project {
 
     private String designation;
 
-    private int symbol;
+    private String symbol;
 
     private String client;
 
@@ -55,6 +56,8 @@ public class Project {
     private List<Alteration> alterations;
 
     private int overallPreparationDuration;
+
+    private LocalDate startDate;
 
     public void setInks(List<Ink> inks) {
         if (this.inks == null) {
