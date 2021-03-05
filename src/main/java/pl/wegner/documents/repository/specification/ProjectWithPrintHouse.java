@@ -20,9 +20,8 @@ public class ProjectWithPrintHouse implements Specification<Project> {
     @Override
     public Predicate toPredicate(Root<Project> root, CriteriaQuery<?> query, CriteriaBuilder builder) {
         if (printHouse == null) {
-            return builder.isTrue(builder.literal(true));
+            return builder.isTrue(builder.literal(false));
         }
         return builder.equal(root.get("printHouse"), this.printHouse);
-
     }
 }

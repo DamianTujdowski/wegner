@@ -20,7 +20,7 @@ public class ProjectWithStage implements Specification<Project> {
     @Override
     public Predicate toPredicate(Root root, CriteriaQuery query, CriteriaBuilder builder) {
         if (stage == null) {
-            return builder.isTrue(builder.literal(true));
+            return builder.isTrue(builder.literal(false));
         }
         return builder.equal(root.get("stage"), this.stage);
     }

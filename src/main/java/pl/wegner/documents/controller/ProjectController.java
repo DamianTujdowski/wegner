@@ -3,9 +3,8 @@ package pl.wegner.documents.controller;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Sort;
 import org.springframework.web.bind.annotation.*;
-
 import pl.wegner.documents.model.entities.Project;
-import pl.wegner.documents.model.enums.Stage;
+import pl.wegner.documents.repository.specification.FilterCriteria;
 import pl.wegner.documents.service.ProjectService;
 
 import java.util.List;
@@ -28,9 +27,8 @@ public class ProjectController {
     public Page<Project> findAllProject(@RequestParam int page,
                                         @RequestParam(defaultValue = "20") int size,
                                         @RequestParam(defaultValue = "ASC") Sort.Direction direction,
-                                        @RequestParam(required = false) Stage stage,
-                                        @RequestParam(required = false) String printHouse) {
-        return service.findAll(page, size, direction, stage, printHouse);
+                                        @RequestBody List<FilterCriteria> criteria) {
+        return service.findAll(page, size, direction, criteria);
     }
 
     @PostMapping("/projects/")

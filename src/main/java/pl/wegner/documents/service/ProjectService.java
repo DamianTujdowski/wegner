@@ -1,5 +1,6 @@
 package pl.wegner.documents.service;
 
+import lombok.NoArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
@@ -9,6 +10,8 @@ import pl.wegner.documents.model.entities.Alteration;
 import pl.wegner.documents.model.entities.Project;
 import pl.wegner.documents.model.enums.Stage;
 import pl.wegner.documents.repository.ProjectRepository;
+import pl.wegner.documents.repository.specification.FilterCriteria;
+import pl.wegner.documents.repository.specification.ProjectSpecificationsBuilder;
 import pl.wegner.documents.repository.specification.ProjectWithPrintHouse;
 import pl.wegner.documents.repository.specification.ProjectWithStage;
 
@@ -19,6 +22,8 @@ import java.util.List;
 
 @Service
 public class ProjectService {
+
+    private final int CENTURY = 2000;
 
     private ProjectRepository repository;
 
@@ -33,8 +38,9 @@ public class ProjectService {
                 ));
     }
 
-    public Page<Project> findAll(int page, int size, Sort.Direction direction, Stage stage, String printHouse) {
-        Specification<Project> spec = buildSpecification(stage, printHouse);
+    public Page<Project> findAll(int page, int size, Sort.Direction direction, List<FilterCriteria> criteria) {
+        ProjectSpecificationsBuilder builder = new ProjectSpecificationsBuilder(criteria);
+        Specification<Project> spec = builder.generateSpecification();
         return repository.findAll(spec, PageRequest.of(page, size, Sort.by(direction, "symbol")));
     }
 
@@ -43,20 +49,16 @@ public class ProjectService {
     }
 
     public Project save(Project project) {
-        project.setStartDate(mapSymbolToDate(project.getSymbol()));
+        project.setStart(mapSymbolToDate(project.getSymbol()));
         return repository.save(project);
     }
 
     private LocalDate mapSymbolToDate(String symbol) {
         validateSymbol(symbol);
-        int year = mapToPartialDate(symbol, 0, 2);
-        int month = mapToPartialDate(symbol, 2, 4);
-        int day = mapToPartialDate(symbol, 4, 6);
+        int year = CENTURY + Integer.valueOf(symbol.substring(0, 2));
+        int month = Integer.valueOf(symbol.substring(2, 4));
+        int day = Integer.valueOf(symbol.substring(4, 6));
         return LocalDate.of(year, month, day);
-    }
-
-    private Integer mapToPartialDate(String symbol, int beginIndex, int endIndex) {
-        return Integer.valueOf(symbol.substring(beginIndex, endIndex));
     }
 
     //TODO implement symbol validation
