@@ -1,25 +1,23 @@
 package pl.wegner.documents.repository.specification;
 
 import org.springframework.data.jpa.domain.Specification;
+import org.springframework.stereotype.Component;
 import pl.wegner.documents.model.entities.Project;
 
 import java.util.List;
 
+@Component
 public class ProjectSpecificationsBuilder {
 
-    private final List<FilterCriteria> criteria;
+//    public Specification<Project> generateSpecification(List<FilterCriteria> criteria) {
+//        return getSpecificationFromFilter(criteria);
+//    }
 
-    public ProjectSpecificationsBuilder(List<FilterCriteria> criteria) {
-        this.criteria = criteria;
-    }
-
-    public Specification<Project> generateSpecification() {
-        return getSpecificationFromFilter(this.criteria);
-    }
-
-    private Specification<Project> getSpecificationFromFilter(List<FilterCriteria> criteria) {
+    public Specification<Project> generateSpecification(List<FilterCriteria> criteria) {
         Specification<Project> specification = Specification.where(createSpecification(criteria.remove(0)));
-        criteria.forEach(c -> specification.and(createSpecification(c)));
+        for (FilterCriteria cr : criteria) {
+            specification = specification.and(createSpecification(cr));
+        }
         return specification;
     }
 

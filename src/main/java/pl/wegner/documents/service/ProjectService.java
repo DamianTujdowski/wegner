@@ -27,8 +27,11 @@ public class ProjectService {
 
     private ProjectRepository repository;
 
-    public ProjectService(ProjectRepository repository) {
+    private ProjectSpecificationsBuilder builder;
+
+    public ProjectService(ProjectRepository repository, ProjectSpecificationsBuilder builder) {
         this.repository = repository;
+        this.builder = builder;
     }
 
     public Project find(long id) {
@@ -39,13 +42,8 @@ public class ProjectService {
     }
 
     public Page<Project> findAll(int page, int size, Sort.Direction direction, List<FilterCriteria> criteria) {
-        ProjectSpecificationsBuilder builder = new ProjectSpecificationsBuilder(criteria);
-        Specification<Project> spec = builder.generateSpecification();
+        Specification<Project> spec = builder.generateSpecification(criteria);
         return repository.findAll(spec, PageRequest.of(page, size, Sort.by(direction, "symbol")));
-    }
-
-    private Specification<Project> buildSpecification(Stage stage, String printHouse) {
-        return Specification.where(new ProjectWithStage(stage)).or(new ProjectWithPrintHouse(printHouse));
     }
 
     public Project save(Project project) {
