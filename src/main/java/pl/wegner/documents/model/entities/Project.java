@@ -34,7 +34,7 @@ public class Project {
 
     private String printHouse;
 
-    private int rollerSize;
+    private Integer rollerSize;
 
     private String dimensions;
 
