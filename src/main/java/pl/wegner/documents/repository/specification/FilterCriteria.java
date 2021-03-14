@@ -3,7 +3,6 @@ package pl.wegner.documents.repository.specification;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.time.LocalDate;
 import java.util.List;
 
 @Getter
@@ -16,6 +15,6 @@ public class FilterCriteria {
 
     private Object value;
 
-    private List<LocalDate> values;
+    private List<Object> values;
 
 }
