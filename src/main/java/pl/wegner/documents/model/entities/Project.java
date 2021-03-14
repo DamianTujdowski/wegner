@@ -59,9 +59,9 @@ public class Project {
 
     private int overallPreparationDuration;
 
-    private LocalDate start;
+    private LocalDate preparationBeginning;
 
-    private LocalDate finish;
+    private LocalDate preparationEnding;
 
     public void setInks(List<Ink> inks) {
         if (this.inks == null) {

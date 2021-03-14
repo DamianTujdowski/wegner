@@ -1,6 +1,5 @@
 package pl.wegner.documents.service;
 
-import lombok.NoArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
@@ -8,30 +7,28 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import pl.wegner.documents.model.entities.Alteration;
 import pl.wegner.documents.model.entities.Project;
-import pl.wegner.documents.model.enums.Stage;
 import pl.wegner.documents.repository.ProjectRepository;
 import pl.wegner.documents.repository.specification.FilterCriteria;
 import pl.wegner.documents.repository.specification.ProjectSpecificationsBuilder;
-import pl.wegner.documents.repository.specification.ProjectWithPrintHouse;
-import pl.wegner.documents.repository.specification.ProjectWithStage;
+import pl.wegner.documents.utils.DateMapper;
 
 import javax.persistence.EntityNotFoundException;
 import javax.transaction.Transactional;
-import java.time.LocalDate;
 import java.util.List;
 
 @Service
 public class ProjectService {
 
-    private final int CENTURY = 2000;
-
     private ProjectRepository repository;
 
     private ProjectSpecificationsBuilder builder;
 
-    public ProjectService(ProjectRepository repository, ProjectSpecificationsBuilder builder) {
+    private DateMapper dateMapper;
+
+    public ProjectService(ProjectRepository repository, ProjectSpecificationsBuilder builder, DateMapper dateMapper) {
         this.repository = repository;
         this.builder = builder;
+        this.dateMapper = dateMapper;
     }
 
     public Project find(long id) {
@@ -47,21 +44,8 @@ public class ProjectService {
     }
 
     public Project save(Project project) {
-        project.setStart(mapSymbolToDate(project.getSymbol()));
+        project.setPreparationBeginning(dateMapper.mapSymbolToDate(project.getSymbol()));
         return repository.save(project);
-    }
-
-    private LocalDate mapSymbolToDate(String symbol) {
-        validateSymbol(symbol);
-        int year = CENTURY + Integer.valueOf(symbol.substring(0, 2));
-        int month = Integer.valueOf(symbol.substring(2, 4));
-        int day = Integer.valueOf(symbol.substring(4, 6));
-        return LocalDate.of(year, month, day);
-    }
-
-    //TODO implement symbol validation
-    private void validateSymbol(String symbol) {
-//        LocalDate.now();
     }
 
     @Transactional
@@ -84,6 +68,8 @@ public class ProjectService {
         edited.setStage(project.getStage());
         edited.setAlterations(project.getAlterations());
         edited.setOverallPreparationDuration(duration);
+        edited.setPreparationBeginning(project.getPreparationBeginning());
+        edited.setPreparationEnding(project.getPreparationEnding());
         return edited;
     }
 

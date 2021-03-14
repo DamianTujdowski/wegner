@@ -27,7 +27,7 @@ public class ProjectController {
     public Page<Project> findAllProject(@RequestParam int page,
                                         @RequestParam(defaultValue = "20") int size,
                                         @RequestParam(defaultValue = "ASC") Sort.Direction direction,
-                                        @RequestBody List<FilterCriteria> criteria) {
+                                        @RequestBody(required = false) List<FilterCriteria> criteria) {
         return service.findAll(page, size, direction, criteria);
     }
 
