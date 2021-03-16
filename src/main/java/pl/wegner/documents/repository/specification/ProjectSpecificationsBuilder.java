@@ -20,20 +20,14 @@ public class ProjectSpecificationsBuilder {
     }
 
     public Specification<Project> generateSpecification(List<FilterCriteria> criteria) {
-//        Specification<Project> specification = Specification.where(createSpecification(criteria.remove(0)));
-//        for (FilterCriteria cr : criteria) {
-//            specification = specification.and(createSpecification(cr));
-//        }
-//        return specification;
-        //TODO null check and return sth if list is empty
         return criteria
                 .stream()
-                .map(this::createSpecification)
+                .map(this::generateSingleSpecification)
                 .reduce(Specification::and)
-                .orElseThrow(() -> new IllegalArgumentException("Empty list"));
+                .orElse((root, query, builder) -> builder.isTrue(builder.literal(true)));
     }
 
-    private Specification<Project> createSpecification(FilterCriteria criteria) {
+    private Specification<Project> generateSingleSpecification(FilterCriteria criteria) {
 
         switch (criteria.getOperator()) {
             case "equals":
