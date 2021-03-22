@@ -57,7 +57,7 @@ public class ProjectService {
                 ));
         edited.setDesignation(project.getDesignation());
         edited.setSymbol(project.getSymbol());
-        edited.setClient(project.getClient());
+        edited.setCustomer(project.getCustomer());
         edited.setPrintHouse(project.getPrintHouse());
         edited.setRollerSize(project.getRollerSize());
         edited.setDimensions(project.getDimensions());

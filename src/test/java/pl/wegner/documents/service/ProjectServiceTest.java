@@ -61,34 +61,34 @@ class ProjectServiceTest {
         projectWithNotInitializedAlterationsList = Project.builder()
                 .id(1)
                 .designation("Alicja")
-                .client("Komsomolec")
+                .customer("Komsomolec")
                 .build();
 
         projectWithEmptyAlterationsList = Project.builder()
                 .id(1)
                 .designation("Alicja")
-                .client("Komsomolec")
+                .customer("Komsomolec")
                 .alterations(new ArrayList<>())
                 .build();
 
         projectWithOneAlteration = Project.builder()
                 .id(1)
                 .designation("Alicja")
-                .client("Komsomolec")
+                .customer("Komsomolec")
                 .alterations(oneAlter)
                 .build();
 
         projectWithTwoAlterations = Project.builder()
                 .id(1)
                 .designation("Alicja")
-                .client("Komsomolec")
+                .customer("Komsomolec")
                 .alterations(twoAlters)
                 .build();
 
         projectWithThreeAlterations = Project.builder()
                 .id(1)
                 .designation("Alicja")
-                .client("Komsomolec")
+                .customer("Komsomolec")
                 .alterations(threeAlter)
                 .build();
     }

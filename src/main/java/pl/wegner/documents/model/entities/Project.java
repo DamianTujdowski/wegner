@@ -30,7 +30,7 @@ public class Project {
     @NotNull
     private String symbol;
 
-    private String client;
+    private String customer;
 
     private String printHouse;
 
