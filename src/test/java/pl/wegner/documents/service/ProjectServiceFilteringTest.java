@@ -48,7 +48,8 @@ class ProjectServiceFilteringTest {
     private ProjectSpecificationsBuilder builder;
 
     private FilterCriteria printHousePalst, printHouseFlorek, stageInAcceptation, stageProof, customerAlicja,
-            leStartSate2021_01_15, geStartDate2021_03_01;
+            leStartDate2021_01_15, leStartDate2021_03_20, geStartDate2021_03_01, between2021_01_15And2021_03_01,
+            leEndDate2021_04_05;
 
     @BeforeEach
     public void setUp() {
@@ -77,15 +78,31 @@ class ProjectServiceFilteringTest {
         customerAlicja.setOperator("equals");
         customerAlicja.setValue("Alicja");
 
-        leStartSate2021_01_15 = new FilterCriteria();
-        leStartSate2021_01_15.setKey("preparationBeginning");
-        leStartSate2021_01_15.setOperator("le");
-        leStartSate2021_01_15.setValue("2021-01-15");
+        leStartDate2021_01_15 = new FilterCriteria();
+        leStartDate2021_01_15.setKey("preparationBeginning");
+        leStartDate2021_01_15.setOperator("le");
+        leStartDate2021_01_15.setValue("2021-01-15");
+
+        leStartDate2021_03_20 = new FilterCriteria();
+        leStartDate2021_03_20.setKey("preparationBeginning");
+        leStartDate2021_03_20.setOperator("le");
+        leStartDate2021_03_20.setValue("2021-03-20");
+
+        leEndDate2021_04_05 = new FilterCriteria();
+        leEndDate2021_04_05.setKey("preparationEnding");
+        leEndDate2021_04_05.setOperator("le");
+        leEndDate2021_04_05.setValue("2021-04-05");
 
         geStartDate2021_03_01 = new FilterCriteria();
         geStartDate2021_03_01.setKey("preparationBeginning");
         geStartDate2021_03_01.setOperator("ge");
         geStartDate2021_03_01.setValue("2021-03-01");
+
+        List<Object> dates = Stream.of("2021-01-15", "2021-03-01").collect(Collectors.toList());
+        between2021_01_15And2021_03_01 = new FilterCriteria();
+        between2021_01_15And2021_03_01.setKey("preparationBeginning");
+        between2021_01_15And2021_03_01.setOperator("between");
+        between2021_01_15And2021_03_01.setValues(dates);
     }
 
     @Test
@@ -96,7 +113,7 @@ class ProjectServiceFilteringTest {
         //when
         result = service.findAll(0, 20, Sort.Direction.ASC, criteria);
         //then
-        assertEquals(4, result.getTotalElements());
+        assertEquals(5, result.getTotalElements());
     }
 
     @Test
@@ -168,7 +185,7 @@ class ProjectServiceFilteringTest {
     @Test
     public void shouldReturnTwoProjects_whenSearchingForProjectsStartedAt2021_01_15OrEarlier() {
         //given
-        List<FilterCriteria> criteria = Stream.of(leStartSate2021_01_15).collect(Collectors.toList());
+        List<FilterCriteria> criteria = Stream.of(leStartDate2021_01_15).collect(Collectors.toList());
         Page<Project> result;
         //when
         result = service.findAll(0, 20, Sort.Direction.ASC, criteria);
@@ -180,6 +197,50 @@ class ProjectServiceFilteringTest {
     public void shouldReturnTwoProjects_whenSearchingForProjectsStartedAt2021_03_01OrLater() {
         //given
         List<FilterCriteria> criteria = Stream.of(geStartDate2021_03_01).collect(Collectors.toList());
+        Page<Project> result;
+        //when
+        result = service.findAll(0, 20, Sort.Direction.ASC, criteria);
+        //then
+        assertEquals(2, result.getTotalElements());
+    }
+
+    @Test
+    public void shouldReturnThreeProjects_whenSearchingForProjectsStartedBetween2021_01_15And2021_03_01() {
+        //given
+        List<FilterCriteria> criteria = Stream.of(between2021_01_15And2021_03_01).collect(Collectors.toList());
+        Page<Project> result;
+        //when
+        result = service.findAll(0, 20, Sort.Direction.ASC, criteria);
+        //then
+        assertEquals(3, result.getTotalElements());
+    }
+
+    @Test
+    public void shouldReturnZeroProjects_whenSearchingForProjectsStartedBefore2021_01_15AndAfter2021_03_01() {
+        //given
+        List<FilterCriteria> criteria = Stream.of(leStartDate2021_01_15, geStartDate2021_03_01).collect(Collectors.toList());
+        Page<Project> result;
+        //when
+        result = service.findAll(0, 20, Sort.Direction.ASC, criteria);
+        //then
+        assertEquals(0, result.getTotalElements());
+    }
+
+    @Test
+    public void shouldReturnTwoProjects_whenSearchingForProjectsStartedBefore2021_3_20AndAfter2021_03_01() {
+        //given
+        List<FilterCriteria> criteria = Stream.of(leStartDate2021_03_20, geStartDate2021_03_01).collect(Collectors.toList());
+        Page<Project> result;
+        //when
+        result = service.findAll(0, 20, Sort.Direction.ASC, criteria);
+        //then
+        assertEquals(2, result.getTotalElements());
+    }
+
+    @Test
+    public void shouldReturnTwoProjects_whenSearchingForProjectsStarted2021_03_01AndEnded2021_04_05() {
+        //given
+        List<FilterCriteria> criteria = Stream.of(geStartDate2021_03_01, leEndDate2021_04_05).collect(Collectors.toList());
         Page<Project> result;
         //when
         result = service.findAll(0, 20, Sort.Direction.ASC, criteria);

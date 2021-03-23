@@ -10,3 +10,6 @@ values (16, 'York', 'Palst', 280, 1,'20122302', 230, '2020-12-23',  '2021-01-10'
 insert into project
 (id, customer, print_house, roller_size, stage, symbol, overall_preparation_duration, preparation_beginning, preparation_ending)
 values (17, 'Wist', 'Palst', 280, 1,'21030301', 230, '2021-03-03',  '2021-03-08');
+insert into project
+(id, customer, print_house, roller_size, stage, symbol, overall_preparation_duration, preparation_beginning, preparation_ending)
+values (18, 'Lody Jan', 'Rexon', 300, 3,'21021003', 230, '2021-02-10',  '2021-02-26');
