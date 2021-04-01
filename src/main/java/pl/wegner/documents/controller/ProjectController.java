@@ -7,6 +7,7 @@ import pl.wegner.documents.model.entities.Project;
 import pl.wegner.documents.repository.specification.FilterCriteria;
 import pl.wegner.documents.service.ProjectService;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -32,7 +33,7 @@ public class ProjectController {
     }
 
     @PostMapping("/projects/")
-    public Project save(@RequestBody Project project) {
+    public Project save(@Valid @RequestBody Project project) {
         return service.save(project);
     }
 
