@@ -4,7 +4,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -74,7 +73,7 @@ class ProjectEntityTest {
         projectWithNoInksAndAlterations = Project.builder()
                 .id(1)
                 .designation("Alicja")
-                .client("Komsomolec")
+                .customer("Komsomolec")
                 .inks(new ArrayList<>())
                 .alterations(new ArrayList<>())
                 .build();
@@ -82,14 +81,14 @@ class ProjectEntityTest {
         projectWithYellowMagentaInks = Project.builder()
                 .id(1)
                 .designation("Alicja")
-                .client("Komsomolec")
+                .customer("Komsomolec")
                 .inks(inks)
                 .build();
 
         projectWithTextAndColorAlterations = Project.builder()
                 .id(1)
                 .designation("Alicja")
-                .client("Komsomolec")
+                .customer("Komsomolec")
                 .alterations(alterations)
                 .build();
     }

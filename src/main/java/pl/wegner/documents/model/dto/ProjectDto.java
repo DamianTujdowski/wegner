@@ -1,8 +1,6 @@
 package pl.wegner.documents.model.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 import pl.wegner.documents.model.entities.Alteration;
 import pl.wegner.documents.model.entities.Ink;
 import pl.wegner.documents.model.enums.PlateThickness;
@@ -14,8 +12,10 @@ import java.time.LocalDate;
 import java.util.List;
 
 @AllArgsConstructor
+@NoArgsConstructor
 @Getter
 @Setter
+@Builder
 public class ProjectDto {
 
     private long id;
@@ -46,8 +46,8 @@ public class ProjectDto {
     private String printHouse;
 
     @NotNull(message = "Project roller size must be provided")
-    @Size(min = 250, max = 600,
-            message = "Roller size must be between 250 and 600 millimeters diameter")
+    @Min(value = 250, message = "Roller size must be greater than or equal to 250")
+    @Max(value = 600, message = "Roller size must be less than or equal to 600")
     private Integer rollerSize;
 
     @NotBlank(message = "Project dimensions must be provided")
@@ -75,9 +75,9 @@ public class ProjectDto {
     @PositiveOrZero(message = "Overall preparation duration can't be lower than 0")
     private int overallPreparationDuration;
 
-    @PastOrPresent(message = "Preparation beginning date must be from the past or current date")
     private LocalDate preparationBeginning;
 
+    @PastOrPresent(message = "Preparation ending date mustn't be in the future")
     private LocalDate preparationEnding;
 
 }

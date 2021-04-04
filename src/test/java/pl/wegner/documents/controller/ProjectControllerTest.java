@@ -1,6 +1,5 @@
 package pl.wegner.documents.controller;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -8,13 +7,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.ResultMatcher;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
+import pl.wegner.documents.model.dto.ProjectDto;
 import pl.wegner.documents.model.entities.Project;
 import pl.wegner.documents.service.ProjectService;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 @WebMvcTest(controllers = ProjectController.class)
 class ProjectControllerTest {
@@ -28,11 +25,11 @@ class ProjectControllerTest {
     @MockBean
     private ProjectService service;
 
-    private Project project;
+    private ProjectDto projectDto;
 
     @BeforeEach
     public void setUp() {
-        project = Project.builder()
+        projectDto = ProjectDto.builder()
 //                .symbol("2103")
                 .build();
     }
@@ -42,7 +39,7 @@ class ProjectControllerTest {
 
         mockMvc.perform(MockMvcRequestBuilders.post("/projects/")
                 .contentType("application/json")
-                .content(mapper.writeValueAsString(project)))
+                .content(mapper.writeValueAsString(projectDto)))
                 .andExpect(MockMvcResultMatchers.status().isBadRequest())
                 .andReturn();
     }

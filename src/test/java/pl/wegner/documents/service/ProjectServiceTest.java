@@ -8,6 +8,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import pl.wegner.documents.model.dto.ProjectDto;
 import pl.wegner.documents.model.entities.Alteration;
 import pl.wegner.documents.model.entities.Project;
 import pl.wegner.documents.repository.ProjectRepository;
@@ -32,7 +33,9 @@ class ProjectServiceTest {
     private ProjectRepository repository;
 
     private Project projectWithNotInitializedAlterationsList, projectWithEmptyAlterationsList,projectWithOneAlteration,
-            projectWithTwoAlterations, projectWithThreeAlterations;
+            projectWithTwoAlterations;
+
+    private ProjectDto dtoWithTwoAlterations, dtoWithThreeAlterations;
 
     @BeforeEach
     public void setUp() {
@@ -85,7 +88,14 @@ class ProjectServiceTest {
                 .alterations(twoAlters)
                 .build();
 
-        projectWithThreeAlterations = Project.builder()
+        dtoWithTwoAlterations = ProjectDto.builder()
+                .id(1)
+                .designation("Alicja")
+                .customer("Komsomolec")
+                .alterations(twoAlters)
+                .build();
+
+        dtoWithThreeAlterations = ProjectDto.builder()
                 .id(1)
                 .designation("Alicja")
                 .customer("Komsomolec")
@@ -99,7 +109,7 @@ class ProjectServiceTest {
         Project edited;
         //when
         when(repository.findById(1L)).thenReturn(Optional.of(projectWithNotInitializedAlterationsList));
-        edited = service.edit(projectWithTwoAlterations);
+        edited = service.edit(dtoWithTwoAlterations);
         //then
         assertEquals(110, edited.getOverallPreparationDuration());
     }
@@ -110,7 +120,7 @@ class ProjectServiceTest {
         Project edited;
         //when
         when(repository.findById(1L)).thenReturn(Optional.of(projectWithEmptyAlterationsList));
-        edited = service.edit(projectWithTwoAlterations);
+        edited = service.edit(dtoWithTwoAlterations);
         //then
         assertEquals(110, edited.getOverallPreparationDuration());
     }
@@ -121,7 +131,7 @@ class ProjectServiceTest {
         Project edited;
         //when
         when(repository.findById(1L)).thenReturn(Optional.of(projectWithOneAlteration));
-        edited = service.edit(projectWithTwoAlterations);
+        edited = service.edit(dtoWithTwoAlterations);
         //then
         assertEquals(110, edited.getOverallPreparationDuration());
     }
@@ -132,7 +142,7 @@ class ProjectServiceTest {
         Project edited;
         //when
         when(repository.findById(1L)).thenReturn(Optional.of(projectWithTwoAlterations));
-        edited = service.edit(projectWithThreeAlterations);
+        edited = service.edit(dtoWithThreeAlterations);
         //then
         assertEquals(120, edited.getOverallPreparationDuration());
     }
