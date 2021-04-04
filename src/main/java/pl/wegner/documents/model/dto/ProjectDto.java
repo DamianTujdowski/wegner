@@ -28,7 +28,8 @@ public class ProjectDto {
 
     @NotBlank(message = "Project symbol must be provided")
     @Pattern(regexp = "\\d{8}/\\d{2}",
-            message = "Symbol can contain only digits and slash. There must be 8 digits before slash and 2 after it")
+            message = "Symbol can contain only digits and slash. " +
+                    "There must be 8 digits before slash and 2 digits after it")
     private String symbol;
 
     @NotBlank(message = "Project customer must be provided")
