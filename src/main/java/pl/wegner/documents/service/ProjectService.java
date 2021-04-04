@@ -5,6 +5,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
+import pl.wegner.documents.model.dto.ProjectDto;
 import pl.wegner.documents.model.entities.Alteration;
 import pl.wegner.documents.model.entities.Project;
 import pl.wegner.documents.repository.ProjectRepository;
@@ -43,33 +44,52 @@ public class ProjectService {
         return repository.findAll(spec, PageRequest.of(page, size, Sort.by(direction, "symbol")));
     }
 
-    public Project save(Project project) {
-        project.setPreparationBeginning(dateMapper.mapSymbolToDate(project.getSymbol()));
-        return repository.save(project);
+    public Project save(ProjectDto projectDto) {
+        Project newProject = mapToProject(projectDto);
+        newProject.setPreparationBeginning(dateMapper.mapSymbolToDate(newProject.getSymbol()));
+        return repository.save(newProject);
+    }
+
+    private Project mapToProject(ProjectDto projectDto) {
+        return Project.builder()
+                .designation(projectDto.getDesignation())
+                .symbol(projectDto.getSymbol())
+                .customer(projectDto.getCustomer())
+                .printHouse(projectDto.getPrintHouse())
+                .rollerSize(projectDto.getRollerSize())
+                .dimensions(projectDto.getDimensions())
+                .plateThickness(projectDto.getPlateThickness())
+                .side(projectDto.getSide())
+                .inks(projectDto.getInks())
+                .notes(projectDto.getNotes())
+                .stage(projectDto.getStage())
+                .alterations(projectDto.getAlterations())
+                .preparationBeginning(projectDto.getPreparationBeginning())
+                .build();
     }
 
     @Transactional
-    public Project edit(Project project) {
-        int duration = countOverallPreparationDuration(project.getAlterations());
-        Project edited = repository.findById(project.getId())
+    public Project edit(ProjectDto projectDto) {
+        int duration = countOverallPreparationDuration(projectDto.getAlterations());
+        Project edited = repository.findById(projectDto.getId())
                 .orElseThrow(() -> new EntityNotFoundException(
-                        String.format("Project with id %d does not exist", project.getId())
+                        String.format("Project with id %d does not exist", projectDto.getId())
                 ));
-        edited.setDesignation(project.getDesignation());
-        edited.setSymbol(project.getSymbol());
-        edited.setCustomer(project.getCustomer());
-        edited.setPrintHouse(project.getPrintHouse());
-        edited.setRollerSize(project.getRollerSize());
-        edited.setDimensions(project.getDimensions());
-        edited.setPlateThickness(project.getPlateThickness());
-        edited.setSide(project.getSide());
-        edited.setInks(project.getInks());
-        edited.setNotes(project.getNotes());
-        edited.setStage(project.getStage());
-        edited.setAlterations(project.getAlterations());
+        edited.setDesignation(projectDto.getDesignation());
+        edited.setSymbol(projectDto.getSymbol());
+        edited.setCustomer(projectDto.getCustomer());
+        edited.setPrintHouse(projectDto.getPrintHouse());
+        edited.setRollerSize(projectDto.getRollerSize());
+        edited.setDimensions(projectDto.getDimensions());
+        edited.setPlateThickness(projectDto.getPlateThickness());
+        edited.setSide(projectDto.getSide());
+        edited.setInks(projectDto.getInks());
+        edited.setNotes(projectDto.getNotes());
+        edited.setStage(projectDto.getStage());
+        edited.setAlterations(projectDto.getAlterations());
         edited.setOverallPreparationDuration(duration);
-        edited.setPreparationBeginning(project.getPreparationBeginning());
-        edited.setPreparationEnding(project.getPreparationEnding());
+        edited.setPreparationBeginning(projectDto.getPreparationBeginning());
+        edited.setPreparationEnding(projectDto.getPreparationEnding());
         return edited;
     }
 

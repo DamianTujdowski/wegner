@@ -3,6 +3,7 @@ package pl.wegner.documents.controller;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Sort;
 import org.springframework.web.bind.annotation.*;
+import pl.wegner.documents.model.dto.ProjectDto;
 import pl.wegner.documents.model.entities.Project;
 import pl.wegner.documents.repository.specification.FilterCriteria;
 import pl.wegner.documents.service.ProjectService;
@@ -33,13 +34,13 @@ public class ProjectController {
     }
 
     @PostMapping("/projects/")
-    public Project save(@Valid @RequestBody Project project) {
-        return service.save(project);
+    public Project save(@Valid @RequestBody ProjectDto projectDto) {
+        return service.save(projectDto);
     }
 
     @PutMapping("/projects/")
-    public Project edit(@RequestBody Project project) {
-        return service.edit(project);
+    public Project edit(@Valid @RequestBody ProjectDto projectDto) {
+        return service.edit(projectDto);
     }
 
     @DeleteMapping("/projects/{id}")

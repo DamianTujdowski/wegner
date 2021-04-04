@@ -28,14 +28,9 @@ public class Project {
 
     private String designation;
 
-    @NotNull(message = "Project symbol must be provided")
-    @Size(min = 8, max = 11, message = "Symbol length must be between 8 and 11 characters")
     private String symbol;
 
-    @NotNull(message = "Project symbol must be provided")
-    @Size(min = 8, max = 11, message = "Symbol length must be between 8 and 11 characters")
     private String customer;
-
 
     private String printHouse;
 
