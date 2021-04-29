@@ -1,6 +1,8 @@
 package pl.wegner.documents.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.jayway.jsonpath.DocumentContext;
+import com.jayway.jsonpath.JsonPath;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
@@ -9,6 +11,9 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import pl.wegner.documents.model.dto.ProjectDto;
 import pl.wegner.documents.service.ProjectService;
+
+import java.time.LocalDate;
+import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -26,15 +31,6 @@ class ProjectControllerTestBadRequests {
     @MockBean
     private ProjectService service;
 
-//    private ProjectDto projectDto;
-//
-//    @BeforeEach
-//    public void setUp() {
-//        projectDto = ProjectDto.builder()
-//                .symbol("2103")
-//                .build();
-//    }
-
     @Test
     public void shouldThrowMethodArgumentNotValidException_WhenTryingToSaveProjectWithNullDesignation() throws Exception {
         //given
@@ -47,13 +43,16 @@ class ProjectControllerTestBadRequests {
                 .andExpect(status().isBadRequest())
                 .andReturn();
 
+        String jsonPathError = "$.message";
         String actualResponse = result
                 .getResponse()
                 .getContentAsString();
+        DocumentContext jsonContext = JsonPath.parse(actualResponse);
+        String jsonReadResult = jsonContext.read(jsonPathError);
 
         String expectedResponse = "designation: must be provided";
         //then
-        assertTrue(actualResponse.contains(expectedResponse));
+        assertTrue(jsonReadResult.contains(expectedResponse));
     }
 
     @Test
@@ -627,4 +626,193 @@ class ProjectControllerTestBadRequests {
         //then
         assertTrue(actualResponse.contains(expectedResponse));
     }
+
+    @Test
+    public void shouldThrowMethodArgumentNotValidException_WhenTryingToSaveProjectWith_PlateThickness_setToNull() throws Exception {
+        //given
+        ProjectDto projectDto = ProjectDto.builder().build();
+        //when
+        MvcResult result = mockMvc.perform(post("/projects/")
+                .contentType("application/json")
+                .content(mapper.writeValueAsString(projectDto)))
+                .andExpect(status().isBadRequest())
+                .andReturn();
+
+        String actualResponse = result
+                .getResponse()
+                .getContentAsString();
+
+        String expectedResponse = "plateThickness: must be provided";
+        //then
+        assertTrue(actualResponse.contains(expectedResponse));
+    }
+
+    @Test
+    public void shouldThrowMethodArgumentNotValidException_WhenTryingToSaveProjectWith_Side_setToNull() throws Exception {
+        //given
+        ProjectDto projectDto = ProjectDto.builder().build();
+        //when
+        MvcResult result = mockMvc.perform(post("/projects/")
+                .contentType("application/json")
+                .content(mapper.writeValueAsString(projectDto)))
+                .andExpect(status().isBadRequest())
+                .andReturn();
+
+        String actualResponse = result
+                .getResponse()
+                .getContentAsString();
+
+        String expectedResponse = "side: must be provided";
+        //then
+        assertTrue(actualResponse.contains(expectedResponse));
+    }
+
+    @Test
+    public void shouldThrowMethodArgumentNotValidException_WhenTryingToSaveProjectWith_Inks_setToNull() throws Exception {
+        //given
+        ProjectDto projectDto = ProjectDto.builder().build();
+        //when
+        MvcResult result = mockMvc.perform(post("/projects/")
+                .contentType("application/json")
+                .content(mapper.writeValueAsString(projectDto)))
+                .andExpect(status().isBadRequest())
+                .andReturn();
+
+        String actualResponse = result
+                .getResponse()
+                .getContentAsString();
+
+        String expectedResponse = "inks: must be provided and must contain at least one element";
+        //then
+        assertTrue(actualResponse.contains(expectedResponse));
+    }
+
+    @Test
+    public void shouldThrowMethodArgumentNotValidException_WhenTryingToSaveProjectWith_InksEmptyList() throws Exception {
+        //given
+        ProjectDto projectDto = ProjectDto.builder()
+                .inks(new ArrayList<>())
+                .build();
+        //when
+        MvcResult result = mockMvc.perform(post("/projects/")
+                .contentType("application/json")
+                .content(mapper.writeValueAsString(projectDto)))
+                .andExpect(status().isBadRequest())
+                .andReturn();
+
+        String actualResponse = result
+                .getResponse()
+                .getContentAsString();
+
+        String expectedResponse = "inks: must be provided and must contain at least one element";
+        //then
+        assertTrue(actualResponse.contains(expectedResponse));
+    }
+
+    @Test
+    public void shouldThrowMethodArgumentNotValidException_WhenTryingToSaveProjectWith_Stage_setToNull() throws Exception {
+        //given
+        ProjectDto projectDto = ProjectDto.builder().build();
+        //when
+        MvcResult result = mockMvc.perform(post("/projects/")
+                .contentType("application/json")
+                .content(mapper.writeValueAsString(projectDto)))
+                .andExpect(status().isBadRequest())
+                .andReturn();
+
+        String actualResponse = result
+                .getResponse()
+                .getContentAsString();
+
+        String expectedResponse = "stage: must be provided";
+        //then
+        assertTrue(actualResponse.contains(expectedResponse));
+    }
+
+    @Test
+    public void shouldThrowMethodArgumentNotValidException_WhenTryingToSaveProjectWith_Alterations_setToNull() throws Exception {
+        //given
+        ProjectDto projectDto = ProjectDto.builder().build();
+        //when
+        MvcResult result = mockMvc.perform(post("/projects/")
+                .contentType("application/json")
+                .content(mapper.writeValueAsString(projectDto)))
+                .andExpect(status().isBadRequest())
+                .andReturn();
+
+        String actualResponse = result
+                .getResponse()
+                .getContentAsString();
+
+        String expectedResponse = "alterations: must be provided";
+        //then
+        assertTrue(actualResponse.contains(expectedResponse));
+    }
+
+    @Test
+    public void shouldThrowMethodArgumentNotValidException_WhenTryingToSaveProjectWith_overallPreparationDuration_lowerTHanZero() throws Exception {
+        //given
+        ProjectDto projectDto = ProjectDto.builder()
+                .overallPreparationDuration(-15)
+                .build();
+        //when
+        MvcResult result = mockMvc.perform(post("/projects/")
+                .contentType("application/json")
+                .content(mapper.writeValueAsString(projectDto)))
+                .andExpect(status().isBadRequest())
+                .andReturn();
+
+        String actualResponse = result
+                .getResponse()
+                .getContentAsString();
+
+        String expectedResponse = "overallPreparationDuration: can't be lower than 0";
+        //then
+        assertTrue(actualResponse.contains(expectedResponse));
+    }
+
+    @Test
+    public void shouldThrowMethodArgumentNotValidException_WhenTryingToSaveProjectWith_preparationBeginning_futureDate() throws Exception {
+        //given
+        ProjectDto projectDto = ProjectDto.builder()
+                .preparationBeginning(LocalDate.of(2021,6, 20))
+                .build();
+        //when
+        MvcResult result = mockMvc.perform(post("/projects/")
+                .contentType("application/json")
+                .content(mapper.writeValueAsString(projectDto)))
+                .andExpect(status().isBadRequest())
+                .andReturn();
+
+        String actualResponse = result
+                .getResponse()
+                .getContentAsString();
+
+        String expectedResponse = "preparationBeginning: mustn't be in the future";
+        //then
+        assertTrue(actualResponse.contains(expectedResponse));
+    }
+
+    @Test
+    public void shouldThrowMethodArgumentNotValidException_WhenTryingToSaveProjectWith_preparationEnding_futureDate() throws Exception {
+        //given
+        ProjectDto projectDto = ProjectDto.builder()
+                .preparationEnding(LocalDate.of(2021,6, 20))
+                .build();
+        //when
+        MvcResult result = mockMvc.perform(post("/projects/")
+                .contentType("application/json")
+                .content(mapper.writeValueAsString(projectDto)))
+                .andExpect(status().isBadRequest())
+                .andReturn();
+
+        String actualResponse = result
+                .getResponse()
+                .getContentAsString();
+
+        String expectedResponse = "preparationEnding: mustn't be in the future";
+        //then
+        assertTrue(actualResponse.contains(expectedResponse));
+    }
+
 }

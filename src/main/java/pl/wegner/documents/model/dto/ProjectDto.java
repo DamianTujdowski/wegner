@@ -11,10 +11,9 @@ import javax.validation.constraints.*;
 import java.time.LocalDate;
 import java.util.List;
 
-@AllArgsConstructor
+@Data
 @NoArgsConstructor
-@Getter
-@Setter
+@AllArgsConstructor
 @Builder
 public class ProjectDto {
 
@@ -22,7 +21,7 @@ public class ProjectDto {
 
     @NotBlank(message = "must be provided")
     @Size(min = 10, max = 50, message = "length must be between 10 and 50 characters")
-    @Pattern(regexp = "[0-9aąbcćdeęfghijklłmnńoópqrsśtuvwxyzźżAĄBCĆDEĘFGHIJKLŁMNŃOÓPRSŚTUVWXYZŹŻ]*",
+    @Pattern(regexp = "[0-9aąbcćdeęfghijklłmnńoópqrsśtuvwxyzźżAĄBCĆDEĘFGHIJKLŁMNŃOÓPRSŚTUVWXYZŹŻ ]*",
             message = "can contain only Polish letters and numbers")
     private String designation;
 
@@ -35,14 +34,14 @@ public class ProjectDto {
     @NotBlank(message = "must be provided")
     @Size(min = 3, max = 20,
             message = "name length must be between 3 and 20 characters")
-    @Pattern(regexp = "[aąbcćdeęfghijklłmnńoópqrsśtuvwxyzźżAĄBCĆDEĘFGHIJKLŁMNŃOÓPRSŚTUVWXYZŹŻ]*",
+    @Pattern(regexp = "[aąbcćdeęfghijklłmnńoópqrsśtuvwxyzźżAĄBCĆDEĘFGHIJKLŁMNŃOÓPRSŚTUVWXYZŹŻ ]*",
             message = "name can contain only letters")
     private String customer;
 
     @NotBlank(message = "must be provided")
     @Size(min = 3, max = 20,
             message = "name length must be between 3 and 20 characters")
-    @Pattern(regexp = "[aąbcćdeęfghijklłmnńoópqrsśtuvwxyzźżAĄBCĆDEĘFGHIJKLŁMNŃOÓPRSŚTUVWXYZŹŻ]*",
+    @Pattern(regexp = "[aąbcćdeęfghijklłmnńoópqrsśtuvwxyzźżAĄBCĆDEĘFGHIJKLŁMNŃOÓPRSŚTUVWXYZŹŻ ]*",
             message = "name can contain only letters")
     private String printHouse;
 
@@ -62,7 +61,7 @@ public class ProjectDto {
     @NotNull(message = "must be provided")
     private PrintSide side;
 
-    @NotEmpty(message = "must be provided")
+    @NotEmpty(message = "must be provided and must contain at least one element")
     private List<Ink> inks;
 
     private String notes;
@@ -70,12 +69,13 @@ public class ProjectDto {
     @NotNull(message = "must be provided")
     private Stage stage;
 
-    @NotNull(message = "can't be null")
+    @NotNull(message = "must be provided")
     private List<Alteration> alterations;
 
     @PositiveOrZero(message = "can't be lower than 0")
     private int overallPreparationDuration;
 
+    @PastOrPresent(message = "mustn't be in the future")
     private LocalDate preparationBeginning;
 
     @PastOrPresent(message = "mustn't be in the future")
