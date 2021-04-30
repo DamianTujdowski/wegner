@@ -1,6 +1,7 @@
 package pl.wegner.documents.service;
 
 import org.springframework.stereotype.Service;
+import pl.wegner.documents.model.dto.OrderDataDto;
 import pl.wegner.documents.model.entities.OrderArchivalData;
 import pl.wegner.documents.model.entities.OrderData;
 import pl.wegner.documents.repository.OrderDataRepository;
@@ -40,12 +41,25 @@ public class OrderDataService {
                 .build();
     }
 
-    public OrderData save(OrderData data) {
-        return repository.save(data);
+    public OrderData save(OrderDataDto data) {
+        OrderData newOrder = mapToOrderData(data);
+        return repository.save(newOrder);
+    }
+
+    private OrderData mapToOrderData(OrderDataDto data) {
+        return OrderData.builder()
+                .fileName(data.getFileName())
+                .platesDimensions(data.getPlatesDimensions())
+                .platesQuantity(data.getPlatesQuantity())
+                .inks(data.getInks())
+                .plateThickness(data.getPlateThickness())
+                .side(data.getSide())
+                .notes(data.getNotes())
+                .build();
     }
 
     @Transactional
-    public OrderData edit(OrderData data) {
+    public OrderData edit(OrderDataDto data) {
         OrderData edited = repository.findById(data.getId())
                 .orElseThrow(() -> new EntityNotFoundException(
                         String.format("Order data with id %d does not exist", data.getId())
@@ -53,7 +67,6 @@ public class OrderDataService {
         edited.setFileName(data.getFileName());
         edited.setPlatesDimensions(data.getPlatesDimensions());
         edited.setPlatesQuantity(data.getPlatesQuantity());
-        edited.setLpi(data.getLpi());
         edited.setInks(data.getInks());
         edited.setPlateThickness(data.getPlateThickness());
         edited.setSide(data.getSide());

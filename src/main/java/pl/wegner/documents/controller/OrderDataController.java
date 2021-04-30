@@ -1,9 +1,12 @@
 package pl.wegner.documents.controller;
 
 import org.springframework.web.bind.annotation.*;
+import pl.wegner.documents.model.dto.OrderDataDto;
 import pl.wegner.documents.model.entities.OrderArchivalData;
 import pl.wegner.documents.model.entities.OrderData;
 import pl.wegner.documents.service.OrderDataService;
+
+import javax.validation.Valid;
 
 @RestController
 public class OrderDataController {
@@ -26,12 +29,12 @@ public class OrderDataController {
     }
 
     @PostMapping("/data/")
-    public OrderData save(@RequestBody OrderData data) {
+    public OrderData save(@Valid @RequestBody OrderDataDto data) {
         return service.save(data);
     }
 
     @PutMapping("/data/")
-    public OrderData edit(@RequestBody OrderData data) {
+    public OrderData edit(@Valid @RequestBody OrderDataDto data) {
         return service.edit(data);
     }
 
