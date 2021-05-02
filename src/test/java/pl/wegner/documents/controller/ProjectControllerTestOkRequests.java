@@ -112,7 +112,7 @@ public class ProjectControllerTestOkRequests {
         setJsonReadResult(result);
 
         //then
-        assertTrue(jsonReadResult.contains("Butter 200g"));
+        assertEquals("Butter 200g extra", jsonReadResult);
     }
 
     @Test
@@ -130,7 +130,7 @@ public class ProjectControllerTestOkRequests {
         setJsonReadResult(result);
 
         //then
-        assertTrue(jsonReadResult.contains("21033002/01"));
+        assertEquals("21033002/01", jsonReadResult);
     }
 
     @Test
@@ -148,7 +148,7 @@ public class ProjectControllerTestOkRequests {
         setJsonReadResult(result);
 
         //then
-        assertTrue(jsonReadResult.contains("Palstmoroz"));
+        assertEquals("Palstmoroz", jsonReadResult);
     }
 
     @Test
@@ -186,7 +186,7 @@ public class ProjectControllerTestOkRequests {
         setJsonReadResult(result);
 
         //then
-        assertTrue(jsonReadResult.contains("250x500"));
+        assertEquals("250x500", jsonReadResult);
     }
 
     @Test
@@ -204,7 +204,7 @@ public class ProjectControllerTestOkRequests {
         setJsonReadResult(result);
 
         //then
-        assertTrue(jsonReadResult.contains("THIN"));
+        assertEquals("THIN", jsonReadResult);
     }
 
     @Test
@@ -222,7 +222,7 @@ public class ProjectControllerTestOkRequests {
         setJsonReadResult(result);
 
         //then
-        assertTrue(jsonReadResult.contains("INNER"));
+        assertEquals("INNER", jsonReadResult);
     }
 
     @Test
@@ -241,7 +241,7 @@ public class ProjectControllerTestOkRequests {
 
         System.out.println(jsonReadResult);
         //then
-        assertTrue(jsonReadResult.contains("cyan"));
+        assertEquals("cyan", jsonReadResult);
     }
 
     @Test
@@ -259,7 +259,7 @@ public class ProjectControllerTestOkRequests {
         setJsonReadResult(result);
 
         //then
-        assertTrue(jsonReadResult.contains("MONTAGE"));
+        assertEquals("MONTAGE", jsonReadResult);
     }
 
     @Test
@@ -317,7 +317,7 @@ public class ProjectControllerTestOkRequests {
         setJsonReadResult(result);
 
         //then
-        assertTrue(jsonReadResult.contains("2021-03-26"));
+        assertEquals("2021-03-26", jsonReadResult);
     }
 
     @Test
@@ -335,7 +335,7 @@ public class ProjectControllerTestOkRequests {
         setJsonReadResult(result);
 
         //then
-        assertTrue(jsonReadResult.contains("2021-04-26"));
+        assertEquals("2021-04-26", jsonReadResult);
     }
 
     private void setJsonReadResult(MvcResult result) throws UnsupportedEncodingException {
