@@ -3,6 +3,7 @@ package pl.wegner.documents.model.dto;
 import lombok.*;
 import pl.wegner.documents.model.entities.Alteration;
 import pl.wegner.documents.model.entities.Ink;
+import pl.wegner.documents.model.entities.Project;
 import pl.wegner.documents.model.enums.PlateThickness;
 import pl.wegner.documents.model.enums.PrintSide;
 import pl.wegner.documents.model.enums.Stage;
@@ -15,7 +16,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class ProjectDto {
+public class ProjectDto implements Mappable<Project>{
 
     private long id;
 
@@ -81,4 +82,23 @@ public class ProjectDto {
     @PastOrPresent(message = "mustn't be in the future")
     private LocalDate preparationEnding;
 
+    @Override
+    public Project map() {
+        return Project.builder()
+                .designation(this.getDesignation())
+                .symbol(this.getSymbol())
+                .customer(this.getCustomer())
+                .printHouse(this.getPrintHouse())
+                .rollerSize(this.getRollerSize())
+                .dimensions(this.getDimensions())
+                .plateThickness(this.getPlateThickness())
+                .side(this.getSide())
+                .inks(this.getInks())
+                .notes(this.getNotes())
+                .stage(this.getStage())
+                .alterations(this.getAlterations())
+                .preparationBeginning(this.getPreparationBeginning())
+                .build();
+
+    }
 }

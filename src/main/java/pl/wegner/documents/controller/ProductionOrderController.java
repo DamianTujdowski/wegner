@@ -2,9 +2,11 @@ package pl.wegner.documents.controller;
 
 import org.springframework.data.domain.Sort;
 import org.springframework.web.bind.annotation.*;
+import pl.wegner.documents.model.dto.ProductionOrderDto;
 import pl.wegner.documents.model.entities.ProductionOrder;
 import pl.wegner.documents.service.ProductionOrderService;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -29,12 +31,12 @@ public class ProductionOrderController {
     }
 
     @PostMapping("/orders/")
-    public ProductionOrder save(@RequestBody ProductionOrder order) {
+    public ProductionOrder save(@Valid @RequestBody ProductionOrderDto order) {
         return orderService.save(order);
     }
 
     @PutMapping("/orders/")
-    public ProductionOrder edit(@RequestBody ProductionOrder order) {
+    public ProductionOrder edit(@Valid @RequestBody ProductionOrderDto order) {
         return orderService.edit(order);
     }
 

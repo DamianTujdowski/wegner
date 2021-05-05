@@ -3,6 +3,7 @@ package pl.wegner.documents.service;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import pl.wegner.documents.model.dto.ProductionOrderDto;
 import pl.wegner.documents.model.entities.ProductionOrder;
 import pl.wegner.documents.repository.ProductionOrderRepository;
 
@@ -30,12 +31,21 @@ public class ProductionOrderService {
         return orderRepository.findAllBy(PageRequest.of(page, size, Sort.by(direction, "occurrence")));
     }
 
-    public ProductionOrder save(ProductionOrder order) {
-        return orderRepository.save(order);
+    public ProductionOrder save(ProductionOrderDto order) {
+        ProductionOrder newProductionOrder = mapToProductionOrder(order);
+        return orderRepository.save(newProductionOrder);
+    }
+
+    private ProductionOrder mapToProductionOrder(ProductionOrderDto order) {
+        return ProductionOrder.builder()
+                .designation(order.getDesignation())
+                .occurrence(order.getOccurrence())
+                .orderData(order.getOrderData())
+                .build();
     }
 
     @Transactional
-    public ProductionOrder edit(ProductionOrder order) {
+    public ProductionOrder edit(ProductionOrderDto order) {
         ProductionOrder edited = orderRepository.findById(order.getId())
                 .orElseThrow(() -> new EntityNotFoundException(
                         String.format("Production order with id %d does not exist", order.getId())

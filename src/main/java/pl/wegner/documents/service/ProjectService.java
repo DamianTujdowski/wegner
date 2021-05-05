@@ -45,7 +45,7 @@ public class ProjectService {
     }
 
     public Project save(ProjectDto projectDto) {
-        Project newProject = mapToProject(projectDto);
+        Project newProject = projectDto.map();
         newProject.setPreparationBeginning(dateMapper.mapSymbolToDate(newProject.getSymbol()));
         return repository.save(newProject);
     }
