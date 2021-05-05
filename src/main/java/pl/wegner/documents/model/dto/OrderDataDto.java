@@ -9,6 +9,7 @@ import pl.wegner.documents.model.enums.PlateThickness;
 import pl.wegner.documents.model.enums.PrintSide;
 
 import javax.validation.constraints.*;
+import java.time.LocalDate;
 import java.util.List;
 
 @Data
@@ -19,10 +20,13 @@ public class OrderDataDto {
 
     private long id;
 
+    @PastOrPresent(message = "mustn't be in the future")
+    private LocalDate creationDate;
+
     @NotBlank(message = "must be provided")
-    @Size(min = 19, max = 23, message = "length must be between 19 and 23 characters")
-    @Pattern(regexp = "(Zlecenie|zlecenie){1} \\d{2} \\d{2} \\d{4} ?(V2)?",
-            message = "format must be like -Zlecenie yyyy mm dd- with optional version mark")
+    @Size(min = 10, max = 30, message = "length must be between 10 and 30 characters")
+    @Pattern(regexp = "[\\w ]*",
+            message = "can contain only letters, digits, underscore and space")
     private String fileName;
 
     @NotBlank(message = "must be provided")
