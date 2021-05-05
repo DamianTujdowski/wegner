@@ -34,7 +34,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @WebMvcTest(controllers = ProjectController.class)
-public class ProjectControllerTestOkRequests {
+class ProjectControllerTestOkRequests {
 
     @Autowired
     private MockMvc mockMvc;
@@ -51,7 +51,7 @@ public class ProjectControllerTestOkRequests {
     private String jsonPathDesignation, jsonReadResult;
 
     @BeforeEach
-    public void setUp() {
+    void setUp() {
         Ink cyan = Ink.builder()
                 .symbol("cyan")
                 .angle(Angle.BLUE)
@@ -98,7 +98,7 @@ public class ProjectControllerTestOkRequests {
     }
 
     @Test
-    public void shouldReturnStatusOk_WhenSavingProjectWithValidDesignation() throws Exception {
+    void shouldReturnStatusOk_WhenSavingProjectWithValidDesignation() throws Exception {
         //given
         jsonPathDesignation = "$.designation";
         when(service.save(projectDto)).thenReturn(response);
@@ -116,7 +116,7 @@ public class ProjectControllerTestOkRequests {
     }
 
     @Test
-    public void shouldReturnStatusOk_WhenSavingProjectWithValidSymbol() throws Exception {
+    void shouldReturnStatusOk_WhenSavingProjectWithValidSymbol() throws Exception {
         //given
         jsonPathDesignation = "$.symbol";
         when(service.save(projectDto)).thenReturn(response);
@@ -134,7 +134,7 @@ public class ProjectControllerTestOkRequests {
     }
 
     @Test
-    public void shouldReturnStatusOk_WhenSavingProjectWithValidPrintHouseName() throws Exception {
+    void shouldReturnStatusOk_WhenSavingProjectWithValidPrintHouseName() throws Exception {
         //given
         jsonPathDesignation = "$.printHouse";
         when(service.save(projectDto)).thenReturn(response);
@@ -152,7 +152,7 @@ public class ProjectControllerTestOkRequests {
     }
 
     @Test
-    public void shouldReturnStatusOk_WhenSavingProjectWithValidRollerSize() throws Exception {
+    void shouldReturnStatusOk_WhenSavingProjectWithValidRollerSize() throws Exception {
         //given
         jsonPathDesignation = "$.rollerSize";
         when(service.save(projectDto)).thenReturn(response);
@@ -172,7 +172,7 @@ public class ProjectControllerTestOkRequests {
     }
 
     @Test
-    public void shouldReturnStatusOk_WhenSavingProjectWithValidDimensions() throws Exception {
+    void shouldReturnStatusOk_WhenSavingProjectWithValidDimensions() throws Exception {
         //given
         jsonPathDesignation = "$.dimensions";
         when(service.save(projectDto)).thenReturn(response);
@@ -190,7 +190,7 @@ public class ProjectControllerTestOkRequests {
     }
 
     @Test
-    public void shouldReturnStatusOk_WhenSavingProjectWithValidPlateThickness() throws Exception {
+    void shouldReturnStatusOk_WhenSavingProjectWithValidPlateThickness() throws Exception {
         //given
         jsonPathDesignation = "$.plateThickness";
         when(service.save(projectDto)).thenReturn(response);
@@ -208,7 +208,7 @@ public class ProjectControllerTestOkRequests {
     }
 
     @Test
-    public void shouldReturnStatusOk_WhenSavingProjectWithValidSide() throws Exception {
+    void shouldReturnStatusOk_WhenSavingProjectWithValidSide() throws Exception {
         //given
         jsonPathDesignation = "$.side";
         when(service.save(projectDto)).thenReturn(response);
@@ -226,7 +226,7 @@ public class ProjectControllerTestOkRequests {
     }
 
     @Test
-    public void shouldReturnStatusOk_WhenSavingProjectWithValidInks() throws Exception {
+    void shouldReturnStatusOk_WhenSavingProjectWithValidInks() throws Exception {
         //given
         jsonPathDesignation = "$.inks[0].symbol";
         when(service.save(projectDto)).thenReturn(response);
@@ -245,7 +245,7 @@ public class ProjectControllerTestOkRequests {
     }
 
     @Test
-    public void shouldReturnStatusOk_WhenSavingProjectWithValidStage() throws Exception {
+    void shouldReturnStatusOk_WhenSavingProjectWithValidStage() throws Exception {
         //given
         jsonPathDesignation = "$.stage";
         when(service.save(projectDto)).thenReturn(response);
@@ -263,7 +263,7 @@ public class ProjectControllerTestOkRequests {
     }
 
     @Test
-    public void shouldReturnStatusOk_WhenSavingProjectWithValidAlterations() throws Exception {
+    void shouldReturnStatusOk_WhenSavingProjectWithValidAlterations() throws Exception {
         //given
         jsonPathDesignation = "$.alterations";
         when(service.save(projectDto)).thenReturn(response);
@@ -283,7 +283,7 @@ public class ProjectControllerTestOkRequests {
     }
 
     @Test
-    public void shouldReturnStatusOk_WhenSavingProjectWithValidOverallPreparationDuration() throws Exception {
+    void shouldReturnStatusOk_WhenSavingProjectWithValidOverallPreparationDuration() throws Exception {
         //given
         jsonPathDesignation = "$.overallPreparationDuration";
         when(service.save(projectDto)).thenReturn(response);
@@ -303,7 +303,7 @@ public class ProjectControllerTestOkRequests {
     }
 
     @Test
-    public void shouldReturnStatusOk_WhenSavingProjectWithValidPreparationBeginning() throws Exception {
+    void shouldReturnStatusOk_WhenSavingProjectWithValidPreparationBeginning() throws Exception {
         //given
         jsonPathDesignation = "$.preparationBeginning";
         when(service.save(projectDto)).thenReturn(response);
@@ -321,7 +321,7 @@ public class ProjectControllerTestOkRequests {
     }
 
     @Test
-    public void shouldReturnStatusOk_WhenSavingProjectWithValidPreparationEnding() throws Exception {
+    void shouldReturnStatusOk_WhenSavingProjectWithValidPreparationEnding() throws Exception {
         //given
         jsonPathDesignation = "$.preparationEnding";
         when(service.save(projectDto)).thenReturn(response);

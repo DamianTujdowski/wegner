@@ -20,7 +20,7 @@ class ProjectEntityTest {
     private Alteration colorAlter, textAlter, colorAlterModified;
 
     @BeforeEach
-    public void init() {
+    void init() {
         yellow = Ink.builder()
                 .id(1)
                 .symbol("Yellow")
@@ -94,7 +94,7 @@ class ProjectEntityTest {
     }
 
     @Test
-    public void whenProjectHasNoInks_shouldAddAllInks() {
+    void whenProjectHasNoInks_shouldAddAllInks() {
         //given
         List<Ink> inks = Stream.of(yellow, magenta).collect(Collectors.toList());
         //when
@@ -104,7 +104,7 @@ class ProjectEntityTest {
     }
 
     @Test
-    public void whenProjectInksListIsSetWithInksListWithNoCommonElements_shouldReplaceEntityInksListWithNewInks() {
+    void whenProjectInksListIsSetWithInksListWithNoCommonElements_shouldReplaceEntityInksListWithNewInks() {
         //given
         List<Ink> inks = Stream.of(cyan).collect(Collectors.toList());
         //when
@@ -114,7 +114,7 @@ class ProjectEntityTest {
     }
 
     @Test
-    public void whenProjectInksListIsSetWithIdenticalInksList_shouldNotMakeAnyChangesToEntityInksList() {
+    void whenProjectInksListIsSetWithIdenticalInksList_shouldNotMakeAnyChangesToEntityInksList() {
         //given
         List<Ink> inks = Stream.of(yellow, magenta).collect(Collectors.toList());
 
@@ -126,7 +126,7 @@ class ProjectEntityTest {
     }
 
     @Test
-    public void whenProjectInksListIsSetWithInksListWithChangedElements_shouldMakeChangesToEntityInksList() {
+    void whenProjectInksListIsSetWithInksListWithChangedElements_shouldMakeChangesToEntityInksList() {
         //given
         List<Ink> inks = Stream.of(yellow, magentaModified).collect(Collectors.toList());
         //when
@@ -137,7 +137,7 @@ class ProjectEntityTest {
     }
 
     @Test
-    public void whenProjectInksListIsSetWithInksListWithRemovedElements_shouldRemoveMissingElementFromEntityInksList() {
+    void whenProjectInksListIsSetWithInksListWithRemovedElements_shouldRemoveMissingElementFromEntityInksList() {
         //given
         List<Ink> inks = Stream.of(yellow).collect(Collectors.toList());
         //when
@@ -148,7 +148,7 @@ class ProjectEntityTest {
     }
 
     @Test
-    public void whenProjectInksListIsSetWithInksListWithNewElements_shouldAddAllNewElements() {
+    void whenProjectInksListIsSetWithInksListWithNewElements_shouldAddAllNewElements() {
         //given
         List<Ink> inks = Stream.of(cyan, yellow, magenta).collect(Collectors.toList());
         //when
@@ -158,7 +158,7 @@ class ProjectEntityTest {
     }
 
     @Test
-    public void whenProjectInksListIsSetWithEmptyInksList_shouldRemoveAllElementFromEntityInksList() {
+    void whenProjectInksListIsSetWithEmptyInksList_shouldRemoveAllElementFromEntityInksList() {
         //given
         List<Ink> inks = new ArrayList<>();
         //when
@@ -168,7 +168,7 @@ class ProjectEntityTest {
     }
 
     @Test
-    public void whenProjectHasNoAlterations_shouldAddAllAlterations() {
+    void whenProjectHasNoAlterations_shouldAddAllAlterations() {
         //given
         List<Alteration> alterations = Stream.of(colorAlter, textAlter).collect(Collectors.toList());
         //when
@@ -178,7 +178,7 @@ class ProjectEntityTest {
     }
 
     @Test
-    public void whenProjectAlterationsListIsSetWithIdenticalAlterationsList_shouldNotMakeAnyChangesToEntityAlterationsList() {
+    void whenProjectAlterationsListIsSetWithIdenticalAlterationsList_shouldNotMakeAnyChangesToEntityAlterationsList() {
         //given
         List<Alteration> alterations = Stream.of(colorAlter, textAlter).collect(Collectors.toList());
         //when
@@ -189,7 +189,7 @@ class ProjectEntityTest {
     }
 
     @Test
-    public void whenProjectAlterationsListIsSetWithAlterationsListWithChangedElements_shouldMakeChangesToEntityAlterationsList() {
+    void whenProjectAlterationsListIsSetWithAlterationsListWithChangedElements_shouldMakeChangesToEntityAlterationsList() {
         //given
         List<Alteration> alterations = Stream.of(colorAlterModified, textAlter).collect(Collectors.toList());
         //when
@@ -200,7 +200,7 @@ class ProjectEntityTest {
     }
 
     @Test
-    public void whenProjectAlterationsListIsSetWithAlterationsListWithRemovedElements_shouldRemoveMissingElementFromEntityAlterationsList() {
+    void whenProjectAlterationsListIsSetWithAlterationsListWithRemovedElements_shouldRemoveMissingElementFromEntityAlterationsList() {
         //given
         List<Alteration> alterations = Stream.of(textAlter).collect(Collectors.toList());
         //when
@@ -210,7 +210,7 @@ class ProjectEntityTest {
     }
 
     @Test
-    public void whenProjectAlterationsListIsSetWithEmptyAlterationsList_shouldRemoveAllElementFromEntityAlterationsList() {
+    void whenProjectAlterationsListIsSetWithEmptyAlterationsList_shouldRemoveAllElementFromEntityAlterationsList() {
         //given
         List<Alteration> alterations = new ArrayList<>();
         //when

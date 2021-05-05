@@ -38,7 +38,7 @@ class ProjectServiceTest {
     private ProjectDto dtoWithTwoAlterations, dtoWithThreeAlterations;
 
     @BeforeEach
-    public void setUp() {
+    void setUp() {
         Alteration textAlt = Alteration.builder()
                 .description("Text alteration")
                 .occurrence(LocalDate.of(2021, 2, 13))
@@ -104,7 +104,7 @@ class ProjectServiceTest {
     }
 
     @Test
-    public void shouldCountOverallPreparationTimeEqualTo110_whenEditedProjectHasNotInitializedAlterationsList() {
+    void shouldCountOverallPreparationTimeEqualTo110_whenEditedProjectHasNotInitializedAlterationsList() {
         //given
         Project edited;
         //when
@@ -115,7 +115,7 @@ class ProjectServiceTest {
     }
 
     @Test
-    public void shouldCountOverallPreparationTimeEqualTo110_whenEditedProjectHasEmptyAlterationsList() {
+    void shouldCountOverallPreparationTimeEqualTo110_whenEditedProjectHasEmptyAlterationsList() {
         //given
         Project edited;
         //when
@@ -126,7 +126,7 @@ class ProjectServiceTest {
     }
 
     @Test
-    public void shouldCountOverallPreparationTimeEqualTo110_whenEditedProjectHasNoCommonAlterations() {
+    void shouldCountOverallPreparationTimeEqualTo110_whenEditedProjectHasNoCommonAlterations() {
         //given
         Project edited;
         //when
@@ -137,7 +137,7 @@ class ProjectServiceTest {
     }
 
     @Test
-    public void shouldCountOverallPreparationTimeEqualTo120_whenEditedProjectHasCommonAlterations() {
+    void shouldCountOverallPreparationTimeEqualTo120_whenEditedProjectHasCommonAlterations() {
         //given
         Project edited;
         //when

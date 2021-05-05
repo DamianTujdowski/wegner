@@ -27,7 +27,7 @@ class DateMapperTest {
     private DateMapper mapper;
 
     @Test
-    public void forSymbol_21021301_shouldGenerateDate2021_02_13() {
+    void forSymbol_21021301_shouldGenerateDate2021_02_13() {
         //given
         String symbol = "21021301";
         LocalDate date = LocalDate.of(2021, 2, 13);
@@ -38,7 +38,7 @@ class DateMapperTest {
     }
 
     @Test
-    public void forSymbol_20103001_shouldGenerateDate2021_02_13() {
+    void forSymbol_20103001_shouldGenerateDate2021_02_13() {
         //given
         String symbol = "20103001";
         LocalDate date = LocalDate.of(2020, 10, 30);

@@ -46,7 +46,7 @@ class OrderDataControllerOkRequestTest {
     private String jsonPathDesignation, jsonReadResult;
 
     @BeforeEach
-    public void setUp() {
+    void setUp() {
         Ink cyan = Ink.builder()
                 .symbol("cyan")
                 .angle(Angle.BLUE)
@@ -58,7 +58,7 @@ class OrderDataControllerOkRequestTest {
         List<Ink> inksList = Stream.of(cyan, magenta).collect(Collectors.toList());
 
         orderDataDto = OrderDataDto.builder()
-                .fileName("Zlecenie 12 03 2021")
+                .fileName("Butter extra 12 03 2021")
                 .platesDimensions("200x350")
                 .platesQuantity(5)
                 .inks(inksList)
@@ -67,7 +67,7 @@ class OrderDataControllerOkRequestTest {
                 .build();
 
         response = OrderData.builder()
-                .fileName("Zlecenie 12 03 2021")
+                .fileName("Butter extra 12 03 2021")
                 .platesDimensions("200x350")
                 .platesQuantity(5)
                 .inks(inksList)
@@ -77,7 +77,7 @@ class OrderDataControllerOkRequestTest {
     }
 
     @Test
-    public void shouldReturnStatusOk_WhenSavingProjectWithValidFileName() throws Exception {
+    void shouldReturnStatusOk_WhenSavingProjectWithValidFileName() throws Exception {
         //given
         jsonPathDesignation = "$.fileName";
         when(service.save(orderDataDto)).thenReturn(response);
@@ -91,11 +91,11 @@ class OrderDataControllerOkRequestTest {
         setJsonReadResult(result);
 
         //then
-        assertEquals("Zlecenie 12 03 2021", jsonReadResult);
+        assertEquals("Butter extra 12 03 2021", jsonReadResult);
     }
 
     @Test
-    public void shouldReturnStatusOk_WhenSavingProjectWithValidVersionFileName() throws Exception {
+    void shouldReturnStatusOk_WhenSavingProjectWithValidVersionFileName() throws Exception {
         //given
         orderDataDto.setFileName("Zlecenie 12 03 2021 V2");
         response.setFileName("Zlecenie 12 03 2021 V2");

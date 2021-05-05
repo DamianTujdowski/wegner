@@ -17,7 +17,7 @@ class OrderArchivalDataEntityTest {
     private Ink yellow, magenta, magentaModified;
 
     @BeforeEach
-    public void init() {
+    void init() {
         yellow = Ink.builder()
                 .id(1)
                 .symbol("Yellow")
@@ -52,7 +52,7 @@ class OrderArchivalDataEntityTest {
     }
 
     @Test
-    public void whenArchOrderHasNoData_shouldAddAllData() {
+    void whenArchOrderHasNoData_shouldAddAllData() {
         //given
         List<Ink> inks = Stream.of(yellow, magenta).collect(Collectors.toList());
         //when
@@ -62,7 +62,7 @@ class OrderArchivalDataEntityTest {
     }
 
     @Test
-    public void whenArchOrderDataListIsSetWithIdenticalDataList_shouldNotMakeAnyChangesToEntityDataList() {
+    void whenArchOrderDataListIsSetWithIdenticalDataList_shouldNotMakeAnyChangesToEntityDataList() {
         //given
         List<Ink> inks = Stream.of(yellow, magenta).collect(Collectors.toList());
         //when
@@ -73,7 +73,7 @@ class OrderArchivalDataEntityTest {
     }
 
     @Test
-    public void whenArchOrderDataListIsSetWithDataListWithChangedElements_shouldMakeChangesToEntityDataList() {
+    void whenArchOrderDataListIsSetWithDataListWithChangedElements_shouldMakeChangesToEntityDataList() {
         //given
         List<Ink> inks = Stream.of(yellow, magentaModified).collect(Collectors.toList());
         //when
@@ -84,7 +84,7 @@ class OrderArchivalDataEntityTest {
     }
 
     @Test
-    public void whenArchOrderDataListIsSetWithDataListWithRemovedElements_shouldRemoveMissingElementFromEntityDataList() {
+    void whenArchOrderDataListIsSetWithDataListWithRemovedElements_shouldRemoveMissingElementFromEntityDataList() {
         //given
         List<Ink> inks = Stream.of(yellow).collect(Collectors.toList());
         //when
@@ -94,7 +94,7 @@ class OrderArchivalDataEntityTest {
     }
 
     @Test
-    public void whenArchOrderDataListIsSetWithEmptyDataList_shouldRemoveAllElementFromEntityDataList() {
+    void whenArchOrderDataListIsSetWithEmptyDataList_shouldRemoveAllElementFromEntityDataList() {
         //given
         List<Ink> inks = new ArrayList<>();
         //when

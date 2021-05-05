@@ -34,7 +34,7 @@ class OrderDataServiceTest {
     private OrderData orderData;
 
     @BeforeEach
-    public void init() {
+    void init() {
         List<Ink> inks = new ArrayList<>();
         archivalData = OrderArchivalData.builder()
                 .occurrence(LocalDate.of(2020, 10, 3))
@@ -64,7 +64,7 @@ class OrderDataServiceTest {
     }
 
     @Test
-    public void shouldCorrectlyGenerateOrderDataFromArchivalOrderData() {
+    void shouldCorrectlyGenerateOrderDataFromArchivalOrderData() {
         //given
         OrderData generatedData;
         //when

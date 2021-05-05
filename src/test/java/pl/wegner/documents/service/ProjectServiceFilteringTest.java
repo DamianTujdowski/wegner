@@ -52,7 +52,7 @@ class ProjectServiceFilteringTest {
             leEndDate2021_04_05;
 
     @BeforeEach
-    public void setUp() {
+    void setUp() {
         printHousePalst = new FilterCriteria();
         printHousePalst.setKey("printHouse");
         printHousePalst.setOperator("equals");
@@ -106,7 +106,7 @@ class ProjectServiceFilteringTest {
     }
 
     @Test
-    public void shouldReturnAllProjects_whenFilterCriteriaListIsEmpty() {
+    void shouldReturnAllProjects_whenFilterCriteriaListIsEmpty() {
         //given
         List<FilterCriteria> criteria = new ArrayList<>();
         Page<Project> result;
@@ -117,7 +117,7 @@ class ProjectServiceFilteringTest {
     }
 
     @Test
-    public void shouldReturnThreeProjects_whenSearchingForProjectPrintedByPalst() {
+    void shouldReturnThreeProjects_whenSearchingForProjectPrintedByPalst() {
         //given
         List<FilterCriteria> criteria = Stream.of(printHousePalst).collect(Collectors.toList());
         Page<Project> result;
@@ -128,7 +128,7 @@ class ProjectServiceFilteringTest {
     }
 
     @Test
-    public void shouldReturnOneProject_whenSearchingForProjectsPrintedByFlorek() {
+    void shouldReturnOneProject_whenSearchingForProjectsPrintedByFlorek() {
         //given
         List<FilterCriteria> criteria = Stream.of(printHouseFlorek).collect(Collectors.toList());
         Page<Project> result;
@@ -139,7 +139,7 @@ class ProjectServiceFilteringTest {
     }
 
     @Test
-    public void shouldReturnOneProject_whenSearchingForProjectsInStageIn_Acceptation() {
+    void shouldReturnOneProject_whenSearchingForProjectsInStageIn_Acceptation() {
         //given
         List<FilterCriteria> criteria = Stream.of(stageInAcceptation).collect(Collectors.toList());
         Page<Project> result;
@@ -150,7 +150,7 @@ class ProjectServiceFilteringTest {
     }
 
     @Test
-    public void shouldReturnThreeProjects_whenSearchingForProjectsInStageProof() {
+    void shouldReturnThreeProjects_whenSearchingForProjectsInStageProof() {
         //given
         List<FilterCriteria> criteria = Stream.of(stageProof).collect(Collectors.toList());
         Page<Project> result;
@@ -161,7 +161,7 @@ class ProjectServiceFilteringTest {
     }
 
     @Test
-    public void shouldReturnTwoProjects_whenSearchingForProjectsOrderedByCustomerAlicja() {
+    void shouldReturnTwoProjects_whenSearchingForProjectsOrderedByCustomerAlicja() {
         //given
         List<FilterCriteria> criteria = Stream.of(customerAlicja).collect(Collectors.toList());
         Page<Project> result;
@@ -172,7 +172,7 @@ class ProjectServiceFilteringTest {
     }
 
     @Test
-    public void shouldReturnOneProject_whenSearchingForProjectsOrderedByCustomerAlicjaAndPrintedByPalst() {
+    void shouldReturnOneProject_whenSearchingForProjectsOrderedByCustomerAlicjaAndPrintedByPalst() {
         //given
         List<FilterCriteria> criteria = Stream.of(customerAlicja, printHousePalst).collect(Collectors.toList());
         Page<Project> result;
@@ -183,7 +183,7 @@ class ProjectServiceFilteringTest {
     }
 
     @Test
-    public void shouldReturnTwoProjects_whenSearchingForProjectsStartedAt2021_01_15OrEarlier() {
+    void shouldReturnTwoProjects_whenSearchingForProjectsStartedAt2021_01_15OrEarlier() {
         //given
         List<FilterCriteria> criteria = Stream.of(leStartDate2021_01_15).collect(Collectors.toList());
         Page<Project> result;
@@ -194,7 +194,7 @@ class ProjectServiceFilteringTest {
     }
 
     @Test
-    public void shouldReturnTwoProjects_whenSearchingForProjectsStartedAt2021_03_01OrLater() {
+    void shouldReturnTwoProjects_whenSearchingForProjectsStartedAt2021_03_01OrLater() {
         //given
         List<FilterCriteria> criteria = Stream.of(geStartDate2021_03_01).collect(Collectors.toList());
         Page<Project> result;
@@ -205,7 +205,7 @@ class ProjectServiceFilteringTest {
     }
 
     @Test
-    public void shouldReturnThreeProjects_whenSearchingForProjectsStartedBetween2021_01_15And2021_03_01() {
+    void shouldReturnThreeProjects_whenSearchingForProjectsStartedBetween2021_01_15And2021_03_01() {
         //given
         List<FilterCriteria> criteria = Stream.of(between2021_01_15And2021_03_01).collect(Collectors.toList());
         Page<Project> result;
@@ -216,7 +216,7 @@ class ProjectServiceFilteringTest {
     }
 
     @Test
-    public void shouldReturnZeroProjects_whenSearchingForProjectsStartedBefore2021_01_15AndAfter2021_03_01() {
+    void shouldReturnZeroProjects_whenSearchingForProjectsStartedBefore2021_01_15AndAfter2021_03_01() {
         //given
         List<FilterCriteria> criteria = Stream.of(leStartDate2021_01_15, geStartDate2021_03_01).collect(Collectors.toList());
         Page<Project> result;
@@ -227,7 +227,7 @@ class ProjectServiceFilteringTest {
     }
 
     @Test
-    public void shouldReturnTwoProjects_whenSearchingForProjectsStartedBefore2021_3_20AndAfter2021_03_01() {
+    void shouldReturnTwoProjects_whenSearchingForProjectsStartedBefore2021_3_20AndAfter2021_03_01() {
         //given
         List<FilterCriteria> criteria = Stream.of(leStartDate2021_03_20, geStartDate2021_03_01).collect(Collectors.toList());
         Page<Project> result;
@@ -238,7 +238,7 @@ class ProjectServiceFilteringTest {
     }
 
     @Test
-    public void shouldReturnTwoProjects_whenSearchingForProjectsStarted2021_03_01AndEnded2021_04_05() {
+    void shouldReturnTwoProjects_whenSearchingForProjectsStarted2021_03_01AndEnded2021_04_05() {
         //given
         List<FilterCriteria> criteria = Stream.of(geStartDate2021_03_01, leEndDate2021_04_05).collect(Collectors.toList());
         Page<Project> result;
@@ -247,6 +247,5 @@ class ProjectServiceFilteringTest {
         //then
         assertEquals(2, result.getTotalElements());
     }
-
 
 }

@@ -32,7 +32,7 @@ class ProjectControllerTestBadRequests {
     private ProjectService service;
 
     @Test
-    public void shouldThrowMethodArgumentNotValidException_WhenTryingToSaveProjectWithNullDesignation() throws Exception {
+    void shouldThrowMethodArgumentNotValidException_WhenTryingToSaveProjectWithNullDesignation() throws Exception {
         //given
         ProjectDto projectDto = ProjectDto.builder()
                 .build();
@@ -56,7 +56,7 @@ class ProjectControllerTestBadRequests {
     }
 
     @Test
-    public void shouldThrowMethodArgumentNotValidException_WhenTryingToSaveProjectWithOnlySpacesDesignation() throws Exception {
+    void shouldThrowMethodArgumentNotValidException_WhenTryingToSaveProjectWithOnlySpacesDesignation() throws Exception {
         //given
         ProjectDto projectDto = ProjectDto.builder()
                 .designation("     ")
@@ -78,7 +78,7 @@ class ProjectControllerTestBadRequests {
     }
 
     @Test
-    public void shouldThrowMethodArgumentNotValidException_WhenTryingToSaveProjectWithFiveLettersLongDesignation() throws Exception {
+    void shouldThrowMethodArgumentNotValidException_WhenTryingToSaveProjectWithFiveLettersLongDesignation() throws Exception {
         //given
         ProjectDto projectDto = ProjectDto.builder()
                 .designation("abcde")
@@ -100,7 +100,7 @@ class ProjectControllerTestBadRequests {
     }
 
     @Test
-    public void shouldThrowMethodArgumentNotValidException_WhenTryingToSaveProjectWithSixtyLettersLongDesignation() throws Exception {
+    void shouldThrowMethodArgumentNotValidException_WhenTryingToSaveProjectWithSixtyLettersLongDesignation() throws Exception {
         //given
         ProjectDto projectDto = ProjectDto.builder()
                 .designation("abcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghij")
@@ -122,7 +122,7 @@ class ProjectControllerTestBadRequests {
     }
 
     @Test
-    public void shouldThrowMethodArgumentNotValidException_WhenTryingToSaveProjectWithDesignationWithIllegalCharacters() throws Exception {
+    void shouldThrowMethodArgumentNotValidException_WhenTryingToSaveProjectWithDesignationWithIllegalCharacters() throws Exception {
         //given
         ProjectDto projectDto = ProjectDto.builder()
                 .designation("abcde% @")
@@ -144,7 +144,7 @@ class ProjectControllerTestBadRequests {
     }
 
     @Test
-    public void shouldThrowMethodArgumentNotValidException_WhenTryingToSaveProjectWithNullSymbol() throws Exception {
+    void shouldThrowMethodArgumentNotValidException_WhenTryingToSaveProjectWithNullSymbol() throws Exception {
         //given
         ProjectDto projectDto = ProjectDto.builder()
                 .build();
@@ -165,7 +165,7 @@ class ProjectControllerTestBadRequests {
     }
 
     @Test
-    public void shouldThrowMethodArgumentNotValidException_WhenTryingToSaveProjectWithThreeDigitsSymbol() throws Exception {
+    void shouldThrowMethodArgumentNotValidException_WhenTryingToSaveProjectWithThreeDigitsSymbol() throws Exception {
         //given
         ProjectDto projectDto = ProjectDto.builder()
                 .symbol("210")
@@ -188,7 +188,7 @@ class ProjectControllerTestBadRequests {
     }
 
     @Test
-    public void shouldThrowMethodArgumentNotValidException_WhenTryingToSaveProjectWithSymbolWithWronglyPlacedSlash() throws Exception {
+    void shouldThrowMethodArgumentNotValidException_WhenTryingToSaveProjectWithSymbolWithWronglyPlacedSlash() throws Exception {
         //given
         ProjectDto projectDto = ProjectDto.builder()
                 .symbol("2103310/101")
@@ -211,7 +211,7 @@ class ProjectControllerTestBadRequests {
     }
 
     @Test
-    public void shouldThrowMethodArgumentNotValidException_WhenTryingToSaveProjectWithSymbolWithThreeDigitsAfterSlash() throws Exception {
+    void shouldThrowMethodArgumentNotValidException_WhenTryingToSaveProjectWithSymbolWithThreeDigitsAfterSlash() throws Exception {
         //given
         ProjectDto projectDto = ProjectDto.builder()
                 .symbol("21033101/011")
@@ -234,7 +234,7 @@ class ProjectControllerTestBadRequests {
     }
 
     @Test
-    public void shouldThrowMethodArgumentNotValidException_WhenTryingToSaveProjectWithSymbolWithSixDigitsBeforeSlash() throws Exception {
+    void shouldThrowMethodArgumentNotValidException_WhenTryingToSaveProjectWithSymbolWithSixDigitsBeforeSlash() throws Exception {
         //given
         ProjectDto projectDto = ProjectDto.builder()
                 .symbol("210330/01")
@@ -257,7 +257,7 @@ class ProjectControllerTestBadRequests {
     }
 
     @Test
-    public void shouldThrowMethodArgumentNotValidException_WhenTryingToSaveProjectWithSymbolWithNoSlash() throws Exception {
+    void shouldThrowMethodArgumentNotValidException_WhenTryingToSaveProjectWithSymbolWithNoSlash() throws Exception {
         //given
         ProjectDto projectDto = ProjectDto.builder()
                 .symbol("2103300201")
@@ -280,7 +280,7 @@ class ProjectControllerTestBadRequests {
     }
 
     @Test
-    public void shouldThrowMethodArgumentNotValidException_WhenTryingToSaveProjectWithNullCustomer() throws Exception {
+    void shouldThrowMethodArgumentNotValidException_WhenTryingToSaveProjectWithNullCustomer() throws Exception {
         //given
         ProjectDto projectDto = ProjectDto.builder()
                 .build();
@@ -301,7 +301,7 @@ class ProjectControllerTestBadRequests {
     }
 
     @Test
-    public void shouldThrowMethodArgumentNotValidException_WhenTryingToSaveProjectWithOnlySpacesCustomer() throws Exception {
+    void shouldThrowMethodArgumentNotValidException_WhenTryingToSaveProjectWithOnlySpacesCustomer() throws Exception {
         //given
         ProjectDto projectDto = ProjectDto.builder()
                 .customer("     ")
@@ -323,7 +323,7 @@ class ProjectControllerTestBadRequests {
     }
 
     @Test
-    public void shouldThrowMethodArgumentNotValidException_WhenTryingToSaveProjectWithTwoLettersLongCustomer() throws Exception {
+    void shouldThrowMethodArgumentNotValidException_WhenTryingToSaveProjectWithTwoLettersLongCustomer() throws Exception {
         //given
         ProjectDto projectDto = ProjectDto.builder()
                 .customer("ab")
@@ -345,7 +345,7 @@ class ProjectControllerTestBadRequests {
     }
 
     @Test
-    public void shouldThrowMethodArgumentNotValidException_WhenTryingToSaveProjectWithSixtyLettersLongCustomer() throws Exception {
+    void shouldThrowMethodArgumentNotValidException_WhenTryingToSaveProjectWithSixtyLettersLongCustomer() throws Exception {
         //given
         ProjectDto projectDto = ProjectDto.builder()
                 .customer("abcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghij")
@@ -367,7 +367,7 @@ class ProjectControllerTestBadRequests {
     }
 
     @Test
-    public void shouldThrowMethodArgumentNotValidException_WhenTryingToSaveProjectWithCustomerWithIllegalCharacters() throws Exception {
+    void shouldThrowMethodArgumentNotValidException_WhenTryingToSaveProjectWithCustomerWithIllegalCharacters() throws Exception {
         //given
         ProjectDto projectDto = ProjectDto.builder()
                 .customer("abcde% @")
@@ -389,7 +389,7 @@ class ProjectControllerTestBadRequests {
     }
 
     @Test
-    public void shouldThrowMethodArgumentNotValidException_WhenTryingToSaveProjectWithNullPrintHouse() throws Exception {
+    void shouldThrowMethodArgumentNotValidException_WhenTryingToSaveProjectWithNullPrintHouse() throws Exception {
         //given
         ProjectDto projectDto = ProjectDto.builder()
                 .build();
@@ -410,7 +410,7 @@ class ProjectControllerTestBadRequests {
     }
 
     @Test
-    public void shouldThrowMethodArgumentNotValidException_WhenTryingToSaveProjectWithOnlySpacesPrintHouse() throws Exception {
+    void shouldThrowMethodArgumentNotValidException_WhenTryingToSaveProjectWithOnlySpacesPrintHouse() throws Exception {
         //given
         ProjectDto projectDto = ProjectDto.builder()
                 .printHouse("     ")
@@ -432,7 +432,7 @@ class ProjectControllerTestBadRequests {
     }
 
     @Test
-    public void shouldThrowMethodArgumentNotValidException_WhenTryingToSaveProjectWithTwoLettersLongPrintHouse() throws Exception {
+    void shouldThrowMethodArgumentNotValidException_WhenTryingToSaveProjectWithTwoLettersLongPrintHouse() throws Exception {
         //given
         ProjectDto projectDto = ProjectDto.builder()
                 .printHouse("ab")
@@ -454,7 +454,7 @@ class ProjectControllerTestBadRequests {
     }
 
     @Test
-    public void shouldThrowMethodArgumentNotValidException_WhenTryingToSaveProjectWithSixtyLettersLongPrintHouse() throws Exception {
+    void shouldThrowMethodArgumentNotValidException_WhenTryingToSaveProjectWithSixtyLettersLongPrintHouse() throws Exception {
         //given
         ProjectDto projectDto = ProjectDto.builder()
                 .printHouse("abcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghij")
@@ -476,7 +476,7 @@ class ProjectControllerTestBadRequests {
     }
 
     @Test
-    public void shouldThrowMethodArgumentNotValidException_WhenTryingToSaveProjectWithPrintHouseWithIllegalCharacters() throws Exception {
+    void shouldThrowMethodArgumentNotValidException_WhenTryingToSaveProjectWithPrintHouseWithIllegalCharacters() throws Exception {
         //given
         ProjectDto projectDto = ProjectDto.builder()
                 .printHouse("abcde% @")
@@ -498,7 +498,7 @@ class ProjectControllerTestBadRequests {
     }
 
     @Test
-    public void shouldThrowMethodArgumentNotValidException_WhenTryingToSaveProjectWithNullRollerSize() throws Exception {
+    void shouldThrowMethodArgumentNotValidException_WhenTryingToSaveProjectWithNullRollerSize() throws Exception {
         //given
         ProjectDto projectDto = ProjectDto.builder()
                 .build();
@@ -519,7 +519,7 @@ class ProjectControllerTestBadRequests {
     }
 
     @Test
-    public void shouldThrowMethodArgumentNotValidException_WhenTryingToSaveProjectWith200RollerSize() throws Exception {
+    void shouldThrowMethodArgumentNotValidException_WhenTryingToSaveProjectWith200RollerSize() throws Exception {
         //given
         ProjectDto projectDto = ProjectDto.builder()
                 .rollerSize(200)
@@ -541,7 +541,7 @@ class ProjectControllerTestBadRequests {
     }
 
     @Test
-    public void shouldThrowMethodArgumentNotValidException_WhenTryingToSaveProjectWith650RollerSize() throws Exception {
+    void shouldThrowMethodArgumentNotValidException_WhenTryingToSaveProjectWith650RollerSize() throws Exception {
         //given
         ProjectDto projectDto = ProjectDto.builder()
                 .rollerSize(650)
@@ -563,7 +563,7 @@ class ProjectControllerTestBadRequests {
     }
 
     @Test
-    public void shouldThrowMethodArgumentNotValidException_WhenTryingToSaveProjectWithNullDimensions() throws Exception {
+    void shouldThrowMethodArgumentNotValidException_WhenTryingToSaveProjectWithNullDimensions() throws Exception {
         //given
         ProjectDto projectDto = ProjectDto.builder()
                 .build();
@@ -584,7 +584,7 @@ class ProjectControllerTestBadRequests {
     }
 
     @Test
-    public void shouldThrowMethodArgumentNotValidException_WhenTryingToSaveProjectWithDimensionsWithNoX() throws Exception {
+    void shouldThrowMethodArgumentNotValidException_WhenTryingToSaveProjectWithDimensionsWithNoX() throws Exception {
         //given
         ProjectDto projectDto = ProjectDto.builder()
                 .dimensions("200300")
@@ -606,7 +606,7 @@ class ProjectControllerTestBadRequests {
     }
 
     @Test
-    public void shouldThrowMethodArgumentNotValidException_WhenTryingToSaveProjectWithToBigWidth() throws Exception {
+    void shouldThrowMethodArgumentNotValidException_WhenTryingToSaveProjectWithToBigWidth() throws Exception {
         //given
         ProjectDto projectDto = ProjectDto.builder()
                 .dimensions("200x30000")
@@ -628,7 +628,7 @@ class ProjectControllerTestBadRequests {
     }
 
     @Test
-    public void shouldThrowMethodArgumentNotValidException_WhenTryingToSaveProjectWith_PlateThickness_setToNull() throws Exception {
+    void shouldThrowMethodArgumentNotValidException_WhenTryingToSaveProjectWith_PlateThickness_setToNull() throws Exception {
         //given
         ProjectDto projectDto = ProjectDto.builder().build();
         //when
@@ -648,7 +648,7 @@ class ProjectControllerTestBadRequests {
     }
 
     @Test
-    public void shouldThrowMethodArgumentNotValidException_WhenTryingToSaveProjectWith_Side_setToNull() throws Exception {
+    void shouldThrowMethodArgumentNotValidException_WhenTryingToSaveProjectWith_Side_setToNull() throws Exception {
         //given
         ProjectDto projectDto = ProjectDto.builder().build();
         //when
@@ -668,7 +668,7 @@ class ProjectControllerTestBadRequests {
     }
 
     @Test
-    public void shouldThrowMethodArgumentNotValidException_WhenTryingToSaveProjectWith_Inks_setToNull() throws Exception {
+    void shouldThrowMethodArgumentNotValidException_WhenTryingToSaveProjectWith_Inks_setToNull() throws Exception {
         //given
         ProjectDto projectDto = ProjectDto.builder().build();
         //when
@@ -688,7 +688,7 @@ class ProjectControllerTestBadRequests {
     }
 
     @Test
-    public void shouldThrowMethodArgumentNotValidException_WhenTryingToSaveProjectWith_InksEmptyList() throws Exception {
+    void shouldThrowMethodArgumentNotValidException_WhenTryingToSaveProjectWith_InksEmptyList() throws Exception {
         //given
         ProjectDto projectDto = ProjectDto.builder()
                 .inks(new ArrayList<>())
@@ -710,7 +710,7 @@ class ProjectControllerTestBadRequests {
     }
 
     @Test
-    public void shouldThrowMethodArgumentNotValidException_WhenTryingToSaveProjectWith_Stage_setToNull() throws Exception {
+    void shouldThrowMethodArgumentNotValidException_WhenTryingToSaveProjectWith_Stage_setToNull() throws Exception {
         //given
         ProjectDto projectDto = ProjectDto.builder().build();
         //when
@@ -730,7 +730,7 @@ class ProjectControllerTestBadRequests {
     }
 
     @Test
-    public void shouldThrowMethodArgumentNotValidException_WhenTryingToSaveProjectWith_Alterations_setToNull() throws Exception {
+    void shouldThrowMethodArgumentNotValidException_WhenTryingToSaveProjectWith_Alterations_setToNull() throws Exception {
         //given
         ProjectDto projectDto = ProjectDto.builder().build();
         //when
@@ -750,7 +750,7 @@ class ProjectControllerTestBadRequests {
     }
 
     @Test
-    public void shouldThrowMethodArgumentNotValidException_WhenTryingToSaveProjectWith_overallPreparationDuration_lowerTHanZero() throws Exception {
+    void shouldThrowMethodArgumentNotValidException_WhenTryingToSaveProjectWith_overallPreparationDuration_lowerTHanZero() throws Exception {
         //given
         ProjectDto projectDto = ProjectDto.builder()
                 .overallPreparationDuration(-15)
@@ -772,7 +772,7 @@ class ProjectControllerTestBadRequests {
     }
 
     @Test
-    public void shouldThrowMethodArgumentNotValidException_WhenTryingToSaveProjectWith_preparationBeginning_futureDate() throws Exception {
+    void shouldThrowMethodArgumentNotValidException_WhenTryingToSaveProjectWith_preparationBeginning_futureDate() throws Exception {
         //given
         ProjectDto projectDto = ProjectDto.builder()
                 .preparationBeginning(LocalDate.of(2021,6, 20))
@@ -794,7 +794,7 @@ class ProjectControllerTestBadRequests {
     }
 
     @Test
-    public void shouldThrowMethodArgumentNotValidException_WhenTryingToSaveProjectWith_preparationEnding_futureDate() throws Exception {
+    void shouldThrowMethodArgumentNotValidException_WhenTryingToSaveProjectWith_preparationEnding_futureDate() throws Exception {
         //given
         ProjectDto projectDto = ProjectDto.builder()
                 .preparationEnding(LocalDate.of(2021,6, 20))

@@ -20,7 +20,7 @@ class ProductionOrderEntityTest {
     private OrderData germanProjectOrder, polishProjectOrder, modifiedGermanProjectOrder;
 
     @BeforeEach
-    public void setUp() {
+    void setUp() {
 
         germanProjectOrder = OrderData.builder()
                 .fileName("Pfeffer hunde prings")
@@ -59,7 +59,7 @@ class ProductionOrderEntityTest {
     }
 
     @Test
-    public void whenOrderHasNoData_shouldAddAllData() {
+    void whenOrderHasNoData_shouldAddAllData() {
         //given
         List<OrderData> data = Stream.of(germanProjectOrder, polishProjectOrder).collect(Collectors.toList());
         //when
@@ -69,7 +69,7 @@ class ProductionOrderEntityTest {
     }
 
     @Test
-    public void whenOrderDataListIsSetWithIdenticalDataList_shouldNotMakeAnyChangesToEntityDataList() {
+    void whenOrderDataListIsSetWithIdenticalDataList_shouldNotMakeAnyChangesToEntityDataList() {
         //given
         List<OrderData> data = Stream.of(germanProjectOrder, polishProjectOrder).collect(Collectors.toList());
         //when
@@ -80,7 +80,7 @@ class ProductionOrderEntityTest {
     }
 
     @Test
-    public void whenOrderDataListIsSetWithDataListWithChangedElements_shouldMakeChangesToEntityDataList() {
+    void whenOrderDataListIsSetWithDataListWithChangedElements_shouldMakeChangesToEntityDataList() {
         //given
         List<OrderData> data = Stream.of(modifiedGermanProjectOrder, polishProjectOrder).collect(Collectors.toList());
         //when
@@ -92,7 +92,7 @@ class ProductionOrderEntityTest {
     }
 
     @Test
-    public void whenOrderDataListIsSetWithDataListWithRemovedElements_shouldRemoveMissingElementFromEntityDataList() {
+    void whenOrderDataListIsSetWithDataListWithRemovedElements_shouldRemoveMissingElementFromEntityDataList() {
         //given
         List<OrderData> data = Stream.of(polishProjectOrder).collect(Collectors.toList());
         //when
@@ -102,7 +102,7 @@ class ProductionOrderEntityTest {
     }
 
     @Test
-    public void whenOrderDataListIsSetWithEmptyDataList_shouldRemoveAllElementFromEntityDataList() {
+    void whenOrderDataListIsSetWithEmptyDataList_shouldRemoveAllElementFromEntityDataList() {
         //given
         List<OrderData> data = new ArrayList<>();
         //when
