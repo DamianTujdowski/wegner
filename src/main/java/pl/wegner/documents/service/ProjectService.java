@@ -6,7 +6,6 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import pl.wegner.documents.model.dto.ProjectDto;
-import pl.wegner.documents.model.entities.Alteration;
 import pl.wegner.documents.model.entities.Project;
 import pl.wegner.documents.repository.ProjectRepository;
 import pl.wegner.documents.repository.specification.FilterCriteria;
@@ -50,27 +49,9 @@ public class ProjectService {
         return repository.save(newProject);
     }
 
-    private Project mapToProject(ProjectDto projectDto) {
-        return Project.builder()
-                .designation(projectDto.getDesignation())
-                .symbol(projectDto.getSymbol())
-                .customer(projectDto.getCustomer())
-                .printHouse(projectDto.getPrintHouse())
-                .rollerSize(projectDto.getRollerSize())
-                .dimensions(projectDto.getDimensions())
-                .plateThickness(projectDto.getPlateThickness())
-                .side(projectDto.getSide())
-                .inks(projectDto.getInks())
-                .notes(projectDto.getNotes())
-                .stage(projectDto.getStage())
-                .alterations(projectDto.getAlterations())
-                .preparationBeginning(projectDto.getPreparationBeginning())
-                .build();
-    }
-
     @Transactional
     public Project edit(ProjectDto projectDto) {
-        int duration = countOverallPreparationDuration(projectDto.getAlterations());
+        int duration = projectDto.countOverallPreparationDuration();
         Project edited = repository.findById(projectDto.getId())
                 .orElseThrow(() -> new EntityNotFoundException(
                         String.format("Project with id %d does not exist", projectDto.getId())
@@ -91,13 +72,6 @@ public class ProjectService {
         edited.setPreparationBeginning(projectDto.getPreparationBeginning());
         edited.setPreparationEnding(projectDto.getPreparationEnding());
         return edited;
-    }
-
-    private int countOverallPreparationDuration(List<Alteration> alterations) {
-        return alterations
-                .stream()
-                .mapToInt(Alteration::getDuration)
-                .sum();
     }
 
     public void delete(long id) {

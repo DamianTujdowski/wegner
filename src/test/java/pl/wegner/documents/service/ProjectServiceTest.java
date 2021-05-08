@@ -12,6 +12,7 @@ import pl.wegner.documents.model.dto.ProjectDto;
 import pl.wegner.documents.model.entities.Alteration;
 import pl.wegner.documents.model.entities.Project;
 import pl.wegner.documents.repository.ProjectRepository;
+import pl.wegner.documents.utils.DateMapper;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -31,6 +32,9 @@ class ProjectServiceTest {
 
     @Mock
     private ProjectRepository repository;
+
+    @Mock
+    private DateMapper mapper;
 
     private Project projectWithNotInitializedAlterationsList, projectWithEmptyAlterationsList,projectWithOneAlteration,
             projectWithTwoAlterations;
@@ -86,6 +90,7 @@ class ProjectServiceTest {
                 .designation("Alicja")
                 .customer("Komsomolec")
                 .alterations(twoAlters)
+                .symbol("21031201/01")
                 .build();
 
         dtoWithTwoAlterations = ProjectDto.builder()
@@ -101,6 +106,20 @@ class ProjectServiceTest {
                 .customer("Komsomolec")
                 .alterations(threeAlter)
                 .build();
+    }
+
+    @Test
+    void shouldReturnProjectWithKomsomolecCustomer_whenSavingProjectDtoWithKomsomolecCustomer() {
+        //given
+        Project newProject = dtoWithTwoAlterations.map();
+        //when
+        when(repository.save(newProject)).thenReturn(newProject);
+        when(mapper.mapSymbolToDate(newProject.getSymbol())).thenReturn(LocalDate.of(2021, 3, 12));
+        LocalDate date = mapper.mapSymbolToDate(newProject.getSymbol());
+        newProject.setPreparationBeginning(date);
+        Project savedProject = service.save(dtoWithTwoAlterations);
+        //then
+        assertEquals(savedProject.getCustomer(), newProject.getCustomer());
     }
 
     @Test
