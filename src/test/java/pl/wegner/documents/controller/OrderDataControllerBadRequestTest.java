@@ -97,60 +97,9 @@ class OrderDataControllerBadRequestTest {
         DocumentContext jsonContext = JsonPath.parse(actualResponse);
         String jsonReadResult = jsonContext.read(jsonPathError);
 
-        String expectedResponse = "fileName: can contain only letters, digits and underscore";
+        String expectedResponse = "fileName: can contain only letters, digits, underscore and space";
         //then
         assertTrue(jsonReadResult.contains(expectedResponse));
     }
-
-    @Test
-    void shouldThrowMethodArgumentNotValidException_WhenSavingOrderDataWithDateAtBeginningFileName() throws Exception {
-        //given
-        OrderDataDto orderDataDto = OrderDataDto.builder()
-                .fileName("23 03 2021 butter")
-                .build();
-        //when
-        MvcResult result = mockMvc.perform(post("/data/")
-                .contentType("application/json")
-                .content(mapper.writeValueAsString(orderDataDto)))
-                .andExpect(status().isBadRequest())
-                .andReturn();
-
-        String jsonPathError = "$.message";
-        String actualResponse = result
-                .getResponse()
-                .getContentAsString();
-        DocumentContext jsonContext = JsonPath.parse(actualResponse);
-        String jsonReadResult = jsonContext.read(jsonPathError);
-
-        String expectedResponse = "fileName: format must be like -Zlecenie yyyy mm dd- with optional version mark";
-        //then
-        assertTrue(jsonReadResult.contains(expectedResponse));
-    }
-
-    @Test
-    void shouldThrowMethodArgumentNotValidException_WhenSavingOrderDataWithDoubleVersionMarkFileName() throws Exception {
-        //given
-        OrderDataDto orderDataDto = OrderDataDto.builder()
-                .fileName("Zlecenie 23 03 2021 VV2")
-                .build();
-        //when
-        MvcResult result = mockMvc.perform(post("/data/")
-                .contentType("application/json")
-                .content(mapper.writeValueAsString(orderDataDto)))
-                .andExpect(status().isBadRequest())
-                .andReturn();
-
-        String jsonPathError = "$.message";
-        String actualResponse = result
-                .getResponse()
-                .getContentAsString();
-        DocumentContext jsonContext = JsonPath.parse(actualResponse);
-        String jsonReadResult = jsonContext.read(jsonPathError);
-
-        String expectedResponse = "fileName: format must be like -Zlecenie yyyy mm dd- with optional version mark";
-        //then
-        assertTrue(jsonReadResult.contains(expectedResponse));
-    }
-
 
 }

@@ -25,6 +25,7 @@ public class OrderDataService {
                 ));
     }
 
+    //TODO move mapping method to OrderArchivalDataDto class
     public OrderData generateData(OrderArchivalData archivalData) {
         return mapToOrderData(archivalData);
     }
@@ -42,20 +43,8 @@ public class OrderDataService {
     }
 
     public OrderData save(OrderDataDto data) {
-        OrderData newOrder = mapToOrderData(data);
+        OrderData newOrder = data.map();
         return repository.save(newOrder);
-    }
-
-    private OrderData mapToOrderData(OrderDataDto data) {
-        return OrderData.builder()
-                .fileName(data.getFileName())
-                .platesDimensions(data.getPlatesDimensions())
-                .platesQuantity(data.getPlatesQuantity())
-                .inks(data.getInks())
-                .plateThickness(data.getPlateThickness())
-                .side(data.getSide())
-                .notes(data.getNotes())
-                .build();
     }
 
     @Transactional

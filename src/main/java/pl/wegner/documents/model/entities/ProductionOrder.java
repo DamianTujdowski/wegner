@@ -24,6 +24,11 @@ public class ProductionOrder {
 
     private LocalDate occurrence;
 
+    //TODO check if CRUD operations work
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "attributesId")
+    private Attributes attributes;
+
     @OneToMany(orphanRemoval = true)
     @JoinColumn(name = "productionOrderId")
     private List<OrderData> orderData;

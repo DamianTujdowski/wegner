@@ -53,7 +53,7 @@ public class ProjectDto implements Mappable<Project>{
 
     @NotBlank(message = "must be provided")
     @Pattern(regexp = "\\d{3,4}x\\d{3,4}",
-            message = "Either width and height must contain 3 or 4 digits and must be separated with 'x'")
+            message = "either width and height must contain 3 or 4 digits and must be separated with 'x'")
     private String dimensions;
 
     @NotNull(message = "must be provided")
@@ -85,19 +85,19 @@ public class ProjectDto implements Mappable<Project>{
     @Override
     public Project map() {
         return Project.builder()
-                .designation(this.getDesignation())
-                .symbol(this.getSymbol())
-                .customer(this.getCustomer())
-                .printHouse(this.getPrintHouse())
-                .rollerSize(this.getRollerSize())
-                .dimensions(this.getDimensions())
-                .plateThickness(this.getPlateThickness())
-                .side(this.getSide())
-                .inks(this.getInks())
-                .notes(this.getNotes())
-                .stage(this.getStage())
-                .alterations(this.getAlterations())
-                .preparationBeginning(this.getPreparationBeginning())
+                .designation(this.designation)
+                .symbol(this.symbol)
+                .customer(this.customer)
+                .printHouse(this.printHouse)
+                .rollerSize(this.rollerSize)
+                .dimensions(this.dimensions)
+                .plateThickness(this.plateThickness)
+                .side(this.side)
+                .inks(this.inks)
+                .notes(this.notes)
+                .stage(this.stage)
+                .alterations(this.alterations)
+                .preparationBeginning(this.preparationBeginning)
                 .build();
 
     }

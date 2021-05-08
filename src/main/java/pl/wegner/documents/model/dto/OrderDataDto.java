@@ -5,6 +5,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import pl.wegner.documents.model.entities.Ink;
+import pl.wegner.documents.model.entities.OrderData;
 import pl.wegner.documents.model.enums.PlateThickness;
 import pl.wegner.documents.model.enums.PrintSide;
 
@@ -16,7 +17,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class OrderDataDto {
+public class OrderDataDto implements Mappable<OrderData>{
 
     private long id;
 
@@ -50,4 +51,18 @@ public class OrderDataDto {
     private String notes;
 
     private long productionOrderId;
+
+    @Override
+    public OrderData map() {
+        return OrderData.builder()
+                .fileName(this.fileName)
+                .platesDimensions(this.platesDimensions)
+                .platesQuantity(this.platesQuantity)
+                .inks(this.inks)
+                .plateThickness(this.plateThickness)
+                .side(this.side)
+                .notes(this.notes)
+                .build();
+
+    }
 }

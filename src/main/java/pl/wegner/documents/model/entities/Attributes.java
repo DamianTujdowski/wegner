@@ -15,12 +15,20 @@ import javax.persistence.Id;
 @AllArgsConstructor
 @Builder
 @Entity
-public class OrderNote {
+public class Attributes {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    private String content;
+    //sth else
+
+    private String operatorName;
+
+    private String telephoneNumber;
+
+    private String occasionalComments;
+
+    private String technicalComments;
 
 }

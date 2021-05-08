@@ -32,16 +32,8 @@ public class ProductionOrderService {
     }
 
     public ProductionOrder save(ProductionOrderDto order) {
-        ProductionOrder newProductionOrder = mapToProductionOrder(order);
+        ProductionOrder newProductionOrder = order.map();
         return orderRepository.save(newProductionOrder);
-    }
-
-    private ProductionOrder mapToProductionOrder(ProductionOrderDto order) {
-        return ProductionOrder.builder()
-                .designation(order.getDesignation())
-                .occurrence(order.getOccurrence())
-                .orderData(order.getOrderData())
-                .build();
     }
 
     @Transactional
@@ -52,6 +44,7 @@ public class ProductionOrderService {
                 ));
         edited.setDesignation(order.getDesignation());
         edited.setOccurrence(order.getOccurrence());
+        edited.setAttributes(order.getAttributes());
         edited.setOrderData(order.getOrderData());
         return edited;
     }
