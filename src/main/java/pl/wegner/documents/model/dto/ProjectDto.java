@@ -101,4 +101,12 @@ public class ProjectDto implements Mappable<Project>{
                 .build();
 
     }
+
+    public int countOverallPreparationDuration() {
+        return this.alterations
+                .stream()
+                .mapToInt(Alteration::getDuration)
+                .sum();
+    }
+
 }
