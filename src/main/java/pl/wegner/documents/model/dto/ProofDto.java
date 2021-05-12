@@ -16,6 +16,7 @@ import java.time.LocalDate;
 @Builder
 public class ProofDto implements Mappable<Proof> {
 
+    @PositiveOrZero(message = "can't be lower than 0")
     private long id;
 
     @PastOrPresent(message = "mustn't be in the future")

@@ -1,6 +1,7 @@
 package pl.wegner.documents.service;
 
 import org.springframework.stereotype.Service;
+import pl.wegner.documents.model.dto.AlterationDto;
 import pl.wegner.documents.model.entities.Alteration;
 import pl.wegner.documents.repository.AlterationRepository;
 
@@ -16,21 +17,21 @@ public class AlterationService {
         this.repository = repository;
     }
 
-
-    public Alteration save(Alteration alteration) {
-        return repository.save(alteration);
+    public Alteration save(AlterationDto alterationDto) {
+        Alteration newAlteration = alterationDto.map();
+        return repository.save(newAlteration);
     }
 
     @Transactional
-    public Alteration edit(Alteration alteration) {
-        Alteration edited = repository.findById(alteration.getId())
+    public Alteration edit(AlterationDto alterationDto) {
+        Alteration edited = repository.findById(alterationDto.getId())
                 .orElseThrow(() -> new EntityNotFoundException(
-                        String.format("Alteration with id %d does not exist", alteration.getId())
+                        String.format("Alteration with id %d does not exist", alterationDto.getId())
                 ));
-        edited.setOccurrence(alteration.getOccurrence());
-        edited.setDescription(alteration.getDescription());
-        edited.setDuration(alteration.getDuration());
-        edited.setProjectId(alteration.getProjectId());
+        edited.setOccurrence(alterationDto.getOccurrence());
+        edited.setDescription(alterationDto.getDescription());
+        edited.setDuration(alterationDto.getDuration());
+        edited.setProjectId(alterationDto.getProjectId());
         return edited;
     }
 

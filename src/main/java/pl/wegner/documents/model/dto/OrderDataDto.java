@@ -19,6 +19,7 @@ import java.util.List;
 @Builder
 public class OrderDataDto implements Mappable<OrderData>{
 
+    @PositiveOrZero(message = "can't be lower than 0")
     private long id;
 
     @PastOrPresent(message = "mustn't be in the future")

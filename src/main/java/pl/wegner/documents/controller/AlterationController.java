@@ -1,8 +1,11 @@
 package pl.wegner.documents.controller;
 
 import org.springframework.web.bind.annotation.*;
+import pl.wegner.documents.model.dto.AlterationDto;
 import pl.wegner.documents.model.entities.Alteration;
 import pl.wegner.documents.service.AlterationService;
+
+import javax.validation.Valid;
 
 @RestController
 public class AlterationController {
@@ -14,13 +17,13 @@ public class AlterationController {
     }
 
     @PostMapping("/alterations/")
-    public Alteration save(@RequestBody Alteration alteration) {
-        return service.save(alteration);
+    public Alteration save(@Valid @RequestBody AlterationDto alterationDto) {
+        return service.save(alterationDto);
     }
 
     @PutMapping("/alterations/")
-    public Alteration edit(@RequestBody Alteration alteration) {
-        return service.edit(alteration);
+    public Alteration edit(@Valid @RequestBody AlterationDto alterationDto) {
+        return service.edit(alterationDto);
     }
 
     @DeleteMapping("/alterations/{id}")

@@ -18,6 +18,7 @@ import java.util.List;
 @Builder
 public class ProductionOrderDto implements Mappable<ProductionOrder> {
 
+    @PositiveOrZero(message = "can't be lower than 0")
     private long id;
 
     @NotBlank(message = "must be provided")
