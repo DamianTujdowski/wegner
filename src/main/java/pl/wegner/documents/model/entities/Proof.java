@@ -26,7 +26,7 @@ public class Proof {
 
     private int quantity;
 
-    private String principal;
+    private String customer;
 
     private String dimension;
 

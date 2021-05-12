@@ -2,9 +2,11 @@ package pl.wegner.documents.controller;
 
 import org.springframework.data.domain.Sort;
 import org.springframework.web.bind.annotation.*;
+import pl.wegner.documents.model.dto.ProofDto;
 import pl.wegner.documents.model.entities.Proof;
 import pl.wegner.documents.service.ProofService;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -29,12 +31,12 @@ public class ProofController {
     }
 
     @PostMapping("/proofs/")
-    public Proof save(@RequestBody Proof proof) {
+    public Proof save(@Valid @RequestBody ProofDto proof) {
         return proofService.save(proof);
     }
 
     @PutMapping("/proofs/")
-    public Proof edit(@RequestBody Proof proof) {
+    public Proof edit(@Valid @RequestBody ProofDto proof) {
         return proofService.edit(proof);
     }
 

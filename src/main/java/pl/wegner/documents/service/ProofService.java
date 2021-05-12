@@ -3,6 +3,7 @@ package pl.wegner.documents.service;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import pl.wegner.documents.model.dto.ProofDto;
 import pl.wegner.documents.model.entities.Proof;
 import pl.wegner.documents.repository.ProofRepository;
 
@@ -30,22 +31,23 @@ public class ProofService {
         return repository.findAllBy(PageRequest.of(page, size, Sort.by(direction, "printDate")));
     }
 
-    public Proof save(Proof proof) {
-        return repository.save(proof);
+    public Proof save(ProofDto proofDto) {
+        Proof newProof = proofDto.map();
+        return repository.save(newProof);
     }
 
     @Transactional
-    public Proof edit(Proof proof) {
-        Proof edited = repository.findById(proof.getId())
+    public Proof edit(ProofDto proofDto) {
+        Proof edited = repository.findById(proofDto.getId())
                 .orElseThrow(() -> new EntityNotFoundException(
-                        String.format("Proof with id %d does not exist", proof.getId())
+                        String.format("Proof with id %d does not exist", proofDto.getId())
                 ));
-        edited.setDesignation(proof.getDesignation());
-        edited.setQuantity(proof.getQuantity());
-        edited.setPrincipal(proof.getPrincipal());
-        edited.setDimension(proof.getDimension());
-        edited.setSendMethod(proof.getSendMethod());
-        edited.setPayer(proof.getPayer());
+        edited.setDesignation(proofDto.getDesignation());
+        edited.setQuantity(proofDto.getQuantity());
+        edited.setCustomer(proofDto.getCustomer());
+        edited.setDimension(proofDto.getDimension());
+        edited.setSendMethod(proofDto.getSendMethod());
+        edited.setPayer(proofDto.getPayer());
         return edited;
     }
 

@@ -25,7 +25,8 @@ public class ProductionOrder {
     private LocalDate occurrence;
 
     //TODO check if CRUD operations work
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY,
+            cascade = CascadeType.ALL)
     @JoinColumn(name = "attributesId")
     private Attributes attributes;
 
