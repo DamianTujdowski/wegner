@@ -98,7 +98,9 @@ public class ProjectDto implements Mappable<Project>{
                 .notes(this.notes)
                 .stage(this.stage)
                 .alterations(this.alterations)
+                .overallPreparationDuration(countOverallPreparationDuration())
                 .preparationBeginning(this.preparationBeginning)
+                .preparationEnding(this.preparationEnding)
                 .build();
 
     }

@@ -12,6 +12,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import pl.wegner.documents.model.dto.ProjectDto;
+import pl.wegner.documents.model.entities.Alteration;
 import pl.wegner.documents.model.entities.Ink;
 import pl.wegner.documents.model.entities.Project;
 import pl.wegner.documents.model.enums.Angle;
@@ -62,6 +63,12 @@ class ProjectControllerTestOkRequests {
                 .build();
         List<Ink> inksList = Stream.of(cyan, magenta).collect(Collectors.toList());
 
+        Alteration alt = Alteration.builder()
+                .description("First PDF preparation")
+                .duration(120)
+                .build();
+        List<Alteration> alts = Stream.of(alt).collect(Collectors.toList());
+
         projectDto = ProjectDto.builder()
                 .designation("Butter 200g extra")
                 .symbol("21033002/01")
@@ -73,28 +80,12 @@ class ProjectControllerTestOkRequests {
                 .side(PrintSide.INNER)
                 .inks(inksList)
                 .stage(Stage.MONTAGE)
-                .alterations(new ArrayList<>())
-                .overallPreparationDuration(240)
+                .alterations(alts)
                 .preparationBeginning(LocalDate.of(2021, 3, 26))
                 .preparationEnding(LocalDate.of(2021, 4, 26))
                 .build();
 
-        response = Project.builder()
-                .designation("Butter 200g extra")
-                .symbol("21033002/01")
-                .customer("Alicja dzialoszyn")
-                .printHouse("Palstmoroz")
-                .rollerSize(340)
-                .dimensions("250x500")
-                .plateThickness(PlateThickness.THIN)
-                .side(PrintSide.INNER)
-                .inks(inksList)
-                .stage(Stage.MONTAGE)
-                .alterations(new ArrayList<>())
-                .overallPreparationDuration(240)
-                .preparationBeginning(LocalDate.of(2021, 3, 26))
-                .preparationEnding(LocalDate.of(2021, 4, 26))
-                .build();
+        response = projectDto.map();
     }
 
     @Test
@@ -279,7 +270,7 @@ class ProjectControllerTestOkRequests {
         List alterations = jsonContext.read(jsonPathDesignation);
 
         //then
-        assertEquals(alterations.size(), 0);
+        assertEquals(1, alterations.size());
     }
 
     @Test
@@ -299,7 +290,7 @@ class ProjectControllerTestOkRequests {
         int overallPreparationDurationValue = jsonContext.read(jsonPathDesignation);
 
         //then
-        assertEquals(240, overallPreparationDurationValue);
+        assertEquals(120, overallPreparationDurationValue);
     }
 
     @Test
