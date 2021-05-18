@@ -138,7 +138,7 @@ class ProjectControllerTestBadRequests {
                 .getResponse()
                 .getContentAsString();
 
-        String expectedResponse = "designation: length must be between 10 and 50 characters";
+        String expectedResponse = "designation: can contain only Polish letters and numbers";
         //then
         assertTrue(actualResponse.contains(expectedResponse));
     }

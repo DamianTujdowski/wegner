@@ -22,7 +22,7 @@ public class AlterationDto implements Mappable<Alteration> {
     private LocalDate occurrence;
 
     @NotBlank(message = "must be provided")
-    @Size(min = 10, max = 50, message = "length must be between 10 and 50 characters")
+    @Size(min = 10, max = 250, message = "length must be between 10 and 250 characters")
     @Pattern(regexp = "[0-9aąbcćdeęfghijklłmnńoópqrsśtuvwxyzźżAĄBCĆDEĘFGHIJKLŁMNŃOÓPRSŚTUVWXYZŹŻ\\s ]*",
             message = "can contain only Polish letters, numbers, space and new line")
     private String description;

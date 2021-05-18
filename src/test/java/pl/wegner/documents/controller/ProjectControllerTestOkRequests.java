@@ -332,6 +332,5 @@ class ProjectControllerTestOkRequests {
     private void setJsonReadResult(MvcResult result) throws UnsupportedEncodingException {
         String projectJsonSourceString = result.getResponse().getContentAsString();
         DocumentContext jsonContext = JsonPath.parse(projectJsonSourceString);
-        jsonReadResult = jsonContext.read(jsonPathDesignation);
-    }
+        jsonReadResult = jsonContext.read(jsonPathDesignation);    }
 }
