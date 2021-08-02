@@ -48,7 +48,7 @@ class ProductionOrderControllerBadRequestTest {
         DocumentContext jsonContext = JsonPath.parse(actualResponse);
         String jsonReadResult = jsonContext.read(jsonPathError);
 
-        String expectedResponse = "designation: must be formatted like -Zlecenie yyyy mm dd- with optional version mark";
+        String expectedResponse = "designation: must be formatted like -Zlecenie dd mm yyyy- with optional version mark";
         //then
         assertTrue(jsonReadResult.contains(expectedResponse));
     }
@@ -73,7 +73,7 @@ class ProductionOrderControllerBadRequestTest {
         DocumentContext jsonContext = JsonPath.parse(actualResponse);
         String jsonReadResult = jsonContext.read(jsonPathError);
 
-        String expectedResponse = "designation: must be formatted like -Zlecenie yyyy mm dd- with optional version mark";
+        String expectedResponse = "designation: must be formatted like -Zlecenie dd mm yyyy- with optional version mark";
         //then
         assertTrue(jsonReadResult.contains(expectedResponse));
     }
@@ -98,7 +98,7 @@ class ProductionOrderControllerBadRequestTest {
         DocumentContext jsonContext = JsonPath.parse(actualResponse);
         String jsonReadResult = jsonContext.read(jsonPathError);
 
-        String expectedResponse = "designation: must be formatted like -Zlecenie yyyy mm dd- with optional version mark";
+        String expectedResponse = "designation: must be formatted like -Zlecenie dd mm yyyy- with optional version mark";
         //then
         assertTrue(jsonReadResult.contains(expectedResponse));
     }
@@ -123,7 +123,7 @@ class ProductionOrderControllerBadRequestTest {
         DocumentContext jsonContext = JsonPath.parse(actualResponse);
         String jsonReadResult = jsonContext.read(jsonPathError);
 
-        String expectedResponse = "designation: must be formatted like -Zlecenie yyyy mm dd- with optional version mark";
+        String expectedResponse = "designation: must be formatted like -Zlecenie dd mm yyyy- with optional version mark";
         //then
         assertTrue(jsonReadResult.contains(expectedResponse));
     }

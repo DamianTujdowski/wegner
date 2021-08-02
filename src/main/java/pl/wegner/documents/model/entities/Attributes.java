@@ -17,11 +17,11 @@ import javax.persistence.Id;
 @Entity
 public class Attributes {
 
+    //TODO think of adding CRUD endpoints for this class
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
-
-    //sth else
+    private Long id;
 
     private String operatorName;
 

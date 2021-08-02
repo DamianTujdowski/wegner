@@ -21,7 +21,7 @@ public class OrderData {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
 
     private LocalDate creationDate;
 
@@ -34,7 +34,8 @@ public class OrderData {
     @Enumerated(EnumType.ORDINAL)
     private LinesPerInch lpi;
 
-    @OneToMany(orphanRemoval = true)
+    @OneToMany(cascade = CascadeType.PERSIST,
+            orphanRemoval = true)
     @JoinColumn(name = "orderDataId")
     private List<Ink> inks;
 

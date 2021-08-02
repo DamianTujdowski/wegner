@@ -23,7 +23,7 @@ public class ProjectDto implements Mappable<Project>{
 
     @NotBlank(message = "must be provided")
     @Size(min = 10, max = 50, message = "length must be between 10 and 50 characters")
-    @Pattern(regexp = "[0-9aąbcćdeęfghijklłmnńoópqrsśtuvwxyzźżAĄBCĆDEĘFGHIJKLŁMNŃOÓPRSŚTUVWXYZŹŻ ]*",
+    @Pattern(regexp = "[aąbcćdeęfghijklłmnńoópqrsśtuvwxyzźżAĄBCĆDEĘFGHIJKLŁMNŃOÓPRSŚTUVWXYZŹŻ \\w]*",
             message = "can contain only Polish letters and numbers")
     private String designation;
 
