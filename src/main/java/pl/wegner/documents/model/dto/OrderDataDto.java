@@ -19,6 +19,8 @@ import java.util.List;
 @Builder
 public class OrderDataDto implements Mappable<OrderData>{
 
+    //TODO validate Enums
+
     @PositiveOrZero(message = "can't be lower than 0")
     private long id;
 

@@ -7,9 +7,11 @@ import lombok.NoArgsConstructor;
 import pl.wegner.documents.model.entities.OrderData;
 import pl.wegner.documents.model.entities.ProductionOrder;
 
+import javax.validation.Valid;
 import javax.validation.constraints.*;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Data
 @NoArgsConstructor
@@ -29,11 +31,12 @@ public class ProductionOrderDto implements Mappable<ProductionOrder> {
     @PastOrPresent(message = "mustn't be in the future")
     private LocalDate occurrence;
 
-//    @NotNull(message = "must be provided")
+    @Valid
+    @NotNull(message = "must be provided")
     private AttributesDto attributes;
 
     @NotEmpty(message = "must be provided and must contain at least one element")
-    private List<OrderData> orderData;
+    private List<@Valid OrderDataDto> orderDataDto;
 
     //TODO test below method if attributes.map() method works as expected
     @Override
@@ -42,8 +45,14 @@ public class ProductionOrderDto implements Mappable<ProductionOrder> {
                 .designation(this.designation)
                 .occurrence(this.occurrence)
                 .attributes(this.attributes.map())
-                .orderData(this.orderData)
+                .orderData(mapToOrderData())
                 .build();
+    }
 
+    public List<OrderData> mapToOrderData() {
+        return this.orderDataDto
+                .stream()
+                .map(OrderDataDto::map)
+                .collect(Collectors.toList());
     }
 }

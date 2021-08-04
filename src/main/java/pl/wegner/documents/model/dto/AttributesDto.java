@@ -17,7 +17,6 @@ import javax.validation.constraints.Size;
 @Builder
 public class AttributesDto implements Mappable<Attributes> {
 
-    //TODO check how to trigger validation, in Production Order Dto,
     //TODO write some tests
 
     @NotBlank(message = "must be provided")

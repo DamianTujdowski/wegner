@@ -22,19 +22,19 @@ class ProjectEntityTest {
     @BeforeEach
     void init() {
         yellow = Ink.builder()
-                .id(1)
+                .id(1L)
                 .symbol("Yellow")
                 .projectId(1)
                 .build();
 
         magenta = Ink.builder()
-                .id(2)
+                .id(2L)
                 .symbol("Magenta")
                 .projectId(1)
                 .build();
 
         cyan = Ink.builder()
-                .id(3)
+                .id(3L)
                 .symbol("Cyan")
                 .projectId(1)
                 .build();
@@ -42,7 +42,7 @@ class ProjectEntityTest {
         List<Ink> inks = Stream.of(yellow, magenta).collect(Collectors.toList());
 
         magentaModified = Ink.builder()
-                .id(2)
+                .id(2L)
                 .symbol("Modified magenta")
                 .projectId(1)
                 .build();

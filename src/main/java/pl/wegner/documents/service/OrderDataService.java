@@ -47,6 +47,8 @@ public class OrderDataService {
         return repository.save(newOrder);
     }
 
+
+    //TODO refactor updating entities - remove setters, add service superclass with method validating if entity exists in db
     @Transactional
     public OrderData edit(OrderDataDto data) {
         OrderData edited = repository.findById(data.getId())

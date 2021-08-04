@@ -44,8 +44,8 @@ public class ProductionOrderService {
                 ));
         edited.setDesignation(order.getDesignation());
         edited.setOccurrence(order.getOccurrence());
-        edited.setAttributes(order.getAttributes());
-        edited.setOrderData(order.getOrderData());
+        edited.setAttributes(order.getAttributes().map());
+        edited.setOrderData(order.mapToOrderData());
         return edited;
     }
 
