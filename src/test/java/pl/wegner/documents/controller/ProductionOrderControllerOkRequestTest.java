@@ -10,8 +10,9 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
+import pl.wegner.documents.model.dto.AttributesDto;
+import pl.wegner.documents.model.dto.OrderDataDto;
 import pl.wegner.documents.model.dto.ProductionOrderDto;
-import pl.wegner.documents.model.entities.Attributes;
 import pl.wegner.documents.model.entities.OrderData;
 import pl.wegner.documents.model.entities.ProductionOrder;
 import pl.wegner.documents.model.enums.PrintSide;
@@ -44,11 +45,21 @@ class ProductionOrderControllerOkRequestTest {
 
     @BeforeEach
     void setUp() {
-        Attributes attributes = Attributes.builder()
+        AttributesDto attributes = AttributesDto.builder()
                 .operatorName("Karol Okrasa")
                 .telephoneNumber("666222333")
                 .technicalComments("thin lines present")
                 .occasionalComments("")
+                .build();
+
+        OrderDataDto orderDataDtoButter = OrderDataDto.builder()
+                .fileName("Butter 12 03 21")
+                .side(PrintSide.OUTER)
+                .build();
+
+        OrderDataDto orderDataDtoDoypack = OrderDataDto.builder()
+                .fileName("Doypack 12 03 21")
+                .side(PrintSide.INNER)
                 .build();
 
         OrderData orderDataButter = OrderData.builder()
@@ -61,19 +72,21 @@ class ProductionOrderControllerOkRequestTest {
                 .side(PrintSide.INNER)
                 .build();
 
+
+        List<OrderDataDto> dataDtos = Stream.of(orderDataDtoButter, orderDataDtoDoypack).collect(Collectors.toList());
         List<OrderData> data = Stream.of(orderDataButter, orderDataDoypack).collect(Collectors.toList());
 
         productionOrderDto = ProductionOrderDto.builder()
                 .designation("Zlecenie 12 03 2021")
                 .occurrence(LocalDate.of(2021, 3, 12))
                 .attributes(attributes)
-                .orderData(data)
+                .orderDataDto(dataDtos)
                 .build();
 
         response = ProductionOrder.builder()
                 .designation("Zlecenie 12 03 2021")
                 .occurrence(LocalDate.of(2021, 3, 12))
-                .attributes(attributes)
+                .attributes(attributes.map())
                 .orderData(data)
                 .build();
     }
