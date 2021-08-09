@@ -22,7 +22,7 @@ public class OrderDataController {
         return service.findById(id);
     }
 
-    // only generates orderData does not save it to DB
+    // only generates orderDataDto does not save it to DB
     @PostMapping("/data/gen")
     public OrderData generateOrderData(@RequestBody OrderArchivalData archivalData) {
         return service.generateData(archivalData);

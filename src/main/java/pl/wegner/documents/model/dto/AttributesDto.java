@@ -6,10 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import pl.wegner.documents.model.entities.Attributes;
 
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.*;
 
 @Data
 @NoArgsConstructor
@@ -18,6 +15,8 @@ import javax.validation.constraints.Size;
 public class AttributesDto implements Mappable<Attributes> {
 
     //TODO write some tests
+    @PositiveOrZero(message = "can't be lower than 0")
+    private Long id;
 
     @NotBlank(message = "must be provided")
     @Size(min = 2, max = 30, message = "between 2 and 30 characters allowed")
