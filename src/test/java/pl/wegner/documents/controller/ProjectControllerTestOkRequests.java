@@ -5,7 +5,6 @@ import com.jayway.jsonpath.DocumentContext;
 import com.jayway.jsonpath.JsonPath;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -23,14 +22,12 @@ import pl.wegner.documents.service.ProjectService;
 
 import java.io.UnsupportedEncodingException;
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -332,5 +329,6 @@ class ProjectControllerTestOkRequests {
     private void setJsonReadResult(MvcResult result) throws UnsupportedEncodingException {
         String projectJsonSourceString = result.getResponse().getContentAsString();
         DocumentContext jsonContext = JsonPath.parse(projectJsonSourceString);
-        jsonReadResult = jsonContext.read(jsonPathDesignation);    }
+        jsonReadResult = jsonContext.read(jsonPathDesignation);
+    }
 }

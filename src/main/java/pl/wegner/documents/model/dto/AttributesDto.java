@@ -20,7 +20,7 @@ public class AttributesDto implements Mappable<Attributes> {
 
     @NotBlank(message = "must be provided")
     @Size(min = 2, max = 30, message = "between 2 and 30 characters allowed")
-    @Pattern(regexp = "[aąbcćdeęfghijklłmnńoópqrsśtuvwxyzźżAĄBCĆDEĘFGHIJKLŁMNŃOÓPRSŚTUVWXYZŹŻ ]*",
+    @Pattern(regexp = "[a-zA-ZąćęłńóśźżĄĆĘŁŃÓŚŹŻ ]*",
             message = "can contain only letters (including Polish) and space")
     private String operatorName;
 
@@ -32,14 +32,14 @@ public class AttributesDto implements Mappable<Attributes> {
 
     @NotNull(message = "can't be null")
     @Size(max = 500, message = "500 characters allowed")
-    @Pattern(regexp = "[ąćęłńóśźżĄĆĘŁŃÓŚŹŻ \\w]*",
-            message = "can contain only letters (including Polish), numbers and space")
+    @Pattern(regexp = "[ąćęłńóśźżĄĆĘŁŃÓŚŹŻ\\-., \\w\\s]*",
+            message = "can contain only letters (including Polish), numbers, whitespace characters and - _ . ,")
     private String occasionalComments;
 
     @NotBlank(message = "must be provided")
     @Size(min = 5, max = 500, message = "between 5 and 500 characters allowed")
-    @Pattern(regexp = "[ąćęłńóśźżĄĆĘŁŃÓŚŹŻ \\w]*",
-            message = "can contain only letters (including Polish), numbers and space")
+    @Pattern(regexp = "[ąćęłńóśźżĄĆĘŁŃÓŚŹŻ\\-.,%!': \\w\\s]*",
+            message = "can contain only letters (including Polish), numbers, whitespace characters and :-_.,%!")
     private String technicalComments;
 
     @Override
