@@ -94,18 +94,18 @@ class ProjectServiceTest {
                 .build();
 
         dtoWithTwoAlterations = ProjectDto.builder()
-                .id(1)
                 .designation("Alicja")
                 .customer("Komsomolec")
                 .alterations(twoAlters)
                 .build();
+        dtoWithTwoAlterations.setId(1L);
 
         dtoWithThreeAlterations = ProjectDto.builder()
-                .id(1)
                 .designation("Alicja")
                 .customer("Komsomolec")
                 .alterations(threeAlter)
                 .build();
+        dtoWithThreeAlterations.setId(1L);
     }
 
     @Test

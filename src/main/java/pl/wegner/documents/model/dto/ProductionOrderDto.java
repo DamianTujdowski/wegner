@@ -1,9 +1,6 @@
 package pl.wegner.documents.model.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import pl.wegner.documents.model.entities.OrderData;
 import pl.wegner.documents.model.entities.ProductionOrder;
 
@@ -14,13 +11,11 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Data
+@EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class ProductionOrderDto implements Mappable<ProductionOrder> {
-
-    @PositiveOrZero(message = "can't be lower than 0")
-    private Long id;
+public class ProductionOrderDto extends Dto implements Mappable<ProductionOrder> {
 
     @NotBlank(message = "must be provided")
     @Size(min = 19, max = 23, message = "length must be between 19 and 23 characters")
@@ -42,6 +37,7 @@ public class ProductionOrderDto implements Mappable<ProductionOrder> {
     @Override
     public ProductionOrder map() {
         return ProductionOrder.builder()
+                .id(super.getId())
                 .designation(this.designation)
                 .occurrence(this.occurrence)
                 .attributes(this.attributes.map())

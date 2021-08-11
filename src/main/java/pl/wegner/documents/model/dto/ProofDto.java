@@ -1,9 +1,6 @@
 package pl.wegner.documents.model.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import pl.wegner.documents.model.entities.Proof;
 import pl.wegner.documents.model.enums.SendMethod;
 
@@ -11,13 +8,11 @@ import javax.validation.constraints.*;
 import java.time.LocalDate;
 
 @Data
+@EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class ProofDto implements Mappable<Proof> {
-
-    @PositiveOrZero(message = "can't be lower than 0")
-    private long id;
+public class ProofDto extends Dto implements Mappable<Proof> {
 
     @PastOrPresent(message = "mustn't be in the future")
     private LocalDate printDate;
@@ -55,7 +50,7 @@ public class ProofDto implements Mappable<Proof> {
     @Override
     public Proof map() {
         return Proof.builder()
-                .id(this.id)
+                .id(super.getId())
                 .printDate(this.printDate)
                 .designation(this.designation)
                 .quantity(this.quantity)

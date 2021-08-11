@@ -1,9 +1,6 @@
 package pl.wegner.documents.model.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import pl.wegner.documents.model.entities.Ink;
 import pl.wegner.documents.model.entities.OrderData;
 import pl.wegner.documents.model.enums.PlateThickness;
@@ -14,15 +11,13 @@ import java.time.LocalDate;
 import java.util.List;
 
 @Data
+@EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class OrderDataDto implements Mappable<OrderData>{
+public class OrderDataDto extends Dto implements Mappable<OrderData>{
 
     //TODO validate Enums
-
-    @PositiveOrZero(message = "can't be lower than 0")
-    private long id;
 
     @PastOrPresent(message = "mustn't be in the future")
     private LocalDate creationDate;
@@ -58,6 +53,7 @@ public class OrderDataDto implements Mappable<OrderData>{
     @Override
     public OrderData map() {
         return OrderData.builder()
+                .id(super.getId())
                 .fileName(this.fileName)
                 .platesDimensions(this.platesDimensions)
                 .platesQuantity(this.platesQuantity)
@@ -66,6 +62,5 @@ public class OrderDataDto implements Mappable<OrderData>{
                 .side(this.side)
                 .notes(this.notes)
                 .build();
-
     }
 }

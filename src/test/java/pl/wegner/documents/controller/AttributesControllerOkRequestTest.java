@@ -35,9 +35,6 @@ class AttributesControllerOkRequestTest {
     private AttributesService service;
 
     private AttributesDto attributesDto;
-    private Attributes response;
-
-    private String jsonPathDesignation, jsonReadResult;
 
     @BeforeEach
     public void setUp() {
@@ -52,31 +49,42 @@ class AttributesControllerOkRequestTest {
                 .occasionalComments("Maślanka dla Iwo")
                 .technicalComments(technicalComment)
                 .build();
-        response = attributesDto.map();
     }
 
     @Test
-    void shouldThrowMethodArgumentNotValidException_WhenSavingAttributesWithInvalidOperatorName() throws Exception {
+    void shouldPassValidation_WhenSavingAttributesWithProperAllFields() throws Exception {
         //given
-        jsonPathDesignation = "$.operatorName";
-        Mockito.when(service.save(attributesDto)).thenReturn(response);
+
         //when
-        MvcResult result = mockMvc.perform(post("/attributes/")
+        mockMvc.perform(post("/attributes/")
                 .contentType("application/json")
                 .content(mapper.writeValueAsString(attributesDto)))
-                .andExpect(status().isOk())
-                .andReturn();
-
-        setJsonReadResult(result);
+                .andExpect(status().isOk());
         //then
-        assertEquals("DT", jsonReadResult);
     }
 
-    private void setJsonReadResult(MvcResult result) throws UnsupportedEncodingException {
-        String projectJsonSourceString = result.getResponse().getContentAsString();
-        DocumentContext jsonContext = JsonPath.parse(projectJsonSourceString);
-        jsonReadResult = jsonContext.read(jsonPathDesignation);
+    @Test
+    void shouldPassValidation_WhenSavingAttributesWithOperatorName_WithPolishSigns() throws Exception {
+        //given
+        attributesDto.setOperatorName("Łukasz Kuraś");
+        //when
+        mockMvc.perform(post("/attributes/")
+                .contentType("application/json")
+                .content(mapper.writeValueAsString(attributesDto)))
+                .andExpect(status().isOk());
+        //then
     }
 
+    @Test
+    void shouldPassValidation_WhenSavingAttributesWithTelephoneNumberWithPrefix() throws Exception {
+        //given
+        attributesDto.setTelephoneNumber("+48 123-546-798");
+        //when
+        mockMvc.perform(post("/attributes/")
+                .contentType("application/json")
+                .content(mapper.writeValueAsString(attributesDto)))
+                .andExpect(status().isOk());
+        //then
+    }
 
 }

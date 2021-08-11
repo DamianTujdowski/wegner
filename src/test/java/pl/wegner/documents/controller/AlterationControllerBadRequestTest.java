@@ -92,7 +92,7 @@ class AlterationControllerBadRequestTest {
                 .andReturn();
 
         setJsonReadResult(result);
-        String expectedResponse = "description: can contain only Polish letters, numbers, space and new line";
+        String expectedResponse = "description: can contain only Polish letters, numbers, space and whitespace characters";
         //then
         assertTrue(jsonReadResult.contains(expectedResponse));
     }

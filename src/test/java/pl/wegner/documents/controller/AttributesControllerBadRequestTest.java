@@ -82,7 +82,7 @@ class AttributesControllerBadRequestTest {
                 .andReturn();
 
         String jsonReadResult = setJsonReadResult(result);
-        String expectedResponse = "occasionalComments: can contain only letters (including Polish), numbers, whitespace characters and - _ . ,";
+        String expectedResponse = "occasionalComments: can contain only letters (including Polish), numbers, whitespace characters and -.,%!': signs";
         //then
         assertTrue(jsonReadResult.contains(expectedResponse));
     }
@@ -91,7 +91,7 @@ class AttributesControllerBadRequestTest {
     void shouldThrowMethodArgumentNotValidException_WhenSavingAttributesWithInvalidTechnicalComments() throws Exception {
         //given
         AttributesDto attributesDto = AttributesDto.builder()
-                .technicalComments("alalala %bebebeb wwa lelefala")
+                .technicalComments("alalala @#bebebeb wwa lelefala")
                 .build();
         //when
         MvcResult result = mockMvc.perform(post("/attributes/")
@@ -101,7 +101,7 @@ class AttributesControllerBadRequestTest {
                 .andReturn();
 
         String jsonReadResult = setJsonReadResult(result);
-        String expectedResponse = "technicalComments: can contain only letters (including Polish), numbers, whitespace characters and - _ . ,";
+        String expectedResponse = "technicalComments: can contain only letters (including Polish), numbers, whitespace characters and -.,%!': signs";
         //then
         assertTrue(jsonReadResult.contains(expectedResponse));
     }

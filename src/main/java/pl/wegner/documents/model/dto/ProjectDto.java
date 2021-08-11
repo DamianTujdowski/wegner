@@ -13,17 +13,15 @@ import java.time.LocalDate;
 import java.util.List;
 
 @Data
+@EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class ProjectDto implements Mappable<Project>{
-
-    @PositiveOrZero(message = "can't be lower than 0")
-    private long id;
+public class ProjectDto extends Dto implements Mappable<Project>{
 
     @NotBlank(message = "must be provided")
     @Size(min = 10, max = 50, message = "length must be between 10 and 50 characters")
-    @Pattern(regexp = "[aąbcćdeęfghijklłmnńoópqrsśtuvwxyzźżAĄBCĆDEĘFGHIJKLŁMNŃOÓPRSŚTUVWXYZŹŻ \\w]*",
+    @Pattern(regexp = "[ąćęłńóśźżĄĆĘŁŃÓŚŹŻ\\w ]*",
             message = "can contain only Polish letters and numbers")
     private String designation;
 
@@ -36,14 +34,14 @@ public class ProjectDto implements Mappable<Project>{
     @NotBlank(message = "must be provided")
     @Size(min = 3, max = 20,
             message = "name length must be between 3 and 20 characters")
-    @Pattern(regexp = "[aąbcćdeęfghijklłmnńoópqrsśtuvwxyzźżAĄBCĆDEĘFGHIJKLŁMNŃOÓPRSŚTUVWXYZŹŻ ]*",
+    @Pattern(regexp = "[a-zA-ZąćęłńóśźżĄĆĘŁŃÓŚŹŻ ]*",
             message = "name can contain only letters")
     private String customer;
 
     @NotBlank(message = "must be provided")
     @Size(min = 3, max = 20,
             message = "name length must be between 3 and 20 characters")
-    @Pattern(regexp = "[aąbcćdeęfghijklłmnńoópqrsśtuvwxyzźżAĄBCĆDEĘFGHIJKLŁMNŃOÓPRSŚTUVWXYZŹŻ ]*",
+    @Pattern(regexp = "[a-zA-ZąćęłńóśźżĄĆĘŁŃÓŚŹŻ ]*",
             message = "name can contain only letters")
     private String printHouse;
 
@@ -86,6 +84,7 @@ public class ProjectDto implements Mappable<Project>{
     @Override
     public Project map() {
         return Project.builder()
+                .id(super.getId())
                 .designation(this.designation)
                 .symbol(this.symbol)
                 .customer(this.customer)

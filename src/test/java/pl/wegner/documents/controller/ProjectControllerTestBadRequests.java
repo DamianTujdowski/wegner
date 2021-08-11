@@ -32,6 +32,32 @@ class ProjectControllerTestBadRequests {
     private ProjectService service;
 
     @Test
+    void shouldThrowMethodArgumentNotValidException_WhenTryingToSaveProjectWithNegativeValueId() throws Exception {
+        //given
+        ProjectDto projectDto = ProjectDto.builder()
+                .build();
+        projectDto.setId(-1L);
+        //when
+        MvcResult result = mockMvc.perform(post("/projects/")
+                .contentType("application/json")
+                .content(mapper.writeValueAsString(projectDto)))
+                .andExpect(status().isBadRequest())
+                .andReturn();
+
+        String jsonPathError = "$.message";
+        String actualResponse = result
+                .getResponse()
+                .getContentAsString();
+        DocumentContext jsonContext = JsonPath.parse(actualResponse);
+        String jsonReadResult = jsonContext.read(jsonPathError);
+
+        String expectedResponse = "id: can't be lower than 1";
+        //then
+        assertTrue(jsonReadResult.contains(expectedResponse));
+    }
+
+
+    @Test
     void shouldThrowMethodArgumentNotValidException_WhenTryingToSaveProjectWithNullDesignation() throws Exception {
         //given
         ProjectDto projectDto = ProjectDto.builder()
