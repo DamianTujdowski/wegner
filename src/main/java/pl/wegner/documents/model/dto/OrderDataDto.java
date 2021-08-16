@@ -11,13 +11,15 @@ import java.time.LocalDate;
 import java.util.List;
 
 @Data
-@EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class OrderDataDto extends Dto implements Mappable<OrderData>{
+public class OrderDataDto implements Mappable<OrderData>{
 
     //TODO validate Enums
+
+    @Positive(message = "can't be lower than 1")
+    private Long id;
 
     @PastOrPresent(message = "mustn't be in the future")
     private LocalDate creationDate;
@@ -37,6 +39,8 @@ public class OrderDataDto extends Dto implements Mappable<OrderData>{
     @Max(value = 8, message = "maximally can be 8")
     private int platesQuantity;
 
+    //TODO replace Ink with @Valid InkDto
+
     @NotEmpty(message = "must be provided and must contain at least one element")
     private List<Ink> inks;
 
@@ -53,7 +57,6 @@ public class OrderDataDto extends Dto implements Mappable<OrderData>{
     @Override
     public OrderData map() {
         return OrderData.builder()
-                .id(super.getId())
                 .fileName(this.fileName)
                 .platesDimensions(this.platesDimensions)
                 .platesQuantity(this.platesQuantity)

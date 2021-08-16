@@ -44,7 +44,8 @@ public class Project {
     @Enumerated(EnumType.ORDINAL)
     private PrintSide side;
 
-    @OneToMany(orphanRemoval = true)
+    @OneToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST},
+            orphanRemoval = true)
     @JoinColumn(name = "projectId")
     private List<Ink> inks;
 

@@ -7,11 +7,13 @@ import javax.validation.constraints.*;
 import java.time.LocalDate;
 
 @Data
-@EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class AlterationDto extends Dto implements Mappable<Alteration> {
+public class AlterationDto implements Mappable<Alteration> {
+
+    @Positive(message = "can't be lower than 1")
+    private Long id;
 
     @PastOrPresent(message = "mustn't be in the future")
     private LocalDate occurrence;
@@ -31,7 +33,6 @@ public class AlterationDto extends Dto implements Mappable<Alteration> {
     @Override
     public Alteration map() {
         return Alteration.builder()
-                .id(super.getId())
                 .occurrence(this.occurrence)
                 .description(this.description)
                 .duration(this.duration)

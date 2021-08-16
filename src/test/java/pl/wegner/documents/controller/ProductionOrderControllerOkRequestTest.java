@@ -13,12 +13,16 @@ import org.springframework.test.web.servlet.MvcResult;
 import pl.wegner.documents.model.dto.AttributesDto;
 import pl.wegner.documents.model.dto.OrderDataDto;
 import pl.wegner.documents.model.dto.ProductionOrderDto;
+import pl.wegner.documents.model.entities.Ink;
 import pl.wegner.documents.model.entities.OrderData;
 import pl.wegner.documents.model.entities.ProductionOrder;
+import pl.wegner.documents.model.enums.PlateThickness;
 import pl.wegner.documents.model.enums.PrintSide;
 import pl.wegner.documents.service.ProductionOrderService;
 
 import java.time.LocalDate;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -54,11 +58,19 @@ class ProductionOrderControllerOkRequestTest {
 
         OrderDataDto orderDataDtoButter = OrderDataDto.builder()
                 .fileName("Butter 12 03 21")
+                .inks(Collections.singletonList(Ink.builder().build()))
+                .platesQuantity(4)
+                .platesDimensions("450x320")
+                .plateThickness(PlateThickness.THIN)
                 .side(PrintSide.OUTER)
                 .build();
 
         OrderDataDto orderDataDtoDoypack = OrderDataDto.builder()
                 .fileName("Doypack 12 03 21")
+                .inks(Collections.singletonList(Ink.builder().build()))
+                .platesQuantity(4)
+                .platesDimensions("450x320")
+                .plateThickness(PlateThickness.THIN)
                 .side(PrintSide.INNER)
                 .build();
 

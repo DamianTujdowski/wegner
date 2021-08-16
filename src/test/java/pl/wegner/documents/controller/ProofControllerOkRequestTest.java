@@ -44,7 +44,6 @@ class ProofControllerOkRequestTest {
     void setUp() {
 
         proofDto = ProofDto.builder()
-                .id(1)
                 .printDate(LocalDate.of(2021, 3, 12))
                 .designation("Maslo extra 200g 12 03 2021 Proof")
                 .quantity(2)
@@ -53,6 +52,7 @@ class ProofControllerOkRequestTest {
                 .sendMethod(SendMethod.SENT_INDIVIDUALLY)
                 .payer("Euro-Eko-Pak")
                 .build();
+        proofDto.setId(1L);
 
         response = Proof.builder()
                 .id(1)
@@ -186,7 +186,6 @@ class ProofControllerOkRequestTest {
         //then
         assertEquals("Euro-Eko-Pak", jsonReadResult);
     }
-
 
     private void setJsonReadResult(MvcResult result) throws UnsupportedEncodingException {
         String projectJsonSourceString = result.getResponse().getContentAsString();

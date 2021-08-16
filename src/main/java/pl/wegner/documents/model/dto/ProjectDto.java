@@ -13,11 +13,13 @@ import java.time.LocalDate;
 import java.util.List;
 
 @Data
-@EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class ProjectDto extends Dto implements Mappable<Project>{
+public class ProjectDto  implements Mappable<Project>{
+
+    @Positive(message = "can't be lower than 1")
+    private Long id;
 
     @NotBlank(message = "must be provided")
     @Size(min = 10, max = 50, message = "length must be between 10 and 50 characters")
@@ -81,10 +83,11 @@ public class ProjectDto extends Dto implements Mappable<Project>{
     @PastOrPresent(message = "mustn't be in the future")
     private LocalDate preparationEnding;
 
+    //TODO this method cant copy id
+    //TODO use BeanUtils to copy whole object
     @Override
     public Project map() {
         return Project.builder()
-                .id(super.getId())
                 .designation(this.designation)
                 .symbol(this.symbol)
                 .customer(this.customer)

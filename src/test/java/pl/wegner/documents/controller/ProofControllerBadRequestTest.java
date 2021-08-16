@@ -34,6 +34,26 @@ class ProofControllerBadRequestTest {
     private String jsonPathDesignation, jsonReadResult;
 
     @Test
+    void shouldThrowMethodArgumentNotValidException_WhenTryingToSaveProofWithNegativeValueId() throws Exception {
+        //given
+        ProofDto proofDto = ProofDto.builder()
+                .build();
+        proofDto.setId(-1L);
+        jsonPathDesignation = "$.message";
+        //when
+        MvcResult result = mockMvc.perform(post("/proofs/")
+                .contentType("application/json")
+                .content(mapper.writeValueAsString(proofDto)))
+                .andExpect(status().isBadRequest())
+                .andReturn();
+
+        setJsonReadResult(result);
+        String expectedResponse = "id: can't be lower than 1";
+        //then
+        assertTrue(jsonReadResult.contains(expectedResponse));
+    }
+
+    @Test
     void shouldThrowMethodArgumentNotValidException_WhenSavingProofWithNullDesignation() throws Exception {
         //given
         ProofDto proofDto = ProofDto.builder()

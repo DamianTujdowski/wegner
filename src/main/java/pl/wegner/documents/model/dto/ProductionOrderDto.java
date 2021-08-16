@@ -11,11 +11,13 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Data
-@EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class ProductionOrderDto extends Dto implements Mappable<ProductionOrder> {
+public class ProductionOrderDto implements Mappable<ProductionOrder> {
+
+    @Positive(message = "can't be lower than 1")
+    private Long id;
 
     @NotBlank(message = "must be provided")
     @Size(min = 19, max = 23, message = "length must be between 19 and 23 characters")
@@ -37,7 +39,6 @@ public class ProductionOrderDto extends Dto implements Mappable<ProductionOrder>
     @Override
     public ProductionOrder map() {
         return ProductionOrder.builder()
-                .id(super.getId())
                 .designation(this.designation)
                 .occurrence(this.occurrence)
                 .attributes(this.attributes.map())

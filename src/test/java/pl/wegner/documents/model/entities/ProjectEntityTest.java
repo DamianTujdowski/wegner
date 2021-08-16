@@ -24,19 +24,19 @@ class ProjectEntityTest {
         yellow = Ink.builder()
                 .id(1L)
                 .symbol("Yellow")
-                .projectId(1)
+                .projectId(1L)
                 .build();
 
         magenta = Ink.builder()
                 .id(2L)
                 .symbol("Magenta")
-                .projectId(1)
+                .projectId(1L)
                 .build();
 
         cyan = Ink.builder()
                 .id(3L)
                 .symbol("Cyan")
-                .projectId(1)
+                .projectId(1L)
                 .build();
 
         List<Ink> inks = Stream.of(yellow, magenta).collect(Collectors.toList());
@@ -44,7 +44,7 @@ class ProjectEntityTest {
         magentaModified = Ink.builder()
                 .id(2L)
                 .symbol("Modified magenta")
-                .projectId(1)
+                .projectId(1L)
                 .build();
 
         colorAlter = Alteration.builder()

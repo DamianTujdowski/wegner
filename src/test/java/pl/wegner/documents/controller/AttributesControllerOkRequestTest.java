@@ -54,7 +54,7 @@ class AttributesControllerOkRequestTest {
     @Test
     void shouldPassValidation_WhenSavingAttributesWithProperAllFields() throws Exception {
         //given
-
+        attributesDto.setId(2L);
         //when
         mockMvc.perform(post("/attributes/")
                 .contentType("application/json")

@@ -5,6 +5,7 @@ import com.jayway.jsonpath.DocumentContext;
 import com.jayway.jsonpath.JsonPath;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -81,6 +82,7 @@ class ProjectControllerTestOkRequests {
                 .preparationBeginning(LocalDate.of(2021, 3, 26))
                 .preparationEnding(LocalDate.of(2021, 4, 26))
                 .build();
+        projectDto.setId(1L);
 
         response = projectDto.map();
     }

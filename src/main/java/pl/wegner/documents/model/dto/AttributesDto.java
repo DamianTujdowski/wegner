@@ -6,11 +6,13 @@ import pl.wegner.documents.model.entities.Attributes;
 import javax.validation.constraints.*;
 
 @Data
-@EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class AttributesDto extends Dto implements Mappable<Attributes> {
+public class AttributesDto implements Mappable<Attributes> {
+
+    @Positive(message = "can't be lower than 1")
+    private Long id;
 
     @NotBlank(message = "must be provided")
     @Size(min = 2, max = 30, message = "between 2 and 30 characters allowed")
@@ -39,7 +41,6 @@ public class AttributesDto extends Dto implements Mappable<Attributes> {
     @Override
     public Attributes map() {
         return Attributes.builder()
-                .id(super.getId())
                 .operatorName(this.operatorName)
                 .telephoneNumber(this.telephoneNumber)
                 .occasionalComments(this.occasionalComments)

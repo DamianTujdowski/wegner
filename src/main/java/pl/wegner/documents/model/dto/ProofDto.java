@@ -8,18 +8,20 @@ import javax.validation.constraints.*;
 import java.time.LocalDate;
 
 @Data
-@EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class ProofDto extends Dto implements Mappable<Proof> {
+public class ProofDto implements Mappable<Proof> {
+
+    @Positive(message = "can't be lower than 1")
+    private Long id;
 
     @PastOrPresent(message = "mustn't be in the future")
     private LocalDate printDate;
 
     @NotBlank(message = "must be provided")
     @Size(min = 10, max = 50, message = "length must be between 10 and 50 characters")
-    @Pattern(regexp = "[0-9aąbcćdeęfghijklłmnńoópqrsśtuvwxyzźżAĄBCĆDEĘFGHIJKLŁMNŃOÓPRSŚTUVWXYZŹŻ ]*",
+    @Pattern(regexp = "[ąćęłńóśźżĄĆĘŁŃÓŚŹŻ\\w ]*",
             message = "can contain only Polish letters, numbers and space")
     private String designation;
 
@@ -29,7 +31,7 @@ public class ProofDto extends Dto implements Mappable<Proof> {
 
     @NotBlank(message = "must be provided")
     @Size(min = 2, max = 20, message = "length must be between 2 and 20 characters")
-    @Pattern(regexp = "[aąbcćdeęfghijklłmnńoópqrsśtuvwxyzźżAĄBCĆDEĘFGHIJKLŁMNŃOÓPRSŚTUVWXYZŹŻ -]*",
+    @Pattern(regexp = "[a-zA-ZąćęłńóśźżĄĆĘŁŃÓŚŹŻ ]*",
             message = "can contain only Polish letters and space")
     private String customer;
 
@@ -43,14 +45,13 @@ public class ProofDto extends Dto implements Mappable<Proof> {
 
     @NotBlank(message = "must be provided")
     @Size(min = 2, max = 20, message = "length must be between 2 and 20 characters")
-    @Pattern(regexp = "[aąbcćdeęfghijklłmnńoópqrsśtuvwxyzźżAĄBCĆDEĘFGHIJKLŁMNŃOÓPRSŚTUVWXYZŹŻ -]*",
+    @Pattern(regexp = "[a-zA-ZąćęłńóśźżĄĆĘŁŃÓŚŹŻ ]*",
             message = "can contain only Polish letters and space")
     private String payer;
 
     @Override
     public Proof map() {
         return Proof.builder()
-                .id(super.getId())
                 .printDate(this.printDate)
                 .designation(this.designation)
                 .quantity(this.quantity)
