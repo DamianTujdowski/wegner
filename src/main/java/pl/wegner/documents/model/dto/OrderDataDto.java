@@ -6,15 +6,17 @@ import pl.wegner.documents.model.entities.OrderData;
 import pl.wegner.documents.model.enums.PlateThickness;
 import pl.wegner.documents.model.enums.PrintSide;
 
+import javax.validation.Valid;
 import javax.validation.constraints.*;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class OrderDataDto implements Mappable<OrderData>{
+public class OrderDataDto implements Mappable<OrderData> {
 
     //TODO validate Enums
 
@@ -39,10 +41,8 @@ public class OrderDataDto implements Mappable<OrderData>{
     @Max(value = 8, message = "maximally can be 8")
     private int platesQuantity;
 
-    //TODO replace Ink with @Valid InkDto
-
     @NotEmpty(message = "must be provided and must contain at least one element")
-    private List<Ink> inks;
+    private List<@Valid InkDto> inks;
 
     @NotNull(message = "must be provided")
     private PlateThickness plateThickness;
@@ -52,7 +52,7 @@ public class OrderDataDto implements Mappable<OrderData>{
 
     private String notes;
 
-    private long productionOrderId;
+    private Long productionOrderId;
 
     @Override
     public OrderData map() {
@@ -60,10 +60,17 @@ public class OrderDataDto implements Mappable<OrderData>{
                 .fileName(this.fileName)
                 .platesDimensions(this.platesDimensions)
                 .platesQuantity(this.platesQuantity)
-                .inks(this.inks)
+                .inks(mapToInks())
                 .plateThickness(this.plateThickness)
                 .side(this.side)
                 .notes(this.notes)
                 .build();
+    }
+
+    private List<Ink> mapToInks() {
+        return this.inks
+                .stream()
+                .map(InkDto::map)
+                .collect(Collectors.toList());
     }
 }

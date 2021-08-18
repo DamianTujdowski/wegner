@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import pl.wegner.documents.model.entities.Ink;
 import pl.wegner.documents.model.enums.Angle;
 import pl.wegner.documents.model.enums.LinesPerInch;
 
@@ -20,13 +21,11 @@ import javax.validation.constraints.Size;
 @Builder
 public class InkDto {
 
-    //TODO validate enums
-
     @Positive(message = "can't be lower than 1")
     private Long id;
 
     @NotBlank(message = "must be provided")
-    @Size(min = 4, max = 50, message = "length must be between 4 and 50 characters")
+    @Size(min = 4, max = 25, message = "length must be between 4 and 50 characters")
     @Pattern(regexp = "[\\w ]*",
             message = "can contain only letters, numbers and space")
     private String symbol;
@@ -45,5 +44,16 @@ public class InkDto {
 
     @Positive(message = "can't be lower than 1")
     private Long orderArchivalDataId;
+
+    public Ink map() {
+        return Ink.builder()
+                .symbol(this.symbol)
+                .angle(this.angle)
+                .lpi(this.lpi)
+                .projectId(this.projectId)
+                .orderDataId(this.orderDataId)
+                .orderArchivalDataId(this.orderArchivalDataId)
+                .build();
+    }
 
 }

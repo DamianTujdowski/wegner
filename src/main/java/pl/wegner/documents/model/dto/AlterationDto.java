@@ -28,7 +28,7 @@ public class AlterationDto implements Mappable<Alteration> {
     private int duration;
 
     @PositiveOrZero(message = "can't be lower than 0")
-    private long projectId;
+    private Long projectId;
 
     @Override
     public Alteration map() {

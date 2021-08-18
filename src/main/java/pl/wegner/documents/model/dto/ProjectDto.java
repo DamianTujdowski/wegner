@@ -8,9 +8,11 @@ import pl.wegner.documents.model.enums.PlateThickness;
 import pl.wegner.documents.model.enums.PrintSide;
 import pl.wegner.documents.model.enums.Stage;
 
+import javax.validation.Valid;
 import javax.validation.constraints.*;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Data
 @NoArgsConstructor
@@ -64,7 +66,7 @@ public class ProjectDto  implements Mappable<Project>{
     private PrintSide side;
 
     @NotEmpty(message = "must be provided and must contain at least one element")
-    private List<Ink> inks;
+    private List<@Valid InkDto> inks;
 
     private String notes;
 
@@ -72,7 +74,7 @@ public class ProjectDto  implements Mappable<Project>{
     private Stage stage;
 
     @NotNull(message = "must be provided")
-    private List<Alteration> alterations;
+    private List<@Valid AlterationDto> alterations;
 
     @PositiveOrZero(message = "can't be lower than 0")
     private int overallPreparationDuration;
@@ -96,10 +98,10 @@ public class ProjectDto  implements Mappable<Project>{
                 .dimensions(this.dimensions)
                 .plateThickness(this.plateThickness)
                 .side(this.side)
-                .inks(this.inks)
+                .inks(mapToInks())
                 .notes(this.notes)
                 .stage(this.stage)
-                .alterations(this.alterations)
+                .alterations(mapToAlteration())
                 .overallPreparationDuration(countOverallPreparationDuration())
                 .preparationBeginning(this.preparationBeginning)
                 .preparationEnding(this.preparationEnding)
@@ -107,11 +109,26 @@ public class ProjectDto  implements Mappable<Project>{
 
     }
 
+
     public int countOverallPreparationDuration() {
         return this.alterations
                 .stream()
-                .mapToInt(Alteration::getDuration)
+                .mapToInt(AlterationDto::getDuration)
                 .sum();
+    }
+
+    private List<Ink> mapToInks() {
+        return this.inks
+                .stream()
+                .map(InkDto::map)
+                .collect(Collectors.toList());
+    }
+
+    private List<Alteration> mapToAlteration() {
+        return this.alterations
+                .stream()
+                .map(AlterationDto::map)
+                .collect(Collectors.toList());
     }
 
 }
