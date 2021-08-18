@@ -27,21 +27,21 @@ class ProjectDtoTest {
 
     @BeforeEach
     void setUp() {
-        Ink cyan = Ink.builder()
+        InkDto cyan = InkDto.builder()
                 .symbol("cyan")
                 .angle(Angle.BLUE)
                 .build();
-        Ink magenta = Ink.builder()
+        InkDto magenta = InkDto.builder()
                 .symbol("magenta")
                 .angle(Angle.MAGENTA)
                 .build();
-        List<Ink> inksList = Stream.of(cyan, magenta).collect(Collectors.toList());
+        List<InkDto> inksList = Stream.of(cyan, magenta).collect(Collectors.toList());
 
-        Alteration alt = Alteration.builder()
+        AlterationDto alt = AlterationDto.builder()
                 .description("First PDF preparation")
                 .duration(120)
                 .build();
-        List<Alteration> alts = Stream.of(alt).collect(Collectors.toList());
+        List<AlterationDto> alts = Stream.of(alt).collect(Collectors.toList());
 
         projectDto = ProjectDto.builder()
                 .designation("Butter 200g extra")

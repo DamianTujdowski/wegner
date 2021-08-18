@@ -58,7 +58,8 @@ public class OrderDataService {
         edited.setFileName(data.getFileName());
         edited.setPlatesDimensions(data.getPlatesDimensions());
         edited.setPlatesQuantity(data.getPlatesQuantity());
-        edited.setInks(data.getInks());
+//this line is throwing error - this method is going to be refactored anyway
+        //        edited.setInks(data.getInks());
         edited.setPlateThickness(data.getPlateThickness());
         edited.setSide(data.getSide());
         edited.setNotes(data.getNotes());

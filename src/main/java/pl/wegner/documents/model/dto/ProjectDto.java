@@ -106,9 +106,7 @@ public class ProjectDto  implements Mappable<Project>{
                 .preparationBeginning(this.preparationBeginning)
                 .preparationEnding(this.preparationEnding)
                 .build();
-
     }
-
 
     public int countOverallPreparationDuration() {
         return this.alterations

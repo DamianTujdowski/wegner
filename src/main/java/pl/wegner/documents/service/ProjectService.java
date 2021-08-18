@@ -65,10 +65,12 @@ public class ProjectService {
         edited.setDimensions(projectDto.getDimensions());
         edited.setPlateThickness(projectDto.getPlateThickness());
         edited.setSide(projectDto.getSide());
-        edited.setInks(projectDto.getInks());
+//this line is throwing error - this method is going to be refactored anyway
+        //        edited.setInks(projectDto.getInks());
         edited.setNotes(projectDto.getNotes());
         edited.setStage(projectDto.getStage());
-        edited.setAlterations(projectDto.getAlterations());
+        //this line is throwing error - this method is going to be refactored anyway
+//        edited.setAlterations(projectDto.getAlterations());
         edited.setOverallPreparationDuration(duration);
         edited.setPreparationBeginning(projectDto.getPreparationBeginning());
         edited.setPreparationEnding(projectDto.getPreparationEnding());

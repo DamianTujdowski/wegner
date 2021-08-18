@@ -8,6 +8,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import pl.wegner.documents.model.dto.AlterationDto;
 import pl.wegner.documents.model.dto.ProjectDto;
 import pl.wegner.documents.model.entities.Alteration;
 import pl.wegner.documents.model.entities.Project;
@@ -65,6 +66,28 @@ class ProjectServiceTest {
         List<Alteration> twoAlters = Stream.of(textAlt, colorAlt).collect(Collectors.toList());
         List<Alteration> threeAlter = Stream.of(textAlt, colorAlt, sizeAlt).collect(Collectors.toList());
 
+        AlterationDto textAltForDto = AlterationDto.builder()
+                .description("Text alteration")
+                .occurrence(LocalDate.of(2021, 2, 13))
+                .duration(40)
+                .build();
+
+        AlterationDto colorAltForDto = AlterationDto.builder()
+                .description("Color alteration")
+                .occurrence(LocalDate.of(2021, 2, 17))
+                .duration(70)
+                .build();
+
+        AlterationDto sizeAltForDto = AlterationDto.builder()
+                .description("Size alteration")
+                .occurrence(LocalDate.of(2021, 2, 18))
+                .duration(10)
+                .build();
+
+        List<AlterationDto> twoAltersForDto = Stream.of(textAltForDto, colorAltForDto).collect(Collectors.toList());
+        List<AlterationDto> threeAlterForDto = Stream.of(textAltForDto, colorAltForDto, sizeAltForDto).collect(Collectors.toList());
+
+
         projectWithNotInitializedAlterationsList = Project.builder()
                 .id(1)
                 .designation("Alicja")
@@ -96,30 +119,16 @@ class ProjectServiceTest {
         dtoWithTwoAlterations = ProjectDto.builder()
                 .designation("Alicja")
                 .customer("Komsomolec")
-                .alterations(twoAlters)
+                .alterations(twoAltersForDto)
                 .build();
         dtoWithTwoAlterations.setId(1L);
 
         dtoWithThreeAlterations = ProjectDto.builder()
                 .designation("Alicja")
                 .customer("Komsomolec")
-                .alterations(threeAlter)
+                .alterations(threeAlterForDto)
                 .build();
         dtoWithThreeAlterations.setId(1L);
-    }
-
-    @Test
-    void shouldReturnProjectWithKomsomolecCustomer_whenSavingProjectDtoWithKomsomolecCustomer() {
-        //given
-        Project newProject = dtoWithTwoAlterations.map();
-        //when
-        when(repository.save(newProject)).thenReturn(newProject);
-        when(mapper.mapSymbolToDate(newProject.getSymbol())).thenReturn(LocalDate.of(2021, 3, 12));
-        LocalDate date = mapper.mapSymbolToDate(newProject.getSymbol());
-        newProject.setPreparationBeginning(date);
-        Project savedProject = service.save(dtoWithTwoAlterations);
-        //then
-        assertEquals(savedProject.getCustomer(), newProject.getCustomer());
     }
 
     @Test

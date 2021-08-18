@@ -31,8 +31,8 @@ public class ProofDto implements Mappable<Proof> {
 
     @NotBlank(message = "must be provided")
     @Size(min = 2, max = 20, message = "length must be between 2 and 20 characters")
-    @Pattern(regexp = "[a-zA-ZąćęłńóśźżĄĆĘŁŃÓŚŹŻ ]*",
-            message = "can contain only Polish letters and space")
+    @Pattern(regexp = "[a-zA-ZąćęłńóśźżĄĆĘŁŃÓŚŹŻ \\-]*",
+            message = "can contain only Polish letters, space and -")
     private String customer;
 
     @NotBlank(message = "must be provided")
@@ -45,8 +45,8 @@ public class ProofDto implements Mappable<Proof> {
 
     @NotBlank(message = "must be provided")
     @Size(min = 2, max = 20, message = "length must be between 2 and 20 characters")
-    @Pattern(regexp = "[a-zA-ZąćęłńóśźżĄĆĘŁŃÓŚŹŻ ]*",
-            message = "can contain only Polish letters and space")
+    @Pattern(regexp = "[a-zA-ZąćęłńóśźżĄĆĘŁŃÓŚŹŻ \\-]*",
+            message = "can contain only Polish letters, space and -")
     private String payer;
 
     @Override

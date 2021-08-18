@@ -1,24 +1,15 @@
 package pl.wegner.documents.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.jayway.jsonpath.DocumentContext;
-import com.jayway.jsonpath.JsonPath;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.MvcResult;
 import pl.wegner.documents.model.dto.AttributesDto;
-import pl.wegner.documents.model.entities.Attributes;
 import pl.wegner.documents.service.AttributesService;
 
-import java.io.UnsupportedEncodingException;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -52,7 +43,7 @@ class AttributesControllerOkRequestTest {
     }
 
     @Test
-    void shouldPassValidation_WhenSavingAttributesWithProperAllFields() throws Exception {
+    void shouldReturnStatusOk_WhenSavingAttributesWithValidData() throws Exception {
         //given
         attributesDto.setId(2L);
         //when
@@ -64,7 +55,7 @@ class AttributesControllerOkRequestTest {
     }
 
     @Test
-    void shouldPassValidation_WhenSavingAttributesWithOperatorName_WithPolishSigns() throws Exception {
+    void shouldReturnStatusOk_WhenSavingAttributesWithOperatorName_WithPolishSigns() throws Exception {
         //given
         attributesDto.setOperatorName("Łukasz Kuraś");
         //when
@@ -76,7 +67,7 @@ class AttributesControllerOkRequestTest {
     }
 
     @Test
-    void shouldPassValidation_WhenSavingAttributesWithTelephoneNumberWithPrefix() throws Exception {
+    void shouldReturnStatusOk_WhenSavingAttributesWithTelephoneNumberWithPrefix() throws Exception {
         //given
         attributesDto.setTelephoneNumber("+48 123-546-798");
         //when
