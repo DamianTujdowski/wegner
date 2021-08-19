@@ -30,10 +30,8 @@ public class InkDto {
             message = "can contain only letters, numbers and space")
     private String symbol;
 
-    @Enumerated(EnumType.ORDINAL)
     private Angle angle;
 
-    @Enumerated(EnumType.ORDINAL)
     private LinesPerInch lpi;
 
     @Positive(message = "can't be lower than 1")

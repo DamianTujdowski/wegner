@@ -2,6 +2,7 @@ package pl.wegner.documents.model.dto;
 
 import lombok.*;
 import pl.wegner.documents.model.entities.Ink;
+import pl.wegner.documents.model.entities.OrderArchivalData;
 import pl.wegner.documents.model.enums.LinesPerInch;
 import pl.wegner.documents.model.enums.PlateThickness;
 import pl.wegner.documents.model.enums.PrintSide;
@@ -10,6 +11,7 @@ import javax.validation.Valid;
 import javax.validation.constraints.*;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Data
 @NoArgsConstructor
@@ -52,6 +54,7 @@ public class OrderArchivalDataDto {
     @NotEmpty(message = "must be provided and must contain at least one element")
     private List<@Valid InkDto> inks;
 
+    @NotNull
     @Size(max = 500, message = "500 characters allowed")
     @Pattern(regexp = "[ąćęłńóśźżĄĆĘŁŃÓŚŹŻ\\-.,%!': \\w\\s]*",
             message = "can contain only letters (including Polish), numbers, whitespace characters and -.,%!': signs")
@@ -80,5 +83,30 @@ public class OrderArchivalDataDto {
 
     //TODO validate enum
     private PlateThickness plateThickness;
+
+    public OrderArchivalData map() {
+        return OrderArchivalData.builder()
+                .occurrence(this.occurrence)
+                .fileName(this.fileName)
+                .productionFileName(this.productionFileName)
+                .platesDimensions(this.platesDimensions)
+                .platesQuantity(this.platesQuantity)
+                .lpi(this.lpi)
+                .side(this.side)
+                .inks(mapToInks())
+                .notes(this.notes)
+                .payer(this.payer)
+                .printHouse(this.printHouse)
+                .platesFactory(this.platesFactory)
+                .plateThickness(this.plateThickness)
+                .build();
+    }
+
+    private List<Ink> mapToInks() {
+        return this.inks
+                .stream()
+                .map(InkDto::map)
+                .collect(Collectors.toList());
+    }
 
 }

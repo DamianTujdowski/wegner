@@ -1,6 +1,7 @@
 package pl.wegner.documents.service;
 
 import org.springframework.stereotype.Service;
+import pl.wegner.documents.model.dto.InkDto;
 import pl.wegner.documents.model.entities.Ink;
 import pl.wegner.documents.repository.InkRepository;
 
@@ -16,12 +17,13 @@ public class InkService {
         this.repository = repository;
     }
 
-    public Ink save(Ink ink) {
-        return repository.save(ink);
+    public Ink save(InkDto ink) {
+        Ink newInk = ink.map();
+        return repository.save(newInk);
     }
 
     @Transactional
-    public Ink edit(Ink ink) {
+    public Ink edit(InkDto ink) {
         Ink edited = repository.findById(ink.getId())
                 .orElseThrow(() -> new EntityNotFoundException(
                         String.format("Ink with id %d does not exist", ink.getId())

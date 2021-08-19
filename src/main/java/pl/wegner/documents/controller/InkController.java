@@ -2,8 +2,11 @@ package pl.wegner.documents.controller;
 
 import org.springframework.web.bind.annotation.*;
 
+import pl.wegner.documents.model.dto.InkDto;
 import pl.wegner.documents.model.entities.Ink;
 import pl.wegner.documents.service.InkService;
+
+import javax.validation.Valid;
 
 @RestController
 public class InkController {
@@ -15,12 +18,12 @@ public class InkController {
     }
 
     @PostMapping("/inks/")
-    public Ink save(@RequestBody Ink ink) {
+    public Ink save(@Valid @RequestBody InkDto ink) {
         return service.save(ink);
     }
 
     @PutMapping("/inks/")
-    public Ink edit(@RequestBody Ink ink) {
+    public Ink edit(@Valid @RequestBody InkDto ink) {
         return service.edit(ink);
     }
 

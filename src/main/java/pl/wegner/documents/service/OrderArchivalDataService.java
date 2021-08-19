@@ -3,6 +3,7 @@ package pl.wegner.documents.service;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import pl.wegner.documents.model.dto.OrderArchivalDataDto;
 import pl.wegner.documents.model.entities.OrderArchivalData;
 import pl.wegner.documents.repository.OrderArchivalDataRepository;
 
@@ -29,12 +30,13 @@ public class OrderArchivalDataService {
         return orderRepository.findAllBy(PageRequest.of(page, size, Sort.by(direction, "occurrence")));
     }
 
-    public OrderArchivalData save(OrderArchivalData order) {
-        return orderRepository.save(order);
+    public OrderArchivalData save(OrderArchivalDataDto order) {
+        OrderArchivalData newOrder = order.map();
+        return orderRepository.save(newOrder);
     }
 
     @Transactional
-    public OrderArchivalData edit(OrderArchivalData order) {
+    public OrderArchivalData edit(OrderArchivalDataDto order) {
         OrderArchivalData editedOrder = orderRepository.findById(order.getId())
                 .orElseThrow(() -> new EntityNotFoundException(
                         String.format("Project with id %d does not exist", order.getId())
@@ -46,7 +48,7 @@ public class OrderArchivalDataService {
         editedOrder.setPlatesQuantity(order.getPlatesQuantity());
         editedOrder.setLpi(order.getLpi());
         editedOrder.setSide(order.getSide());
-        editedOrder.setInks(order.getInks());
+//        editedOrder.setInks(order.getInks());
         editedOrder.setNotes(order.getNotes());
         editedOrder.setPayer(order.getPayer());
         editedOrder.setPrintHouse(order.getPrintHouse());

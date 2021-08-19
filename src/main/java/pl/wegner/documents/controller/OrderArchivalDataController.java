@@ -2,9 +2,11 @@ package pl.wegner.documents.controller;
 
 import org.springframework.data.domain.Sort;
 import org.springframework.web.bind.annotation.*;
+import pl.wegner.documents.model.dto.OrderArchivalDataDto;
 import pl.wegner.documents.model.entities.OrderArchivalData;
 import pl.wegner.documents.service.OrderArchivalDataService;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -29,12 +31,12 @@ public class OrderArchivalDataController {
     }
 
     @PostMapping("/archives/")
-    public OrderArchivalData save(@RequestBody OrderArchivalData order) {
+    public OrderArchivalData save(@Valid @RequestBody OrderArchivalDataDto order) {
         return orderService.save(order);
     }
 
     @PutMapping("/archives/")
-    public OrderArchivalData edit(@RequestBody OrderArchivalData order) {
+    public OrderArchivalData edit(@Valid @RequestBody OrderArchivalDataDto order) {
         return orderService.edit(order);
     }
 
