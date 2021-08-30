@@ -29,6 +29,8 @@ public class Ink {
     @Enumerated(EnumType.ORDINAL)
     private LinesPerInch lpi;
 
+    //TODO remove this Id fields - problem with setting them when posting entity
+    //TODO are they really needed?
     private Long projectId;
 
     private Long orderDataId;

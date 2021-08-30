@@ -85,6 +85,13 @@ public class ProjectDto  implements Mappable<Project>{
     @PastOrPresent(message = "mustn't be in the future")
     private LocalDate preparationEnding;
 
+    public int countOverallPreparationDuration() {
+        return this.alterations
+                .stream()
+                .mapToInt(AlterationDto::getDuration)
+                .sum();
+    }
+
     //TODO this method cant copy id
     //TODO use BeanUtils to copy whole object
     @Override
@@ -108,21 +115,14 @@ public class ProjectDto  implements Mappable<Project>{
                 .build();
     }
 
-    public int countOverallPreparationDuration() {
-        return this.alterations
-                .stream()
-                .mapToInt(AlterationDto::getDuration)
-                .sum();
-    }
-
-    private List<Ink> mapToInks() {
+    public List<Ink> mapToInks() {
         return this.inks
                 .stream()
                 .map(InkDto::map)
                 .collect(Collectors.toList());
     }
 
-    private List<Alteration> mapToAlteration() {
+    public List<Alteration> mapToAlteration() {
         return this.alterations
                 .stream()
                 .map(AlterationDto::map)
