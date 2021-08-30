@@ -1,8 +1,8 @@
 package pl.wegner.documents.controller;
 
 import org.springframework.web.bind.annotation.*;
+import pl.wegner.documents.model.dto.OrderArchivalDataDto;
 import pl.wegner.documents.model.dto.OrderDataDto;
-import pl.wegner.documents.model.entities.OrderArchivalData;
 import pl.wegner.documents.model.entities.OrderData;
 import pl.wegner.documents.service.OrderDataService;
 
@@ -24,7 +24,7 @@ public class OrderDataController {
 
     // only generates orderDataDto does not save it to DB
     @PostMapping("/data/gen")
-    public OrderData generateOrderData(@RequestBody OrderArchivalData archivalData) {
+    public OrderData generateOrderData(@Valid @RequestBody OrderArchivalDataDto archivalData) {
         return service.generateData(archivalData);
     }
 
