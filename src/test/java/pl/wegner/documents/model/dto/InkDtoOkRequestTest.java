@@ -35,7 +35,7 @@ class InkDtoOkRequestTest {
         inkDto = InkDto.builder()
                 .symbol("Pantone 1725 C")
                 .angle(Angle.NONE)
-                .lpi(LinesPerInch.APLA)
+                .lpi(LinesPerInch.MEDIUM)
                 .projectId(14L)
                 .orderDataId(4L)
                 .orderArchivalDataId(6L)

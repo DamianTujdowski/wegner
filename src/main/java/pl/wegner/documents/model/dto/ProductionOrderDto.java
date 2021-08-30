@@ -35,7 +35,6 @@ public class ProductionOrderDto implements Mappable<ProductionOrder> {
     @NotEmpty(message = "must be provided and must contain at least one element")
     private List<@Valid OrderDataDto> orderDataDto;
 
-    //TODO test below method if attributes.map() method works as expected
     @Override
     public ProductionOrder map() {
         return ProductionOrder.builder()

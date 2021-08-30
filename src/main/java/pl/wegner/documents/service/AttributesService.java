@@ -38,7 +38,6 @@ public class AttributesService {
         return attributesRepository.save(newAttributes);
     }
 
-    //TODO test that method
     @Transactional
     public Attributes edit(AttributesDto attributes) {
         Attributes edited = attributesRepository.findById(attributes.getId())

@@ -1,6 +1,7 @@
 package pl.wegner.documents.service;
 
 import org.springframework.stereotype.Service;
+import pl.wegner.documents.model.dto.OrderArchivalDataDto;
 import pl.wegner.documents.model.dto.OrderDataDto;
 import pl.wegner.documents.model.entities.OrderArchivalData;
 import pl.wegner.documents.model.entities.OrderData;
@@ -25,28 +26,14 @@ public class OrderDataService {
                 ));
     }
 
-    //TODO move mapping method to OrderArchivalDataDto class
-    public OrderData generateData(OrderArchivalData archivalData) {
-        return mapToOrderData(archivalData);
-    }
-
-    private OrderData mapToOrderData(OrderArchivalData archivalData) {
-        return OrderData.builder()
-                .fileName(archivalData.getFileName())
-                .platesDimensions(archivalData.getPlatesDimensions())
-                .platesQuantity(archivalData.getPlatesQuantity())
-                .lpi(archivalData.getLpi())
-                .inks(archivalData.getInks())
-                .plateThickness(archivalData.getPlateThickness())
-                .side(archivalData.getSide())
-                .build();
+    public OrderData generateData(OrderArchivalDataDto archivalData) {
+        return archivalData.mapToOrderData();
     }
 
     public OrderData save(OrderDataDto data) {
         OrderData newOrder = data.map();
         return repository.save(newOrder);
     }
-
 
     //TODO refactor updating entities - remove setters, add service superclass with method validating if entity exists in db
     @Transactional

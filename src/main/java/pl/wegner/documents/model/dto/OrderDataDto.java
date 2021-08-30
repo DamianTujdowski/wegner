@@ -18,8 +18,6 @@ import java.util.stream.Collectors;
 @Builder
 public class OrderDataDto implements Mappable<OrderData> {
 
-    //TODO validate Enums
-
     @Positive(message = "can't be lower than 1")
     private Long id;
 
@@ -52,6 +50,7 @@ public class OrderDataDto implements Mappable<OrderData> {
 
     private String notes;
 
+    @Positive(message = "can't be lower than 1")
     private Long productionOrderId;
 
     @Override

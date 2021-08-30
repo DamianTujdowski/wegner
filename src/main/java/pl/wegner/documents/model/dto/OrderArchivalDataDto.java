@@ -1,8 +1,12 @@
 package pl.wegner.documents.model.dto;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import pl.wegner.documents.model.entities.Ink;
 import pl.wegner.documents.model.entities.OrderArchivalData;
+import pl.wegner.documents.model.entities.OrderData;
 import pl.wegner.documents.model.enums.LinesPerInch;
 import pl.wegner.documents.model.enums.PlateThickness;
 import pl.wegner.documents.model.enums.PrintSide;
@@ -45,10 +49,10 @@ public class OrderArchivalDataDto {
     @Positive(message = "can't be lower than 1")
     private int platesQuantity;
 
-    //TODO validate enum
+    @NotNull
     private LinesPerInch lpi;
 
-    //TODO validate enum
+    @NotNull
     private PrintSide side;
 
     @NotEmpty(message = "must be provided and must contain at least one element")
@@ -81,7 +85,7 @@ public class OrderArchivalDataDto {
             message = "name can contain only letters")
     private String platesFactory;
 
-    //TODO validate enum
+    @NotNull(message = "must be provided")
     private PlateThickness plateThickness;
 
     public OrderArchivalData map() {
@@ -99,6 +103,18 @@ public class OrderArchivalDataDto {
                 .printHouse(this.printHouse)
                 .platesFactory(this.platesFactory)
                 .plateThickness(this.plateThickness)
+                .build();
+    }
+
+    public OrderData mapToOrderData() {
+        return OrderData.builder()
+                .fileName(this.fileName)
+                .platesDimensions(this.platesDimensions)
+                .platesQuantity(this.platesQuantity)
+                .lpi(this.lpi)
+                .inks(mapToInks())
+                .plateThickness(this.plateThickness)
+                .side(this.side)
                 .build();
     }
 

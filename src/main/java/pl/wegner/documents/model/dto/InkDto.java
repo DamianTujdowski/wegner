@@ -8,12 +8,7 @@ import pl.wegner.documents.model.entities.Ink;
 import pl.wegner.documents.model.enums.Angle;
 import pl.wegner.documents.model.enums.LinesPerInch;
 
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Pattern;
-import javax.validation.constraints.Positive;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.*;
 
 @Data
 @NoArgsConstructor
@@ -30,8 +25,10 @@ public class InkDto {
             message = "can contain only letters, numbers and space")
     private String symbol;
 
+    @NotNull(message = "must be provided")
     private Angle angle;
 
+    @NotNull(message = "must be provided")
     private LinesPerInch lpi;
 
     @Positive(message = "can't be lower than 1")
